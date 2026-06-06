@@ -100,10 +100,13 @@
   .progress-bar { background: #edf2f7; border-radius: 10px; height: 8px; margin-top: 8px; }
   .progress-fill { height: 8px; border-radius: 10px; background: linear-gradient(90deg, #48bb78, #38a169); }
 
-  .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-  .stat { background: white; border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 120px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); text-align: center; }
-  .stat .num { font-size: 1.8em; font-weight: 700; color: #2d9e5a; }
-  .stat .lbl { font-size: 0.78em; color: #718096; margin-top: 2px; }
+  .stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .stat { background: white; border-radius: 10px; padding: 12px 10px; flex: 1; min-width: 90px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); text-align: center; }
+  .stat .num { font-size: 1.5em; font-weight: 700; color: #2d9e5a; }
+  .stat .lbl { font-size: 0.72em; color: #718096; margin-top: 2px; }
+
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-scroll::after { content: ''; display: block; }
 
   h3.sub { font-size: 0.95em; font-weight: 700; color: #2d3748; margin: 16px 0 10px; }
 
@@ -111,6 +114,23 @@
   .flight-box .route { font-size: 1.05em; font-weight: 700; color: #2b6cb0; }
   .flight-box .detail { font-size: 0.87em; color: #4a5568; margin-top: 4px; }
   .flight-box .warn { background: #feebc8; border: 1px solid #f6ad55; border-radius: 6px; padding: 6px 10px; font-size: 0.82em; color: #744210; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    .header { padding: 20px 16px; }
+    .header h1 { font-size: 1.4em; }
+    .header p { font-size: 0.95em; }
+    .header .meta { gap: 8px; }
+    .header .meta span { font-size: 0.82em; padding: 4px 10px; }
+    .container { padding: 16px 12px; }
+    .section-header { padding: 12px 14px; }
+    .section-body { padding: 14px 12px; }
+    .itinerary { font-size: 0.82em; }
+    .itinerary th, .itinerary td { padding: 8px 8px; }
+    .checklist li { gap: 8px; padding: 10px 0; }
+    .check-meta { display: none; }
+    .flight-box { padding: 10px 12px; }
+    .pack-grid { grid-template-columns: 1fr 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -184,6 +204,7 @@
         <span><span class="dot kids"></span> With kids (Julia & Lieve)</span>
         <span><span class="dot romantic"></span> Romantic week (adults only)</span>
       </div>
+      <div class="table-scroll">
       <table class="itinerary">
         <thead>
           <tr><th>Date</th><th>Day</th><th>Location</th><th>Activities</th><th>Stay</th><th>Status</th></tr>
@@ -451,6 +472,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 
@@ -759,6 +781,7 @@
       <h2>Budget Estimate</h2>
     </div>
     <div class="section-body">
+      <div class="table-scroll">
       <table class="itinerary">
         <thead><tr><th>Category</th><th>Details</th><th>Estimated Cost</th></tr></thead>
         <tbody>
@@ -778,6 +801,7 @@
           <tr style="font-weight:700"><td>TOTAL ESTIMATE</td><td></td><td>€9,800 – €14,500</td></tr>
         </tbody>
       </table>
+      </div>
       <p class="note">Cost depends heavily on Koh Phangan resort choice. Santhiya is mid-luxe (~€150/night); Anantara Rasananda runs €300+/night.</p>
     </div>
   </div>

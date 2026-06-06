@@ -65,8 +65,18 @@
 
   .note { font-size: 0.8em; color: #718096; }
 
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
   @media (max-width: 600px) {
     .totaal-banner { grid-template-columns: repeat(2, 1fr); }
+    .header { padding: 20px 16px; }
+    .header h1 { font-size: 1.4em; }
+    .container { padding: 16px 12px; }
+    .section-header { padding: 12px 14px; flex-wrap: wrap; gap: 6px; }
+    .section-subtotaal { font-size: 0.82em; width: 100%; }
+    table { font-size: 0.82em; }
+    th, td { padding: 8px 10px; }
+    .totaal-card .bedrag { font-size: 1.3em; }
   }
 </style>
 </head>
@@ -106,6 +116,7 @@
       <h2>Vluchten</h2>
       <span class="section-subtotaal">Betaald: €2.935,28</span>
     </div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Omschrijving</th><th>Datum</th><th>Boekingsnr.</th><th>Betaalmethode</th><th>Bedrag</th><th>Status</th></tr>
@@ -157,6 +168,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- HOTELS -->
@@ -166,6 +178,7 @@
       <h2>Hotels & Verblijf</h2>
       <span class="section-subtotaal">Betaald: €356,58 · Nog te boeken: ~€3.500–5.500</span>
     </div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Hotel</th><th>Data</th><th>Boekingsnr.</th><th>Platform</th><th>Bedrag</th><th>Status</th></tr>
@@ -240,6 +253,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- ACTIVITEITEN -->
@@ -249,6 +263,7 @@
       <h2>Activiteiten</h2>
       <span class="section-subtotaal">Betaald: €0 · Geschat: ~€600–900</span>
     </div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Activiteit</th><th>Locatie</th><th>Datum</th><th>Bedrag</th><th>Status</th></tr>
@@ -286,6 +301,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- OVERIG -->
@@ -295,6 +311,7 @@
       <h2>Overig & te regelen</h2>
       <span class="section-subtotaal">Geschat: ~€600–1.000</span>
     </div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Item</th><th>Bedrag</th><th>Status</th></tr>
@@ -327,6 +344,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- BUDGET TOTAAL -->
@@ -335,6 +353,7 @@
       <span>📊</span>
       <h2>Budget Totaaloverzicht</h2>
     </div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Categorie</th><th>Betaald</th><th>Geschat nog</th><th>Totaal verwacht</th></tr>
@@ -353,6 +372,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <div style="padding:12px 14px; background:#f0fff4; font-size:0.85em; color:#22543d; border-top:1px solid #c6f6d5;">
       💚 <strong>Al bespaard:</strong> €83,10 korting via Trip.com op Ascott Sathorn
     </div>
