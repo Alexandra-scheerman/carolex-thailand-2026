@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇹🇭 Thailand 2026 — Financieel Overzicht</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #2d3748; }
+
+  .header {
+    background: linear-gradient(135deg, #1a6b3a 0%, #2d9e5a 50%, #f4a820 100%);
+    color: white; padding: 28px 40px; text-align: center;
+  }
+  .header h1 { font-size: 2em; font-weight: 700; }
+  .header p { font-size: 1em; margin-top: 6px; opacity: 0.9; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+
+  /* TOTAAL BANNER */
+  .totaal-banner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .totaal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .totaal-card .bedrag { font-size: 1.6em; font-weight: 700; }
+  .totaal-card .label { font-size: 0.78em; color: #718096; margin-top: 4px; }
+  .totaal-card.betaald .bedrag { color: #22543d; }
+  .totaal-card.openstaand .bedrag { color: #c05621; }
+  .totaal-card.totaal .bedrag { color: #2b6cb0; }
+  .totaal-card.bespaard .bedrag { color: #6b46c1; }
+
+  /* SECTIE */
+  .section { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; overflow: hidden; }
+  .section-header { padding: 14px 20px; background: #f7fafc; border-bottom: 1px solid #edf2f7; display: flex; align-items: center; gap: 10px; }
+  .section-header h2 { font-size: 1.05em; font-weight: 700; flex: 1; }
+  .section-subtotaal { font-size: 0.9em; color: #4a5568; font-weight: 600; }
+
+  /* TABEL */
+  table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+  th { padding: 10px 14px; text-align: left; font-weight: 600; color: #4a5568; background: #f7fafc; border-bottom: 2px solid #e2e8f0; }
+  td { padding: 11px 14px; border-bottom: 1px solid #edf2f7; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f7fafc; }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.76em; font-weight: 600; }
+  .badge.betaald { background: #c6f6d5; color: #22543d; }
+  .badge.te-boeken { background: #fed7d7; color: #822727; }
+  .badge.optioneel { background: #e9d8fd; color: #44337a; }
+  .badge.geschat { background: #bee3f8; color: #1a365d; }
+
+  .korting { color: #22543d; font-size: 0.82em; }
+  .amount { font-weight: 600; white-space: nowrap; }
+  .amount.paid { color: #22543d; }
+  .amount.est { color: #744210; }
+
+  .note { font-size: 0.8em; color: #718096; }
+
+  @media (max-width: 600px) {
+    .totaal-banner { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>💶 Thailand 2026 — Financiën</h1>
+  <p>Bijgehouden door je AI reisagent · Laatste update: 6 juni 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- TOTAALBANNER -->
+  <div class="totaal-banner">
+    <div class="totaal-card betaald">
+      <div class="bedrag">€3.539</div>
+      <div class="label">✅ Al betaald</div>
+    </div>
+    <div class="totaal-card openstaand">
+      <div class="bedrag">~€8.000</div>
+      <div class="label">⏳ Nog te boeken (schatting)</div>
+    </div>
+    <div class="totaal-card totaal">
+      <div class="bedrag">~€10.180</div>
+      <div class="label">📊 Totaal verwacht</div>
+    </div>
+    <div class="totaal-card bespaard">
+      <div class="bedrag">€83</div>
+      <div class="label">🎉 Bespaard t.o.v. lijstprijs</div>
+    </div>
+  </div>
+
+  <!-- VLUCHTEN -->
+  <div class="section">
+    <div class="section-header">
+      <span>✈️</span>
+      <h2>Vluchten</h2>
+      <span class="section-subtotaal">Betaald: €2.935,28</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Omschrijving</th><th>Datum</th><th>Boekingsnr.</th><th>Betaalmethode</th><th>Bedrag</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>KLM AMS → BKK + BKK → AMS</strong><br>
+            <span class="note">Caroline Valentine Baane · KL0843 (22 jul) + KL0844 (12 aug) · Seat 36E/36B</span>
+          </td>
+          <td>30 sep 2025</td>
+          <td>YSSAS6</td>
+          <td>CCCA</td>
+          <td class="amount paid">€1.467,64</td>
+          <td><span class="badge betaald">✅ Betaald</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>KLM AMS → BKK + BKK → AMS</strong><br>
+            <span class="note">Alexandra Nellegonda Scheerman · KL0843 (22 jul) + KL0844 (12 aug) · Seat 36D/36A</span>
+          </td>
+          <td>30 sep 2025</td>
+          <td>YSSAS6</td>
+          <td>CCCA</td>
+          <td class="amount paid">€1.467,64</td>
+          <td><span class="badge betaald">✅ Betaald</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>KLM — Ruimbagage toevoegen</strong><br>
+            <span class="note">Nog toevoegen via klm.com → My Trip → YSSAS6 · aanbevolen: 1 ruimkoffer p.p.</span>
+          </td>
+          <td>—</td>
+          <td>YSSAS6</td>
+          <td>—</td>
+          <td class="amount est">~€200–280</td>
+          <td><span class="badge te-boeken">❌ Nog doen</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Binnenlandse vlucht BKK → Koh Samui (4 pers.)</strong><br>
+            <span class="note">Bangkok Airways of AirAsia · 28 jul · nog te boeken</span>
+          </td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="amount est">~€320–480</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- HOTELS -->
+  <div class="section">
+    <div class="section-header">
+      <span>🏨</span>
+      <h2>Hotels & Verblijf</h2>
+      <span class="section-subtotaal">Betaald: €356,58 · Nog te boeken: ~€3.500–5.500</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Hotel</th><th>Data</th><th>Boekingsnr.</th><th>Platform</th><th>Bedrag</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Ascott Sathorn Bangkok</strong><br>
+            <span class="note">Deluxe 2-slaapkamer appartement · 2 volw. + 2 kinderen · Ontbijt incl.</span><br>
+            <span class="korting">💚 €83,10 korting toegepast</span>
+          </td>
+          <td>23–25 jul</td>
+          <td>1482190417238129</td>
+          <td>Trip.com</td>
+          <td class="amount paid">€356,58</td>
+          <td><span class="badge betaald">✅ Betaald</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Kanchanaburi resort</strong><br>
+            <span class="note">Bijv. Oriental Kwai Resort · aan de rivier · familie</span>
+          </td>
+          <td>25–27 jul</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="amount est">~€300–450</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Koh Samui resort</strong><br>
+            <span class="note">Choeng Mon gebied · familiesuite · 4 nachten + retournacht 4 aug</span>
+          </td>
+          <td>28 jul–4 aug</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="amount est">~€700–1.200</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Khao Sok — Our Jungle Camp + Cheow Lan meer</strong><br>
+            <span class="note">Jungle lodge 2 nachten + drijvende bungalow 1 nacht</span>
+          </td>
+          <td>1–4 aug</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="amount est">~€450–700</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Koh Phangan romantisch resort</strong><br>
+            <span class="note">Bijv. Santhiya of Anantara Rasananda · 6 nachten voor 2</span>
+          </td>
+          <td>5–11 aug</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="amount est">~€900–2.400</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Bangkok airport hotel</strong><br>
+            <span class="note">Bijv. Novotel BKK Airport · 1 nacht voor vlucht 12 aug 12:05</span>
+          </td>
+          <td>11–12 aug</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="amount est">~€120–160</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACTIVITEITEN -->
+  <div class="section">
+    <div class="section-header">
+      <span>🎯</span>
+      <h2>Activiteiten</h2>
+      <span class="section-subtotaal">Betaald: €0 · Geschat: ~€600–900</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Activiteit</th><th>Locatie</th><th>Datum</th><th>Bedrag</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Co van Kessel — CO COMBO (fiets + boot)</strong><br><span class="note">River City · 5 uur · Chinatown + longtail boot + maaltijd · 4 pers. · vertrek 13:00</span></td>
+          <td>Bangkok</td><td>24 jul</td>
+          <td class="amount paid">€246,94</td>
+          <td><span class="badge betaald">✅ Betaald</span></td>
+        </tr>
+        <tr>
+          <td><strong>Erawan watervallen</strong><br><span class="note">Vervoer via resort · entree ~THB 300 p.p.</span></td>
+          <td>Kanchanaburi</td><td>26 jul</td>
+          <td class="amount est">~€40–80</td>
+          <td><span class="badge optioneel">📋 Plannen</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ang Thong Marine Park boottocht</strong><br><span class="note">Dagtour · snorkelen · kajak · lunch incl.</span></td>
+          <td>Koh Samui</td><td>29 jul</td>
+          <td class="amount est">~€180–260</td>
+          <td><span class="badge te-boeken">❌ Nog boeken</span></td>
+        </tr>
+        <tr>
+          <td><strong>Khao Sok nachtsafari</strong><br><span class="note">Via jungle lodge · gids + zaklampen</span></td>
+          <td>Khao Sok</td><td>3 aug</td>
+          <td class="amount est">~€100–160</td>
+          <td><span class="badge optioneel">📋 Via lodge</span></td>
+        </tr>
+        <tr>
+          <td><strong>SUP / kajakken Koh Phangan</strong><br><span class="note">Havana Beach Resort verhuur · zie-through SUP</span></td>
+          <td>Koh Phangan</td><td>7 aug</td>
+          <td class="amount est">~€40–80</td>
+          <td><span class="badge optioneel">🔵 Optioneel</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- OVERIG -->
+  <div class="section">
+    <div class="section-header">
+      <span>💡</span>
+      <h2>Overig & te regelen</h2>
+      <span class="section-subtotaal">Geschat: ~€600–1.000</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Bedrag</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Reisverzekering (4 personen)</strong><br><span class="note">Incl. medische evacuatie · check huidige dekking</span></td>
+          <td class="amount est">~€150–300</td>
+          <td><span class="badge te-boeken">❌ Regelen</span></td>
+        </tr>
+        <tr>
+          <td><strong>Vaccinations + reisapotheek</strong><br><span class="note">Hep A, Tyfus, Malaria (Malarone) · reiskliniek bezoeken</span></td>
+          <td class="amount est">~€200–400</td>
+          <td><span class="badge te-boeken">❌ Regelen</span></td>
+        </tr>
+        <tr>
+          <td><strong>Thaise SIM-kaart (2 stuks)</strong><br><span class="note">AIS/DTAC 30 dagen data · kopen op BKK airport aankomst</span></td>
+          <td class="amount est">~€30</td>
+          <td><span class="badge optioneel">📋 Ter plaatse</span></td>
+        </tr>
+        <tr>
+          <td><strong>Transfers & taxi's</strong><br><span class="note">Grab (spotgoedkoop), minibusjes, ferry's</span></td>
+          <td class="amount est">~€200–350</td>
+          <td><span class="badge geschat">📊 Schatting</span></td>
+        </tr>
+        <tr>
+          <td><strong>Eten & drinken (21 nachten × 4 pers.)</strong><br><span class="note">Streetfood + restaurants · mix van budget en lekker uit eten</span></td>
+          <td class="amount est">~€1.500–2.500</td>
+          <td><span class="badge geschat">📊 Schatting</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BUDGET TOTAAL -->
+  <div class="section">
+    <div class="section-header">
+      <span>📊</span>
+      <h2>Budget Totaaloverzicht</h2>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Categorie</th><th>Betaald</th><th>Geschat nog</th><th>Totaal verwacht</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>✈️ Vluchten (incl. ruimbagage)</td><td class="amount paid">€2.935</td><td class="amount est">~€240</td><td>~€3.175</td></tr>
+        <tr><td>🏨 Hotels & Verblijf</td><td class="amount paid">€357</td><td class="amount est">~€2.470–4.910</td><td>~€2.827–5.267</td></tr>
+        <tr><td>🎯 Activiteiten</td><td class="amount paid">€247</td><td class="amount est">~€200–460</td><td>~€447–707</td></tr>
+        <tr><td>💡 Overig (verzekering, vaccins, etc.)</td><td class="amount paid">€0</td><td class="amount est">~€580–1.050</td><td>~€580–1.050</td></tr>
+        <tr><td>🍜 Eten & drinken</td><td class="amount paid">€0</td><td class="amount est">~€1.500–2.500</td><td>~€1.500–2.500</td></tr>
+        <tr style="font-weight:700; background:#f7fafc;">
+          <td><strong>TOTAAL</strong></td>
+          <td class="amount paid"><strong>€3.539</strong></td>
+          <td class="amount est"><strong>~€4.980–9.140</strong></td>
+          <td><strong>~€8.500–12.700</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="padding:12px 14px; background:#f0fff4; font-size:0.85em; color:#22543d; border-top:1px solid #c6f6d5;">
+      💚 <strong>Al bespaard:</strong> €83,10 korting via Trip.com op Ascott Sathorn
+    </div>
+  </div>
+
+  <div style="text-align:center; color:#a0aec0; font-size:0.8em; padding:20px 0;">
+    Bijgehouden door je AI reisagent · Wordt bijgewerkt bij elke nieuwe boeking
+  </div>
+
+</div>
+</body>
+</html>
