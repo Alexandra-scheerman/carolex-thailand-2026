@@ -40,6 +40,17 @@
 </head>
 <body>
 
+<div id="pw-gate" style="position:fixed;inset:0;background:#0d2b1f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;">
+  <form id="pw-form" style="background:#fff;border-radius:16px;padding:32px 28px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.4);box-sizing:border-box;">
+    <div style="font-size:2em;margin-bottom:8px;">🔒</div>
+    <div style="font-weight:700;color:#1a3a2a;margin-bottom:16px;">Deze pagina is beveiligd</div>
+    <input type="password" id="pw-input" placeholder="Wachtwoord" autofocus style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;font-size:1em;box-sizing:border-box;">
+    <button type="submit" style="width:100%;padding:10px;background:#2d9e5a;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;">Ontgrendel</button>
+    <div id="pw-error" style="color:#c0392b;font-size:0.85em;margin-top:8px;display:none;">Onjuist wachtwoord</div>
+  </form>
+</div>
+<div id="site-content" style="display:none">
+
 <h1>📧 Email Overzicht – Thailand Trip 2026</h1>
 <p class="subtitle">Carolex & kids &nbsp;|&nbsp; 22 juli – 12 augustus 2026 &nbsp;|&nbsp; Bijgewerkt: juni 2026</p>
 
@@ -174,5 +185,28 @@
   💡 <strong>Tip:</strong> Update dit document zodra je een reactie ontvangt — verander de status naar "Bevestigd" of "Afgewezen". Bewaar bevestigingsnummers en reserveringsdata in dit bestand zodat alles op één plek staat.
 </div>
 
+
+</div>
+<script>
+(function(){
+  var KEY='thailand_auth';
+  var gate=document.getElementById('pw-gate');
+  var content=document.getElementById('site-content');
+  function unlock(){ gate.style.display='none'; content.style.display=''; }
+  if(localStorage.getItem(KEY)==='ok'){ unlock(); }
+  document.getElementById('pw-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var val=document.getElementById('pw-input').value.trim().toLowerCase();
+    if(val==='thailand'){
+      localStorage.setItem(KEY,'ok');
+      unlock();
+    } else {
+      document.getElementById('pw-error').style.display='block';
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-input').focus();
+    }
+  });
+})();
+</script>
 </body>
 </html>

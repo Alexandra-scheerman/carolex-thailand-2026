@@ -135,6 +135,17 @@
 </head>
 <body>
 
+<div id="pw-gate" style="position:fixed;inset:0;background:#0d2b1f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;">
+  <form id="pw-form" style="background:#fff;border-radius:16px;padding:32px 28px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.4);box-sizing:border-box;">
+    <div style="font-size:2em;margin-bottom:8px;">🔒</div>
+    <div style="font-weight:700;color:#1a3a2a;margin-bottom:16px;">Deze pagina is beveiligd</div>
+    <input type="password" id="pw-input" placeholder="Wachtwoord" autofocus style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;font-size:1em;box-sizing:border-box;">
+    <button type="submit" style="width:100%;padding:10px;background:#2d9e5a;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;">Ontgrendel</button>
+    <div id="pw-error" style="color:#c0392b;font-size:0.85em;margin-top:8px;display:none;">Onjuist wachtwoord</div>
+  </form>
+</div>
+<div id="site-content" style="display:none">
+
 <div class="header">
   <h1>🇹🇭 Thailand Family Trip 2026</h1>
   <p>Alexandra & Caroline + Julia (10) & Lieve (13)</p>
@@ -617,7 +628,7 @@
             <span>Highly recommended for families. Kids can cycle themselves or sit on back. Also option: canal tour with longtail boat + tuk-tuk.</span>
             <br><a href="https://www.getyourguide.nl/bangkok-l169/bangkok-klassieke-fietstocht-t22249/">getyourguide.com — Bangkok Classic Bike Tour</a>
           </div>
-          <div class="check-meta"><span class="badge plan">Book ahead</span></div>
+          <div class="check-meta"><span class="badge done">✅ Geboekt · 9.375 THB (~€253)</span></div>
         </li>
         <li>
           <div class="check-icon todo">×</div>
@@ -847,7 +858,7 @@
           <tr><td>✅ Kids' flights</td><td>Handled by Marjolein</td><td>—</td></tr>
           <tr><td>❌ Checked baggage</td><td>Add via My Trip — 4 bags × 2 ways</td><td>~€320–560</td></tr>
           <tr><td>✅ Bangkok hotel (2 nachten)</td><td>Ascott Sathorn Bangkok — Deluxe 2BR apt, ontbijt incl.</td><td>€356.58 ✅</td></tr>
-          <tr><td>❌ Internal flight BKK→Samui (4)</td><td>Bangkok Airways × 4</td><td>~€320–480</td></tr>
+          <tr><td>✅ Internal flight BKK→Samui (4)</td><td>Bangkok Airways × 4 · 28 jul</td><td>€557,00 ✅</td></tr>
           <tr><td>✅ Internal flight Samui→BKK (2)</td><td>Bangkok Airways PG168 · 17:50 USM→19:05 BKK · 11 aug · 7A + 7B</td><td>ca. €315 ✅</td></tr>
           <tr><td>✅ Kanchanaburi resort (3 nights)</td><td>Dheva Mantra Resort · Deluxe Familiekamer</td><td>€475,03 ✅</td></tr>
           <tr><td>✅ Koh Samui resort (4 nachten, Jul 28-Aug 1)</td><td>Deva Beach Resort · Choeng Mon Beach · extra bed + slaapbank incl.</td><td>€715.93 (THB 26.520) ✅</td></tr>
@@ -856,7 +867,10 @@
           <tr><td>❌ Khao Sok lodge + floating bungalow</td><td>3 nights</td><td>~€450–700</td></tr>
           <tr><td>❌ Koh Phangan romantic resort (6 nights)</td><td>Santhiya / Anantara level</td><td>~€900–2,400</td></tr>
           <tr><td>❌ Airport hotel Bangkok (1 night)</td><td>Novotel Airport</td><td>~€120–160</td></tr>
-          <tr><td>❌ Activities (all)</td><td>Bike tour, Ang Thong, waterfalls, zipline, safaris</td><td>~€600–900</td></tr>
+          <tr><td>✅ Fietstocht Bangkok (24 jul)</td><td>Ko van Kessel bike tour · 4 pers.</td><td>9.375 THB (~€253) ✅</td></tr>
+          <tr><td>✅ Elephants World (27 jul)</td><td>2 volw. (1.800 THB) + 2 kids (1.300 THB) = 6.200 THB</td><td>~€168,00 ✅</td></tr>
+          <tr><td>❌ Ang Thong Marine Park (2 aug)</td><td>Groepstour 4 pers. incl. kajak + snorkel</td><td>~€186–213</td></tr>
+          <tr><td>❌ Tree Bridge Zipline (30 jul)</td><td>4 pers.</td><td>~€164</td></tr>
           <tr><td>❌ Transfers & ferries</td><td>Taxis, minivans, ferries</td><td>~€200–350</td></tr>
           <tr><td>❌ Food & dining</td><td>~€30–60/day × 21 days × 4 (street food to restaurants)</td><td>~€1,500–2,500</td></tr>
           <tr style="font-weight:700"><td>TOTAL ESTIMATE</td><td></td><td>€9,800 – €14,500</td></tr>
@@ -872,5 +886,28 @@
   </div>
 
 </div>
+
+</div>
+<script>
+(function(){
+  var KEY='thailand_auth';
+  var gate=document.getElementById('pw-gate');
+  var content=document.getElementById('site-content');
+  function unlock(){ gate.style.display='none'; content.style.display=''; }
+  if(localStorage.getItem(KEY)==='ok'){ unlock(); }
+  document.getElementById('pw-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var val=document.getElementById('pw-input').value.trim().toLowerCase();
+    if(val==='thailand'){
+      localStorage.setItem(KEY,'ok');
+      unlock();
+    } else {
+      document.getElementById('pw-error').style.display='block';
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-input').focus();
+    }
+  });
+})();
+</script>
 </body>
 </html>
