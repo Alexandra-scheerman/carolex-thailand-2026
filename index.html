@@ -3,94 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carolex – Thailand 2026 🌴</title>
+<meta name="theme-color" content="#ef977f">
+<title>Carolex · Thailand 2026 🌴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d2b1f; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
-  .header { text-align: center; color: #fff; margin-bottom: 40px; }
-  .header h1 { font-size: 2.4em; font-weight: 300; letter-spacing: 0.05em; }
-  .header h1 span { font-weight: 700; color: #7ed8a0; }
-  .header p { color: #a8d8b8; margin-top: 8px; font-size: 1.05em; }
-  .dates { display: inline-block; background: rgba(126,216,160,0.15); border: 1px solid rgba(126,216,160,0.3); border-radius: 20px; padding: 5px 16px; color: #7ed8a0; font-size: 0.9em; margin-top: 12px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 800px; width: 100%; }
-  .card { background: #fff; border-radius: 16px; padding: 28px 28px 24px; text-decoration: none; color: inherit; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s, box-shadow 0.2s; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
-  .card-icon { font-size: 2.4em; margin-bottom: 12px; }
-  .card-title { font-size: 1.2em; font-weight: 700; color: #1a3a2a; margin-bottom: 6px; }
-  .card-desc { font-size: 0.9em; color: #666; line-height: 1.5; }
-  .card-tag { display: inline-block; background: #e8f5ec; color: #2d6b3a; border-radius: 20px; padding: 3px 10px; font-size: 0.78em; margin-top: 12px; }
-  .footer { color: rgba(168,216,184,0.5); font-size: 0.82em; margin-top: 40px; text-align: center; }
+  :root {
+    --bg: #ef977f;
+    --card: #ffffff;
+    --ink: #111827;
+    --muted: #6b7280;
+    --nav-ink: #212237;
+    --accent: #f7a794;
+    --accent-text: #ef8465;
+    --lav: #a5b0e8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); min-height: 100vh;
+  }
+  .wrap { max-width: 430px; margin: 0 auto; padding-bottom: 30px; }
+
+  .topbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 13px 10px;
+    position: sticky; top: 0; z-index: 300; background: var(--bg);
+  }
+  .nav-pill {
+    flex: 1; background: var(--card); border-radius: 18px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; color: var(--nav-ink);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+  .menu-btn {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: var(--card); border: none; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    color: var(--nav-ink); box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  .hero { color: #fff; padding: 24px 22px 22px; }
+  .hero h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.28px; line-height: 1.26; }
+  .hero p { font-size: 14px; font-weight: 500; margin-top: 6px; opacity: .95; }
+  .hero .dates {
+    display: inline-block; margin-top: 12px; padding: 5px 14px; border-radius: 20px;
+    background: rgba(255,255,255,.22); font-size: 13px; font-weight: 600;
+  }
+
+  .cards { display: grid; grid-template-columns: 1fr; gap: 14px; padding: 0 16px; }
+  .card {
+    background: var(--card); border-radius: 16px; padding: 20px;
+    text-decoration: none; color: inherit; display: block; position: relative;
+  }
+  .card:active { transform: scale(.99); }
+  .card .icon { font-size: 30px; margin-bottom: 10px; display: block; }
+  .card h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.2px; }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.45; margin-top: 5px; }
+  .card .tag {
+    display: inline-block; margin-top: 12px; padding: 3px 12px; border-radius: 12px;
+    background: #fdece6; color: var(--accent-text); font-size: 12px; font-weight: 600;
+  }
+  .card .tag.lav { background: #edf0fc; color: #6674c4; }
+  .card .chev { position: absolute; right: 16px; top: 22px; color: var(--accent); }
+  .card.primary { border: 2px solid var(--accent); }
+  .card.primary h2 { color: var(--accent-text); }
+
+  .foot { text-align: center; color: rgba(255,255,255,.85); font-size: 12px; padding: 26px 20px 10px; line-height: 1.6; }
+
+  /* menu overlay */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(33,34,55,.45); z-index: 500;
+    display: none; align-items: flex-end; justify-content: center;
+  }
+  .overlay.open { display: flex; }
+  .panel {
+    background: var(--card); border-radius: 20px 20px 0 0; width: 100%; max-width: 430px;
+    max-height: 82vh; overflow-y: auto; padding: 22px 20px 30px;
+  }
+  .panel h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .panel .close { background: #f3f4f6; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 15px; cursor: pointer; color: var(--nav-ink); }
+  .menu-list { list-style: none; }
+  .menu-list li a {
+    display: flex; align-items: center; gap: 12px; padding: 13px 8px;
+    text-decoration: none; font-size: 16px; font-weight: 500; color: var(--nav-ink);
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .menu-list li:last-child a { border-bottom: none; }
+  .menu-list .mi { font-size: 20px; width: 28px; text-align: center; }
+
+  @media (min-width: 700px) {
+    .wrap { max-width: 900px; }
+    .cards { grid-template-columns: 1fr 1fr; padding: 0 22px; }
+    .card.primary { grid-column: 1 / -1; }
+    .hero { padding: 34px 24px 26px; }
+    .hero h1 { font-size: 34px; }
+    .overlay { align-items: center; }
+    .panel { border-radius: 20px; }
+  }
 </style>
 </head>
 <body>
 
-<div id="pw-gate" style="position:fixed;inset:0;background:#0d2b1f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;">
-  <form id="pw-form" style="background:#fff;border-radius:16px;padding:32px 28px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.4);box-sizing:border-box;">
+<div id="pw-gate" style="position:fixed;inset:0;background:#ef977f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;">
+  <form id="pw-form" style="background:#fff;border-radius:16px;padding:32px 28px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.25);box-sizing:border-box;">
     <div style="font-size:2em;margin-bottom:8px;">🔒</div>
-    <div style="font-weight:700;color:#1a3a2a;margin-bottom:16px;">Deze pagina is beveiligd</div>
-    <input type="password" id="pw-input" placeholder="Wachtwoord" autofocus style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;font-size:1em;box-sizing:border-box;">
-    <button type="submit" style="width:100%;padding:10px;background:#2d9e5a;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;">Ontgrendel</button>
+    <div style="font-weight:700;color:#212237;margin-bottom:16px;">Deze pagina is beveiligd</div>
+    <input type="password" id="pw-input" placeholder="Wachtwoord" autofocus style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;font-size:1em;box-sizing:border-box;font-family:inherit;">
+    <button type="submit" style="width:100%;padding:10px;background:#ef8465;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;font-family:inherit;">Ontgrendel</button>
     <div id="pw-error" style="color:#c0392b;font-size:0.85em;margin-top:8px;display:none;">Onjuist wachtwoord</div>
   </form>
 </div>
+
 <div id="site-content" style="display:none">
+<div class="wrap">
 
-<div class="header">
-  <h1>🌴 <span>Carolex</span> – Thailand 2026</h1>
-  <p>Alexandra &amp; Caroline &nbsp;·&nbsp; Julia (10) &amp; Lieve (13)</p>
-  <div class="dates">22 juli – 12 augustus 2026</div>
+  <div class="topbar">
+    <div class="nav-pill">🌴 Carolex · Thailand 2026</div>
+    <button class="menu-btn" id="btn-menu" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+
+  <div class="hero">
+    <h1>Sawasdee! 🙏</h1>
+    <p>Alexandra &amp; Caroline · Julia (10) &amp; Lieve (13)</p>
+    <span class="dates" id="dates-pill">22 juli t/m 12 augustus 2026</span>
+  </div>
+
+  <div class="cards">
+
+    <a class="card primary" href="Vandaag.html">
+      <span class="icon">📅</span>
+      <h2>Vandaag</h2>
+      <p>De dag-tot-dag planner voor onderweg: per dag het programma, je hotel, telefoonnummers en waar je aan moet denken.</p>
+      <span class="tag">Nieuw · voor op je telefoon</span>
+      <span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+    </a>
+
+    <a class="card" href="Thailand_Trip_Planner.html">
+      <span class="icon">🗺️</span>
+      <h2>Reisplanner</h2>
+      <p>Het complete overzicht: alle bestemmingen, hotels, activiteiten en boekingsstatus in een document.</p>
+      <span class="tag lav">Volledig overzicht</span>
+    </a>
+
+    <a class="card" href="Kopen_en_Pakken.html">
+      <span class="icon">🛍️</span>
+      <h2>Kopen &amp; Pakken</h2>
+      <p>Afvinkbare checklist: wat nog kopen en wat er in de handbagage moet. Vinkjes worden onthouden op je telefoon.</p>
+      <span class="tag">Afvinkbaar</span>
+    </a>
+
+    <a class="card" href="Thailand_Planning_Print.pdf">
+      <span class="icon">🖨️</span>
+      <h2>Planning (print-PDF)</h2>
+      <p>Compacte dagplanning op A4 met alle tijden, contacten en te betalen bedragen. Printen en meenemen.</p>
+      <span class="tag lav">PDF</span>
+    </a>
+
+    <a class="card" href="Thailand_Boekingen_Bundel.pdf">
+      <span class="icon">📑</span>
+      <h2>Boekingenbundel (print-PDF)</h2>
+      <p>Alle 13 boekingen met referenties en de originele bevestigingsmails in een printbaar document.</p>
+      <span class="tag lav">PDF</span>
+    </a>
+
+    <a class="card" href="Email_Overzicht_Thailand.html">
+      <span class="icon">📧</span>
+      <h2>Email Overzicht</h2>
+      <p>Overzicht van alle hotels en resorts waar we een inquiry hebben gestuurd, met status en datums.</p>
+      <span class="tag lav">Archief · juni 2026</span>
+    </a>
+
+    <a class="card" href="Thailand_Financien.html">
+      <span class="icon">💰</span>
+      <h2>Budget &amp; Financiën</h2>
+      <p>Kostenoverzicht van de hele trip: vluchten, hotels, activiteiten en overige uitgaven.</p>
+      <span class="tag lav">Budget tracker</span>
+    </a>
+
+  </div>
+
+  <div class="foot">Alleen zichtbaar voor mensen met de link · Laatste update: 17 juli 2026 🌴</div>
+
 </div>
 
-<div class="grid">
-
-  <a class="card" href="Thailand_Trip_Planner.html">
-    <div class="card-icon">🗺️</div>
-    <div class="card-title">Reisplanner</div>
-    <div class="card-desc">Het complete reisschema: alle bestemmingen, hotels, activiteiten en boekingsstatus per dag.</div>
-    <span class="card-tag">Hoofd document</span>
-  </a>
-
-  <a class="card" href="Kopen_en_Pakken.html">
-    <div class="card-icon">🛍️</div>
-    <div class="card-title">Kopen &amp; Pakken</div>
-    <div class="card-desc">Afvinkbare checklist: wat nog kopen deze week en wat er in de handbagage moet. Vinkjes worden onthouden op je telefoon.</div>
-    <span class="card-tag">Nieuw · afvinkbaar</span>
-  </a>
-
-  <a class="card" href="Thailand_Planning_Print.pdf">
-    <div class="card-icon">🖨️</div>
-    <div class="card-title">Planning (print-PDF)</div>
-    <div class="card-desc">Compacte dagplanning op A4 met alle tijden, contacten en te betalen bedragen. Printen en meenemen.</div>
-    <span class="card-tag">PDF</span>
-  </a>
-
-  <a class="card" href="Thailand_Boekingen_Bundel.pdf">
-    <div class="card-icon">📑</div>
-    <div class="card-title">Boekingenbundel (print-PDF)</div>
-    <div class="card-desc">Alle 13 boekingen met referenties + de originele bevestigingsmails in één printbaar document.</div>
-    <span class="card-tag">PDF</span>
-  </a>
-
-  <a class="card" href="Email_Overzicht_Thailand.html">
-    <div class="card-icon">📧</div>
-    <div class="card-title">Email Overzicht</div>
-    <div class="card-desc">Overzicht van alle hotels en resorts waar we een inquiry hebben gestuurd — met status en datums.</div>
-    <span class="card-tag">Archief · juni 2026</span>
-  </a>
-
-  <a class="card" href="Thailand_Financien.html">
-    <div class="card-icon">💰</div>
-    <div class="card-title">Budget & Financiën</div>
-    <div class="card-desc">Kostenoverzicht van de hele trip: vluchten, hotels, activiteiten en overige uitgaven.</div>
-    <span class="card-tag">Budget tracker</span>
-  </a>
-
+<div class="overlay" id="menu-overlay">
+  <div class="panel">
+    <h2>Menu <button class="close" id="menu-close">✕</button></h2>
+    <ul class="menu-list">
+      <li><a href="Vandaag.html"><span class="mi">📅</span>Vandaag (dagplanner)</a></li>
+      <li><a href="Thailand_Trip_Planner.html"><span class="mi">🗺️</span>Reisplanner (volledig overzicht)</a></li>
+      <li><a href="Kopen_en_Pakken.html"><span class="mi">🛍️</span>Kopen &amp; Pakken checklist</a></li>
+      <li><a href="Thailand_Boekingen_Bundel.pdf"><span class="mi">📑</span>Boekingenbundel (PDF)</a></li>
+      <li><a href="Thailand_Planning_Print.pdf"><span class="mi">🖨️</span>Dagplanning (print-PDF)</a></li>
+      <li><a href="Email_Overzicht_Thailand.html"><span class="mi">📧</span>Email overzicht</a></li>
+      <li><a href="Thailand_Financien.html"><span class="mi">💰</span>Budget &amp; financiën</a></li>
+    </ul>
+  </div>
+</div>
 </div>
 
-<div class="footer">Alleen zichtbaar voor mensen met de link &nbsp;·&nbsp; Laatste update: 17 juli 2026 &nbsp;·&nbsp; nog 5 dagen! 🌴</div>
-
-
-</div>
 <script>
 (function(){
   var KEY='thailand_auth';
@@ -101,15 +216,22 @@
   document.getElementById('pw-form').addEventListener('submit', function(e){
     e.preventDefault();
     var val=document.getElementById('pw-input').value.trim().toLowerCase();
-    if(val==='thailand'){
-      localStorage.setItem(KEY,'ok');
-      unlock();
-    } else {
+    if(val==='thailand'){ localStorage.setItem(KEY,'ok'); unlock(); }
+    else {
       document.getElementById('pw-error').style.display='block';
       document.getElementById('pw-input').value='';
       document.getElementById('pw-input').focus();
     }
   });
+
+  var days = Math.ceil((new Date('2026-07-22T00:00:00') - new Date()) / 86400000);
+  var pill = document.getElementById('dates-pill');
+  if (days > 0) { pill.textContent = '22 juli t/m 12 augustus 2026 · nog ' + days + (days === 1 ? ' dag!' : ' dagen!'); }
+
+  var ov = document.getElementById('menu-overlay');
+  document.getElementById('btn-menu').addEventListener('click', function(){ ov.classList.add('open'); });
+  document.getElementById('menu-close').addEventListener('click', function(){ ov.classList.remove('open'); });
+  ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });
 })();
 </script>
 </body>
