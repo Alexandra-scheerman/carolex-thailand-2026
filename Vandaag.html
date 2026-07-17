@@ -165,6 +165,35 @@
   }
   .foot a { color: #fff; }
 
+  /* ---------- detail pages ---------- */
+  .detail { position: fixed; inset: 0; background: #f7f8fa; z-index: 400; overflow-y: auto; display: none; -webkit-overflow-scrolling: touch; }
+  .detail.open { display: block; }
+  .d-top { position: sticky; top: 0; z-index: 10; background: #f7f8fa; display: flex; align-items: center; padding: 12px 16px; gap: 10px; }
+  .d-back { width: 36px; height: 36px; border-radius: 50%; background: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--nav-ink); box-shadow: 0 1px 6px rgba(0,0,0,0.06); flex-shrink: 0; }
+  .d-top h2 { flex: 1; text-align: center; font-size: 16px; font-weight: 600; color: var(--ink); margin-right: 46px; }
+  .d-wrap { max-width: 430px; margin: 0 auto; padding: 0 12px 50px; }
+  .d-card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; border: 1px solid #eef0f3; }
+  .d-hero { display: flex; gap: 14px; align-items: flex-start; }
+  .d-thumb { width: 72px; height: 72px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 34px; flex-shrink: 0; }
+  .d-hero h3 { font-size: 18px; font-weight: 700; line-height: 1.25; }
+  .d-loc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .d-hero .btn { margin-top: 10px; min-height: 34px; padding: 4px 14px; font-size: 14px; }
+  .d-sec-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+  .d-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+  .d-row + .d-row { border-top: 1px solid #f3f4f6; }
+  .d-chip { width: 38px; height: 38px; border-radius: 50%; background: #fdece6; color: #ef8465; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .d-chip svg { stroke: #ef8465; }
+  .d-row .lbl { font-size: 12px; color: var(--muted); }
+  .d-row .val { font-size: 14px; font-weight: 500; color: var(--ink); display: block; margin-top: 1px; }
+  .d-row a.val { text-decoration: none; }
+  .d-map { background: #e9edf3; border-radius: 10px; min-height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #5b6572; font-size: 13px; text-align: center; padding: 14px; margin-bottom: 12px; }
+  .d-map .pin { font-size: 26px; }
+  .btn-blue { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; border: 1.5px solid #2563eb; color: #2563eb; border-radius: 22px; background: none; padding: 10px; font-size: 14px; font-weight: 600; font-family: inherit; text-decoration: none; cursor: pointer; }
+  .d-desc { font-size: 14px; color: #4b5563; line-height: 1.55; }
+  .tl-item.tap .tl-title { cursor: pointer; }
+  .tl-more { display: inline-flex; align-items: center; color: var(--accent-text); font-size: 13px; font-weight: 600; margin-top: 6px; cursor: pointer; }
+  @media (min-width: 900px) { .d-wrap { max-width: 520px; } }
+
   /* ---------- overlays ---------- */
   .overlay {
     position: fixed; inset: 0; background: rgba(33,34,55,.45); z-index: 500;
@@ -329,6 +358,8 @@
   </div>
 </div>
 
+<div class="detail" id="detail"></div>
+
 <div class="toast" id="toast">Gekopieerd!</div>
 </div>
 
@@ -397,8 +428,8 @@ var DAYS = [
    prog:[
      { time:'12:15', title:'Grab naar River City', box:'River City Bangkok\n23 Charoen Krung 24, Bangkok',
        act:[ {label:'Copy adres', copy:'River City Bangkok, 23 Charoen Krung 24, Bangkok'}, {label:'Open grab app', href: GRAB} ] },
-     { time:'12:45', title:'Aanwezig bij Co van Kessel', sub:'Verzamelpunt River City Bangkok' },
-     { time:'13:00', title:'CO Combo: fietsen + longtail boot', sub:'Tot 18:00 · Chinatown, kanalen, maaltijd inbegrepen\nBoeking #6a241d5343f2d · 9.375 THB (€253) betaald', docs:true },
+     { time:'12:45', title:'Aanwezig bij Co van Kessel', sub:'Verzamelpunt River City Bangkok', det:'cvk' },
+     { time:'13:00', title:'CO Combo: fietsen + longtail boot', sub:'Tot 18:00 · Chinatown, kanalen, maaltijd inbegrepen\nBoeking #6a241d5343f2d · 9.375 THB (€253) betaald', det:'cvk' },
      { time:'--:--', title:'Avond: koffers pakken', sub:'Morgen vroeg weg naar Kanchanaburi' }
    ],
    rem:[
@@ -420,7 +451,7 @@ var DAYS = [
    ]},
  { iso:'2026-07-26', dl:'26 Juli', wd:'Zondag', loc:'Kanchanaburi', temp:'33', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'dheva',
    prog:[
-     { time:'--:--', title:'Erawan watervallen', sub:'7 niveaus, zwemmen, picknick\nVervoer via het resort: 2.100 THB (€55), per mail bevestigd' },
+     { time:'--:--', title:'Erawan watervallen', sub:'7 niveaus, zwemmen, picknick\nVervoer via het resort: 2.100 THB (€55), per mail bevestigd', det:'erawan' },
      { time:'--:--', title:'Entree betalen', sub:'~300 THB pp (€8), cash' },
      { time:'--:--', title:'Avond: relaxen aan de rivier' }
    ],
@@ -432,7 +463,7 @@ var DAYS = [
  { iso:'2026-07-27', dl:'27 Juli', wd:'Maandag', loc:'Kanchanaburi', temp:'33', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'dheva',
    prog:[
      { time:'08:50', title:'Pickup Elephants World', sub:'Tussen 08:50 en 09:20 bij het resort · halve dag\n6.700 THB (€181) cash bij aankomst (creditcard 5% toeslag)\nHotelnaam Dheva Mantra is doorgegeven voor de pickup',
-       act:[ {label:'WhatsApp Thiti', href:'https://wa.me/66863355332'} ] },
+       det:'elephants', act:[ {label:'WhatsApp Thiti', href:'https://wa.me/66863355332'} ] },
      { time:'--:--', title:'Middag: rafting of pool', sub:'Tubing bestaat niet bij het resort · optie: wet rafting op de Kwai, 1 uur, 3.500 THB (€91) voor de groep, of relaxen bij pool en rivier' },
      { time:'--:--', title:'Avond: koffers pakken', sub:'Laatste avond aan de rivier, morgen naar Koh Samui' }
    ],
@@ -468,7 +499,7 @@ var DAYS = [
  { iso:'2026-07-30', dl:'30 Juli', wd:'Donderdag', loc:'Koh Samui', temp:'31', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'deva',
    prog:[
      { time:'08:30', title:'Pickup Tree Bridge Zipline', sub:'8 lijnen + hangbrug + waterval · vervoer inbegrepen\n9.200 THB (€249) voor 4 personen · bevestigd via WhatsApp op 17 jul',
-       act:[ {label:'WhatsApp zipline', href:'https://wa.me/66988173924'} ] },
+       det:'zipline', act:[ {label:'WhatsApp zipline', href:'https://wa.me/66988173924'} ] },
      { time:'--:--', title:'Middag: strand of pool' }
    ],
    rem:[
@@ -500,7 +531,7 @@ var DAYS = [
    ]},
  { iso:'2026-08-02', dl:'2 Augustus', wd:'Zondag', loc:'Koh Samui', temp:'31', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'kohkoon',
    prog:[
-     { time:'07:15', title:'Pickup Ang Thong cruise', sub:'Pickup 07:15-07:30 bij So KohKoon · grote boot (Highsea Tour)\nViewpoint-klim over 42 eilanden, Blue Lagoon, kajakken door grotten, snorkelstop\nGeboekt via GetYourGuide (GYGX7NAB9LFY), €150,98 betaald\nOntbijt en lunchbuffet aan boord · zuivelbeperking Julia is doorgegeven\nParkentree cash: 1.050 THB (€28) · terug bij het hotel ~16:00-17:00' },
+     { time:'07:15', title:'Pickup Ang Thong cruise', sub:'Pickup 07:15-07:30 bij So KohKoon · grote boot (Highsea Tour)\nViewpoint-klim over 42 eilanden, Blue Lagoon, kajakken door grotten, snorkelstop\nGeboekt via GetYourGuide (GYGX7NAB9LFY), €150,98 betaald\nOntbijt en lunchbuffet aan boord · zuivelbeperking Julia is doorgegeven\nParkentree cash: 1.050 THB (€28) · terug bij het hotel ~16:00-17:00', det:'angthong' },
      { time:'--:--', title:'Avond: uitrusten', sub:'Vroeg terug, samen eten bij het resort' }
    ],
    rem:[
@@ -541,8 +572,8 @@ var DAYS = [
  { iso:'2026-08-06', dl:'6 Augustus', wd:'Donderdag', loc:'Koh Phangan', temp:'31', ico:'sun', phase:'rom', tag:'Reisdag · romantische week', hotel:'longbay',
    prog:[
      { time:'12:00', title:'Check-out 79 Beach Club', sub:'Koffers kunnen tot 13:40 bij het hotel blijven' },
-     { time:'13:50', title:'Inchecken Bangrak Seatran Pier', sub:'De pier ligt naast het hotel · 40 min voor vertrek\nE-ticket #AB26071700076 op de telefoon tonen' },
-     { time:'14:30', title:'Seatran ferry naar Thong Sala', sub:'Aankomst 15:05 op Koh Phangan' },
+     { time:'13:50', title:'Inchecken Bangrak Seatran Pier', sub:'De pier ligt naast het hotel · 40 min voor vertrek\nE-ticket #AB26071700076 op de telefoon tonen', det:'ferry6' },
+     { time:'14:30', title:'Seatran ferry naar Thong Sala', sub:'Aankomst 15:05 op Koh Phangan', det:'ferry6' },
      { time:'15:05', title:'Gratis transfer naar Long Bay', sub:'Naar het meeting point op de pier lopen, de chauffeur wacht daar\nAankomst resort ~15:45' },
      { time:'--:--', title:'Inchecken Long Bay Resort', box:'Long Bay Resort\n58/5 Moo 8, Haad Yao Beach, Koh Phangan',
        act:[ {label:'Copy adres', copy:'Long Bay Resort, 58/5 Moo 8, Haad Yao Beach, Koh Phangan'} ],
@@ -583,7 +614,7 @@ var DAYS = [
    prog:[
      { time:'11:00', title:'Check-out Long Bay Resort', sub:'Koffers kunnen bij het resort blijven tot de transfer' },
      { time:'13:00', title:'Gratis transfer naar Thongsala Pier', sub:'Uiterlijk 14:00 inchecken bij de pier (60 min voor vertrek)\nE-ticket #C646580 op de telefoon tonen' },
-     { time:'15:00', title:'Lomprayah ferry naar Samui', sub:'Aankomst ~15:30 Bangrak Pier · taxi ±10 min naar het vliegveld' },
+     { time:'15:00', title:'Lomprayah ferry naar Samui', sub:'Aankomst ~15:30 Bangrak Pier · taxi ±10 min naar het vliegveld', det:'ferry11' },
      { time:'17:50', title:'Vlucht PG168 naar Bangkok', sub:'Aankomst 19:05 · Alexandra 7A, Caroline 7B\nTrolleys gratis inchecken, cabine max 7 kg', docs:true },
      { time:'--:--', title:'Taxi naar Sukhumvit', box:'Sora Resort & Suites Sukhumvit\n22 Soi Sukhumvit 12, Khlong Toei, Bangkok',
        act:[ {label:'Copy adres', copy:'Sora Resort and Suites Sukhumvit, 22 Soi Sukhumvit 12, Khlong Toei, Bangkok'}, {label:'Open grab app', href: GRAB} ],
@@ -679,9 +710,8 @@ function render(){
 
   /* timeline */
   var tl = '';
-  var hasDocs = false;
   day.prog.forEach(function(p){
-    tl += '<div class="tl-item">';
+    tl += '<div class="tl-item' + (p.det ? ' tap' : '') + '"' + (p.det ? ' data-det="' + p.det + '"' : '') + '>';
     tl += '<div class="tl-time">' + esc(p.time || '--:--') + '</div>';
     tl += '<div class="tl-title">' + esc(p.title) + '</div>';
     if (p.box) tl += '<div class="tl-sub">' + esc(p.box) + '</div>';
@@ -694,11 +724,13 @@ function render(){
       });
       tl += '</div>';
     }
-    if (p.docs) hasDocs = true;
+    if (p.det) tl += '<div class="tl-more">Bekijk details &rsaquo;</div>';
     tl += '</div>';
   });
-  if (hasDocs) {
-    tl += '<div class="tl-item" style="padding-top:2px;"><a class="btn wide" href="' + BUNDLE + '">Naar incheck documenten <span class="chev">' + icoChev() + '</span></a></div>';
+  var dayPdf = PDF[day.hotel];
+  if (dayPdf) {
+    var pdfLab = (day.hotel === 'board') ? 'Bekijk vluchttickets (pdf)' : 'Bekijk incheck document (pdf)';
+    tl += '<div class="tl-item" style="padding-top:2px;"><a class="btn wide" href="' + dayPdf + '" target="_blank" rel="noopener">' + pdfLab + ' <span class="chev">' + icoChev() + '</span></a></div>';
   }
   document.getElementById('timeline').innerHTML = tl;
 
@@ -713,6 +745,13 @@ function render(){
   /* copy handlers */
   document.querySelectorAll('[data-copy]').forEach(function(b){
     b.addEventListener('click', function(){ copyText(b.getAttribute('data-copy')); });
+  });
+
+  /* detail handlers */
+  var hcEl = document.querySelector('.hotel-card');
+  if (hcEl) hcEl.addEventListener('click', function(e){ if (e.target.closest('a')) return; openDetail('hotel', day.hotel); });
+  document.querySelectorAll('.tl-item.tap').forEach(function(elm){
+    elm.addEventListener('click', function(e){ if (e.target.closest('a,button')) return; openDetail('act', elm.getAttribute('data-det')); });
   });
 
   /* sidebar + calendar highlight */
@@ -745,6 +784,139 @@ function closeOverlays(){
   document.querySelectorAll('.overlay').forEach(function(o){ o.classList.remove('open'); });
 }
 
+/* ================= DETAIL PAGES ================= */
+var PDF = {
+  dheva: 'boekingen/hotel-dheva-mantra.pdf',
+  deva: 'boekingen/hotel-deva-beach.pdf',
+  beach79: 'boekingen/hotel-79-beach-club.pdf',
+  longbay: 'boekingen/hotel-long-bay.pdf',
+  sora: 'boekingen/hotel-sora.pdf',
+  board: 'boekingen/vluchten-klm.pdf'
+};
+var HDET = {
+  ascott: { email:'frontoffice.asb@the-ascott.com', booked:{label:'Geboekt via Trip.com', href:'https://www.trip.com'},
+    desc:'Appartement-hotel in de wijk Sathorn, Bangkok. Deluxe 2-slaapkamer appartement met ontbijt voor de eerste twee nachten met de meiden. Aankomst 11:30 is doorgegeven: early check-in bij beschikbaarheid, anders bagage-opslag en gebruik van de faciliteiten.' },
+  dheva: { email:'info@dhevamantraresort.com', booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
+    desc:'Resort aan de rivier Kwai bij Kanchanaburi. Deluxe familiekamer met extra bed (1.800 THB / €49 ter plaatse). Uitvalsbasis voor de Walking Street, Erawan en Elephants World. Taxi-van naar het vliegveld op 28 jul: 3.500 THB (€91), per mail bevestigd.' },
+  deva: { booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
+    desc:'Strandresort aan Choeng Mon Beach, Koh Samui, met extra bed en slaapbank. Volledig betaald via Booking.com (€654,65). Ontbijt is niet inbegrepen: aan de balie bestellen, 450 THB pp per dag (€12), cash. Airport-pickup 400 THB (€11) voor 4 personen is aangevraagd.' },
+  kohkoon: { email:'kohkoonresort@gmail.com', wa:'+66 94 009 0065', booked:{label:'kohkoonresort.com', href:'https://www.kohkoonresort.com'},
+    desc:'Beach Front Villa direct aan Bangrak Beach, Koh Samui. 21.000 THB (€568), op naam van Caroline. Aankomst ±13:30 is doorgegeven; ze proberen early check-in. Vertrekpunt voor de Ang Thong-cruise en de overdracht van de meiden aan Marjolein op 4 aug.' },
+  beach79: { email:'reservation@79samui.com', booked:{label:'79samui.com', href:'https://www.79samui.com'},
+    desc:'Resort aan Bangrak Beach met Grand Deluxe kamer en ontbijt, naast de Seatran-pier. Start van de romantische week. 13.600 THB (€368), volledig betaald. Koffers kunnen op 6 aug tot 13:40 blijven staan.' },
+  longbay: { email:'sukruthai.m@longbay-resort.com', booked:{label:'longbay-resort.com', href:'https://www.longbay-resort.com'},
+    desc:'Deluxe Cottage aan Haad Yao Beach, Koh Phangan: vijf nachten strand, snorkelen bij het koraalrif en zonsondergangen. Totaal 40.000 THB (€1.040), aanbetaald 20.000 THB; restant 20.000 THB (€520) bij aankomst, cash of creditcard +3%. Gratis piertransfers, pickup is bevestigd.' },
+  sora: { email:'fo_sukhumvit@sorahotels.com', booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
+    desc:'Hotel aan Soi Sukhumvit 12, Bangkok, voor de laatste nacht. Gratis annuleren tot 4 aug. Late aankomst ±20:30 en vertrek 08:30 zijn doorgegeven; vervoer met Grab (~400-550 THB / €11-14 per rit).' },
+  board: { booked:{label:'KLM', href:'https://www.klm.nl'},
+    desc:'KLM nachtvlucht KL0843 van Amsterdam naar Bangkok. Boekingen YSSAS6 (Caroline 36E, Alexandra 36D) en YT6FMW (kids, via Marjolein). Alleen handbagage: 12 kg pp, max 55x35x25 cm.' }
+};
+var ACTS = {
+  cvk: { name:'Co van Kessel fietstour', loc:'Bangkok', emoji:'🚲', bgc:'#fdf3d8',
+    addr:'River City Bangkok, 23 Charoen Krung 24, Bangkok', date:'Vrijdag 24 juli', time:'13:00 - 18:00 · uiterlijk 12:45 aanwezig',
+    email:'info@covankessel.com',
+    desc:'CO Combo van 5 uur: fietsen door Chinatown en de smalle steegjes, longtailboot over de kanalen van Thonburi, maaltijd inbegrepen. 3 volwassenen + 1 kind, 9.375 THB (€253), betaald. Boeking #6a241d5343f2d. Gesloten schoenen, schouders bedekt voor de tempels.',
+    pdf:'boekingen/activiteit-co-van-kessel.pdf', pdfLabel:'Bekijk booking (pdf)',
+    booked:{label:'covankessel.com', href:'https://www.covankessel.com'} },
+  erawan: { name:'Erawan watervallen', loc:'Kanchanaburi', emoji:'🌊', bgc:'#e0f0f2',
+    addr:'Erawan National Park, Kanchanaburi', date:'Zondag 26 juli', time:'Hele dag · vroeg vertrekken',
+    phone:'+66 34 615 999',
+    desc:'Zeven niveaus watervallen met natuurlijke zwembaden in Erawan National Park. Vervoer via Dheva Mantra: 2.100 THB (€55), per mail bevestigd, bij de receptie vastleggen. Entree ~300 THB pp (€8) cash. Waterschoenen aan, de rotsen zijn glad.' },
+  elephants: { name:'Elephants World', loc:'Kanchanaburi', emoji:'🐘', bgc:'#e7efe3',
+    addr:'Elephants World, Kanchanaburi', date:'Maandag 27 juli', time:'Pickup 08:50 - 09:20 bij het resort · halve dag',
+    wa:'+66 86 335 5332', email:'info@elephantsworld.org',
+    desc:'Halve dag bij de olifanten aan de rivier Kwai: voeren, eten maken en samen met de olifanten de rivier in (zwemkleding aan). 3 volwassenen + 1 kind, 6.700 THB (€181) cash bij aankomst, creditcard 5% toeslag. Hotelnaam voor de pickup is doorgegeven.',
+    pdf:'boekingen/activiteit-elephants-world.pdf', pdfLabel:'Bekijk booking (pdf)',
+    booked:{label:'elephantsworld.org', href:'https://www.elephantsworld.org'} },
+  zipline: { name:'Tree Bridge Zipline & Cafe', loc:'Koh Samui', emoji:'🌿', bgc:'#e7efe3',
+    addr:'Tree Bridge Zipline and Cafe, Koh Samui', date:'Donderdag 30 juli', time:'Pickup 08:30 bij Deva Beach Resort',
+    wa:'+66 98 817 3924',
+    desc:'8 ziplines, hangbrug en waterval in de jungle van Samui, vervoer inbegrepen. 4 personen, 2.300 THB pp = 9.200 THB (€249). Bevestigd via WhatsApp op 17 jul; alleen nog het kamernummer appen na check-in bij Deva Beach. Gesloten schoenen aan, geen losse sieraden of tassen.',
+    booked:{label:'treebridgezipline.com', href:'https://treebridgezipline.com'} },
+  angthong: { name:'Ang Thong Marine Park cruise', loc:'Koh Samui', emoji:'🚤', bgc:'#e0f0f2',
+    addr:'So KohKoon Beach Resort, Bangrak Beach, Koh Samui', date:'Zondag 2 augustus', time:'Pickup 07:15 - 07:30 · terug ±16:00 - 17:00',
+    desc:'Grote boot (Highsea Tour) door het marinepark met 42 eilanden: viewpoint-klim, Blue Lagoon, kajakken door grotten en snorkelstop. Ontbijt en lunchbuffet aan boord, zuivelbeperking van Julia is doorgegeven. Geboekt via GetYourGuide (ref GYGX7NAB9LFY), €150,98 betaald, gratis annuleren tot 1 aug 08:30. Parkentree 1.050 THB (€28) cash bij de incheckbalie. Het e-ticket staat in de GetYourGuide-app en je mail.',
+    booked:{label:'GetYourGuide', href:'https://www.getyourguide.com'} },
+  ferry6: { name:'Seatran ferry naar Koh Phangan', loc:'Koh Samui', emoji:'⛴️', bgc:'#e3e7f7',
+    addr:'Bangrak Seatran Pier, Koh Samui', date:'Donderdag 6 augustus', time:'14:30 - 15:05 · uiterlijk 13:50 inchecken',
+    desc:'Oversteek van Bangrak Pier (naast 79 Beach Club) naar Thong Sala op Koh Phangan. 2 personen, e-ticket #AB26071700076 via 12go, op de telefoon tonen bij het inchecken. Gratis annuleren tot 4 aug. Na aankomst wacht de chauffeur van Long Bay bij het meeting point op de pier.',
+    booked:{label:'12go.asia', href:'https://12go.asia'} },
+  ferry11: { name:'Lomprayah ferry naar Koh Samui', loc:'Koh Phangan', emoji:'⛴️', bgc:'#e3e7f7',
+    addr:'Thong Sala Pier, Koh Phangan', date:'Dinsdag 11 augustus', time:'15:00 - 15:30 · uiterlijk 14:00 inchecken',
+    desc:'Terug van Thong Sala naar Bangrak Pier op Samui, daarna ±10 minuten taxi naar het vliegveld voor vlucht PG168 van 17:50. 2 personen, e-ticket #C646580 via 12go, bagage tot 20 kg gratis. De gratis transfer vanaf Long Bay (~13:00) is geregeld.',
+    pdf:'boekingen/ferry-11-aug.pdf', pdfLabel:'Bekijk e-ticket (pdf)',
+    booked:{label:'12go.asia', href:'https://12go.asia'} }
+};
+
+function icoMail(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><polyline points="3 7 12 13 21 7"/></svg>'; }
+function icoPhoneA(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.8.7a2 2 0 0 1 1.7 2z"/></svg>'; }
+function icoCalA(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'; }
+function icoClock(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>'; }
+function mapsUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+function dRow(ico, lbl, valHtml){
+  return '<div class="d-row"><span class="d-chip">' + ico + '</span><span><span class="lbl">' + lbl + '</span>' + valHtml + '</span></div>';
+}
+
+function openDetail(type, key){
+  var el = document.getElementById('detail');
+  var title, name, loc, emoji, bgc, addr, dateRows, contactRows = '', desc, pdf, pdfLabel, booked;
+  if (type === 'hotel') {
+    var h = HOTELS[key]; if (!h) return;
+    var x = HDET[key] || {};
+    title = (key === 'board') ? 'Vlucht details' : 'Hotel details';
+    name = h.name; loc = (key === 'board') ? 'KLM' : h.addr.split(', ').slice(-1)[0]; emoji = h.emoji; bgc = h.bgc; addr = h.addr;
+    dateRows = dRow(icoCalA(), 'Datums', '<span class="val">' + esc(h.dates) + ' · ' + esc(h.nights) + '</span>');
+    if (h.tel) contactRows += dRow(icoPhoneA(), 'Telefoon', '<a class="val" href="tel:' + h.tel.replace(/\s/g,'') + '">' + esc(h.tel) + '</a>');
+    if (x.wa) contactRows += dRow(icoPhoneA(), 'WhatsApp', '<a class="val" href="https://wa.me/' + x.wa.replace(/[^0-9]/g,'') + '" target="_blank" rel="noopener">' + esc(x.wa) + '</a>');
+    if (x.email) contactRows += dRow(icoMail(), 'Email', '<a class="val" href="mailto:' + x.email + '">' + esc(x.email) + '</a>');
+    desc = (x.desc || '') + (h.note ? '\n\n' + h.note : '');
+    pdf = PDF[key]; pdfLabel = (key === 'board') ? 'Bekijk vluchttickets (pdf)' : 'Bekijk incheck document (pdf)';
+    booked = x.booked;
+  } else {
+    var a = ACTS[key]; if (!a) return;
+    title = 'Activiteit details';
+    name = a.name; loc = a.loc; emoji = a.emoji; bgc = a.bgc; addr = a.addr;
+    dateRows = dRow(icoCalA(), 'Datum', '<span class="val">' + esc(a.date) + '</span>')
+             + dRow(icoClock(), 'Tijd', '<span class="val">' + esc(a.time) + '</span>');
+    if (a.phone) contactRows += dRow(icoPhoneA(), 'Telefoon', '<a class="val" href="tel:' + a.phone.replace(/\s/g,'') + '">' + esc(a.phone) + '</a>');
+    if (a.wa) contactRows += dRow(icoPhoneA(), 'WhatsApp', '<a class="val" href="https://wa.me/' + a.wa.replace(/[^0-9]/g,'') + '" target="_blank" rel="noopener">' + esc(a.wa) + '</a>');
+    if (a.email) contactRows += dRow(icoMail(), 'Email', '<a class="val" href="mailto:' + a.email + '">' + esc(a.email) + '</a>');
+    desc = a.desc; pdf = a.pdf; pdfLabel = a.pdfLabel || 'Bekijk booking (pdf)'; booked = a.booked;
+  }
+
+  var html = '<div class="d-top"><button class="d-back" id="d-back" aria-label="Terug">' +
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>' +
+    '</button><h2>' + title + '</h2></div>';
+  html += '<div class="d-wrap">';
+
+  html += '<div class="d-card"><div class="d-hero"><div class="d-thumb" style="background:' + bgc + '">' + emoji + '</div><div>';
+  html += '<h3>' + esc(name) + '</h3>';
+  html += '<div class="d-loc">' + icoPin() + esc(loc) + '</div>';
+  html += '<button class="btn" data-copy="' + esc(addr) + '">Copy adres</button>';
+  html += '</div></div></div>';
+
+  html += '<div class="d-card">' + dateRows + '</div>';
+  if (contactRows) html += '<div class="d-card"><div class="d-sec-title">Contact</div>' + contactRows + '</div>';
+
+  html += '<div class="d-card"><div class="d-sec-title">Getting there</div>';
+  html += '<div class="d-map"><span class="pin">📍</span>' + esc(addr) + '</div>';
+  html += '<a class="btn-blue" href="' + mapsUrl(addr) + '" target="_blank" rel="noopener">' + icoPin() + ' Get Direction</a></div>';
+
+  if (desc) html += '<div class="d-card"><div class="d-sec-title">Omschrijving</div><div class="d-desc" style="white-space:pre-line">' + esc(desc) + '</div></div>';
+  if (pdf) html += '<div class="d-card"><div class="d-sec-title">Documenten</div><a class="btn wide" style="margin-top:0" href="' + pdf + '" target="_blank" rel="noopener">' + pdfLabel + ' <span class="chev">' + icoChev() + '</span></a></div>';
+  if (booked) html += '<div class="d-card"><div class="d-sec-title">Geboekt via</div><a class="btn wide" style="margin-top:0" href="' + booked.href + '" target="_blank" rel="noopener">' + esc(booked.label) + ' <span class="chev">' + icoChev() + '</span></a></div>';
+  html += '</div>';
+
+  el.innerHTML = html;
+  el.classList.add('open');
+  el.scrollTop = 0;
+  document.getElementById('d-back').addEventListener('click', closeDetail);
+  el.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){ copyText(b.getAttribute('data-copy')); });
+  });
+}
+function closeDetail(){ document.getElementById('detail').classList.remove('open'); }
+
 /* ================= NAV ================= */
 document.getElementById('btn-prev').addEventListener('click', function(){ if (cur > 0) { cur--; render(); } });
 document.getElementById('btn-next').addEventListener('click', function(){ if (cur < DAYS.length-1) { cur++; render(); } });
@@ -758,9 +930,10 @@ document.querySelectorAll('[data-close]').forEach(function(b){
   b.addEventListener('click', closeOverlays);
 });
 document.addEventListener('keydown', function(e){
-  if (e.key === 'ArrowLeft' && cur > 0) { cur--; render(); }
-  if (e.key === 'ArrowRight' && cur < DAYS.length-1) { cur++; render(); }
-  if (e.key === 'Escape') closeOverlays();
+  var detailOpen = document.getElementById('detail').classList.contains('open');
+  if (e.key === 'ArrowLeft' && !detailOpen && cur > 0) { cur--; render(); }
+  if (e.key === 'ArrowRight' && !detailOpen && cur < DAYS.length-1) { cur++; render(); }
+  if (e.key === 'Escape') { closeDetail(); closeOverlays(); }
 });
 
 /* swipe */
@@ -770,6 +943,7 @@ document.addEventListener('touchstart', function(e){
 }, {passive:true});
 document.addEventListener('touchend', function(e){
   if (touchX === null) return;
+  if (document.getElementById('detail').classList.contains('open')) { touchX = null; return; }
   var dx = e.changedTouches[0].clientX - touchX;
   var dy = e.changedTouches[0].clientY - touchY;
   if (Math.abs(dx) > 70 && Math.abs(dy) < 50) {
