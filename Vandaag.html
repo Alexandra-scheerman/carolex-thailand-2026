@@ -173,6 +173,37 @@
   #day-view.bwd { animation: slideInFromLeft .24s ease-out; }
   .foot a { color: #fff; }
 
+  /* ---------- weather / converter / location ---------- */
+  .weather button { background: none; border: none; color: #fff; cursor: pointer; font-family: inherit; padding: 0; text-align: right; }
+  .weather .loc { text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); text-underline-offset: 3px; }
+  .wx-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+  .wx-row:last-child { border-bottom: none; }
+  .wx-row .wxi { font-size: 22px; width: 30px; text-align: center; }
+  .wx-row .wxd { flex: 1; }
+  .wx-row .wxd small { display: block; color: var(--muted); font-size: 12px; }
+  .wx-row .wxt { font-weight: 700; white-space: nowrap; }
+  .wx-row .wxt small { color: var(--muted); font-weight: 500; }
+  .d-ul { list-style: none; }
+  .d-ul li { position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: #4b5563; line-height: 1.5; }
+  .d-ul li::before { content: ''; position: absolute; left: 2px; top: 13px; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+  .d-ul.lav li::before { background: var(--lav); }
+  .thai-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+  .thai-row:last-child { border-bottom: none; }
+  .thai-row .nl { color: var(--muted); }
+  .thai-row .th { font-weight: 600; text-align: right; }
+  .cv-label { font-size: 12px; color: var(--muted); margin: 14px 0 6px; }
+  .cv-row { display: flex; border: 1.5px solid #e5e7eb; border-radius: 10px; overflow: hidden; }
+  .cv-row input { flex: 1; border: none; outline: none; padding: 12px 14px; font-size: 17px; font-family: inherit; font-weight: 600; color: var(--ink); min-width: 0; background: #fff; }
+  .cv-row .unit { display: flex; align-items: center; padding: 0 16px; font-weight: 700; font-size: 14px; color: var(--ink); border-left: 1.5px solid #e5e7eb; background: #fafafa; }
+  .cv-swap { display: block; margin: 14px auto 0; background: none; border: none; cursor: pointer; font-size: 20px; color: var(--accent-text); font-family: inherit; }
+  .cv-rate { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 13px; }
+  .cv-rate .lbl { color: var(--accent-text); font-weight: 700; }
+  .cv-rate .val { font-weight: 700; }
+  .cv-btn { display: block; width: 100%; margin-top: 18px; background: var(--accent); border: none; border-radius: 12px; color: #fff; font-family: inherit; font-size: 16px; font-weight: 700; padding: 14px; cursor: pointer; }
+  .cv-hero { text-align: center; font-size: 44px; padding: 18px 0 6px; letter-spacing: 6px; }
+  .dmid { flex: 1; min-width: 0; }
+  .dmid small { display: block; color: var(--muted); font-size: 11px; font-weight: 500; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
   /* ---------- detail pages ---------- */
   .detail { position: fixed; inset: 0; background: #f7f8fa; z-index: 400; overflow-y: auto; display: none; -webkit-overflow-scrolling: touch; }
   .detail.open { display: block; }
@@ -320,11 +351,11 @@
         <div class="sub"><span id="d-weekday"></span><small id="d-count"></small></div>
       </div>
       <div class="weather">
-        <span class="loc" id="d-loc"></span>
-        <span class="w-ico">
+        <button class="loc" id="d-loc" aria-label="Locatie details"></button>
+        <button class="w-ico" id="w-btn" aria-label="Weersverwachting">
           <span id="d-ico"></span>
           <span class="temp" id="d-temp"></span>
-        </span>
+        </button>
       </div>
     </header>
 
@@ -358,6 +389,7 @@
   <div class="panel">
     <h2>Menu <button class="close" data-close="menu-overlay">✕</button></h2>
     <ul class="menu-list">
+      <li><a href="#" id="menu-convert"><span class="mi">💱</span>Omrekenen Baht</a></li>
       <li><a href="index.html"><span class="mi">🌴</span>Startpagina</a></li>
       <li><a href="Thailand_Trip_Planner.html"><span class="mi">🗺️</span>Reisplanner (volledig overzicht)</a></li>
       <li><a href="Kopen_en_Pakken.html"><span class="mi">🛍️</span>Kopen &amp; Pakken checklist</a></li>
@@ -751,7 +783,10 @@ function render(dir){
     : ('Dag ' + (cur+1-PREP) + ' van ' + (DAYS.length-PREP));
   document.getElementById('d-loc').textContent = day.loc;
   document.getElementById('d-ico').innerHTML = (day.ico === 'plane') ? icoPlane() : icoSun();
-  document.getElementById('d-temp').textContent = day.temp;
+  document.getElementById('d-temp').textContent = day.temp + '°';
+  updateWeather(day.loc);
+  document.getElementById('d-loc').onclick = function(){ if (LOCDET[day.loc]) openLocDetail(day.loc); };
+  document.getElementById('w-btn').onclick = function(){ openForecast(day.loc); };
 
   /* hotel card */
   var h = HOTELS[day.hotel];
@@ -832,8 +867,15 @@ function render(dir){
 function buildDayLists(){
   var html = '';
   DAYS.forEach(function(d, i){
-    html += '<li><a href="#" data-i="' + i + '"><span class="dnum ' + d.phase + '">' + d.dl.split(' ')[0] + '<small>' + d.dl.split(' ')[1].slice(0,3).toLowerCase() + '</small></span>';
-    html += '<span>' + esc(d.wd) + '</span><span class="dloc">' + esc(d.loc) + '</span></a></li>';
+    var col = LOCCOLOR[d.loc] || '#212237';
+    var h = HOTELS[d.hotel];
+    var switchDay = !!(d.hotel && (i === 0 || d.hotel !== DAYS[i-1].hotel));
+    var ticon = '';
+    if (switchDay) ticon = (d.hotel === 'board' || d.iso === '2026-07-28' || d.iso === '2026-08-11') ? ' ✈️' : ' 🧳';
+    var sub = h ? (d.hotel === 'board' ? 'Vliegen' : h.name) : d.tag;
+    if (switchDay && d.hotel !== 'board') sub = 'Reisdag · ' + sub;
+    html += '<li><a href="#" data-i="' + i + '"><span class="dnum" style="background:' + col + '">' + d.dl.split(' ')[0] + '<small>' + d.dl.split(' ')[1].slice(0,3).toLowerCase() + '</small></span>';
+    html += '<span class="dmid">' + esc(d.wd) + ticon + '<small>' + esc(sub) + '</small></span><span class="dloc" style="color:' + col + '">' + esc(d.loc) + '</span></a></li>';
   });
   document.getElementById('side-days').innerHTML = html;
   document.getElementById('cal-days').innerHTML = html;
@@ -851,6 +893,262 @@ function buildDayLists(){
 
 function closeOverlays(){
   document.querySelectorAll('.overlay').forEach(function(o){ o.classList.remove('open'); });
+}
+
+/* ================= WEER (Open-Meteo, live) ================= */
+var LOCMETA = {
+  'Thuis': {lat:51.59, lon:4.78}, 'Breda': {lat:51.59, lon:4.78}, 'Amsterdam': {lat:52.31, lon:4.76},
+  'Bangkok': {lat:13.756, lon:100.502}, 'Kanchanaburi': {lat:14.023, lon:99.533},
+  'Koh Samui': {lat:9.512, lon:100.014}, 'Koh Phangan': {lat:9.731, lon:100.014}
+};
+function wxEmoji(c){
+  if (c === 0) return '☀️';
+  if (c <= 2) return '🌤️';
+  if (c === 3) return '☁️';
+  if (c === 45 || c === 48) return '🌫️';
+  if (c <= 57) return '🌦️';
+  if (c <= 67) return '🌧️';
+  if (c <= 77) return '🌨️';
+  if (c <= 82) return '🌧️';
+  return '⛈️';
+}
+function getWx(loc, cb){
+  var m = LOCMETA[loc]; if (!m) { cb(null); return; }
+  var key = 'wx3_' + loc;
+  try {
+    var c = JSON.parse(localStorage.getItem(key) || 'null');
+    if (c && Date.now() - c.t < 1800000) { cb(c.d); return; }
+  } catch(e){}
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=' + m.lat + '&longitude=' + m.lon +
+    '&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=7&timezone=auto')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      try { localStorage.setItem(key, JSON.stringify({t: Date.now(), d: d})); } catch(e){}
+      cb(d);
+    })
+    .catch(function(){ cb(null); });
+}
+function updateWeather(loc){
+  getWx(loc, function(d){
+    if (DAYS[cur].loc !== loc) return;
+    if (d && d.current) {
+      document.getElementById('d-temp').textContent = Math.round(d.current.temperature_2m) + '°';
+      document.getElementById('d-ico').innerHTML = '<span style="font-size:24px;line-height:1">' + wxEmoji(d.current.weather_code) + '</span>';
+    }
+  });
+}
+function openForecast(loc){
+  var el = document.getElementById('detail');
+  var html = '<div class="d-top"><button class="d-back" id="d-back" aria-label="Terug">' +
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>' +
+    '</button><h2>Weer in ' + esc(loc) + '</h2></div>';
+  html += '<div class="d-wrap"><div class="d-card" id="wx-list">Weer laden...</div></div>';
+  el.innerHTML = html; el.classList.add('open'); el.scrollTop = 0;
+  document.getElementById('d-back').addEventListener('click', closeDetail);
+  getWx(loc, function(d){
+    var box = document.getElementById('wx-list');
+    if (!box) return;
+    if (!d || !d.daily) { box.innerHTML = 'Weer ophalen lukt nu niet. Check je internetverbinding en probeer het straks opnieuw.'; return; }
+    var out = '';
+    if (d.current) out += '<div class="wx-row" style="font-size:16px;"><span class="wxi" style="font-size:28px">' + wxEmoji(d.current.weather_code) + '</span><span class="wxd"><strong>Nu</strong></span><span class="wxt">' + Math.round(d.current.temperature_2m) + '°</span></div>';
+    var dagen = ['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
+    for (var i = 0; i < d.daily.time.length; i++) {
+      var dt = new Date(d.daily.time[i] + 'T12:00:00');
+      var nm = (i === 0) ? 'Vandaag' : dagen[dt.getDay()] + ' ' + dt.getDate() + '/' + (dt.getMonth()+1);
+      out += '<div class="wx-row"><span class="wxi">' + wxEmoji(d.daily.weather_code[i]) + '</span>' +
+        '<span class="wxd">' + nm + '<small>' + (d.daily.precipitation_probability_max[i] != null ? d.daily.precipitation_probability_max[i] + '% kans op regen' : '') + '</small></span>' +
+        '<span class="wxt">' + Math.round(d.daily.temperature_2m_max[i]) + '° <small>/ ' + Math.round(d.daily.temperature_2m_min[i]) + '°</small></span></div>';
+    }
+    box.innerHTML = out;
+  });
+}
+
+/* ================= LOCATIE DETAILS ================= */
+var LOCCOLOR = {
+  'Thuis':'#212237', 'Breda':'#212237', 'Amsterdam':'#212237',
+  'Bangkok':'#6674c4', 'Kanchanaburi':'#3f9268', 'Koh Samui':'#e8765a', 'Koh Phangan':'#8f9ce0'
+};
+var THAI = [
+  ['Hallo', 'Sawasdee kha (vrouw) / khrap (man)'],
+  ['Dank je wel', 'Khop khun kha / khrap'],
+  ['Lekker!', 'Aroi!'],
+  ['Hoeveel kost het?', 'Tao rai?'],
+  ['Niet pittig, graag', 'Mai phet'],
+  ['Hoe gaat het?', 'Sabai dee mai?'],
+  ['Proost / veel geluk', 'Chok dee!']
+];
+var LOCDET = {
+  'Bangkok': { emoji:'🏙️', bgc:'#e3e7f7', dates:'23 - 25 juli · en de laatste nacht 11 - 12 augustus', mapq:'Ascott Sathorn Bangkok',
+    doen: [
+      ['Co van Kessel fietstour door Chinatown en over de kanalen (24 jul)', 'River City Bangkok'],
+      ['Streetfood en avondwandeling langs de rivier', 'Riverside Bangkok'],
+      ['Op de laatste avond (11 aug): pad thai en souvenirs in Sukhumvit', 'Sukhumvit Soi 12 Bangkok']
+    ],
+    tips: [
+      ['Grand Palace en Wat Pho (liggende Boeddha), vroeg gaan, schouders en knieen bedekt', 'Grand Palace Bangkok'],
+      ['Wat Arun aan de overkant van de rivier, mooi bij zonsondergang', 'Wat Arun Bangkok'],
+      ['Chao Phraya express boat, goedkoop varen als een local', 'Sathorn Pier Bangkok'],
+      ['Jodd Fairs nachtmarkt, eten en sfeer', 'Jodd Fairs Bangkok'],
+      ['ICONSIAM, spectaculair winkelcentrum met drijvende foodcourt', 'ICONSIAM Bangkok'],
+      ['Sea Life Bangkok als regenoptie voor de meiden', 'Sea Life Bangkok'],
+      ['Lumpini Park in de ochtend, varanen spotten', 'Lumpini Park Bangkok']
+    ],
+    eten: ['Pad thai van de straat', 'Mango sticky rice', 'Som tam (papajasalade, pittig!)', 'Boat noodles bij een noodle-stalletje', 'Satay met pindasaus', 'Roti met banaan als toetje', 'Thaise ijsthee (cha yen)'],
+    gewoonten: ['Groeten doe je met een wai: handen samen en een klein knikje', 'Schoenen uit bij tempels en bij mensen thuis', 'In tempels: schouders en knieen bedekt', 'Raak niemand aan op het hoofd, ook kinderen niet', 'Praat met respect over het koningshuis', 'Afdingen op markten mag, altijd met een glimlach', 'Drink flessenwater, geen kraanwater'] },
+  'Kanchanaburi': { emoji:'🌉', bgc:'#e7efe3', dates:'25 - 28 juli', mapq:'Dheva Mantra Resort Kanchanaburi',
+    doen: [
+      ['Weekend Walking Street avondmarkt bij de brug (za-avond)', 'River Kwai Bridge Kanchanaburi'],
+      ['Erawan watervallen: 7 niveaus klimmen en zwemmen (26 jul)', 'Erawan National Park'],
+      ['Elephants World: olifanten voeren en wassen (27 jul)', 'Elephants World Kanchanaburi'],
+      ['Optioneel: wet rafting op de rivier Kwai (1 uur, 3.500 THB / €91 voor de groep)']
+    ],
+    tips: [
+      ['Over de beroemde brug over de rivier Kwai lopen, gratis en vlakbij', 'Bridge over the River Kwai'],
+      ['Death Railway treinritje langs de kliffen bij Krasae Cave', 'Krasae Cave Kanchanaburi'],
+      ['Wat Tham Sua, tempel met enorme Boeddha en uitzicht', 'Wat Tham Sua Kanchanaburi'],
+      ['JEATH oorlogsmuseum, klein maar indrukwekkend', 'JEATH War Museum'],
+      ['Avondmarkt bij het treinstation voor goedkoop eten', 'Kanchanaburi Night Market']
+    ],
+    eten: ['Pad krapao (gehakt met heilige basilicum en een gebakken ei)', 'Gegrilde riviervis met knoflook', 'Khao pad (gebakken rijst) voor de meiden', 'Kluay tod (gefrituurde banaan) van de markt', 'Verse fruitshakes'],
+    gewoonten: ['Veel rustiger tempo dan Bangkok, ga in het ritme mee', 'Vroeg op pad, het is hier het koelst in de ochtend', 'Muggenspray aan de rivier zodra de zon zakt', 'Bij de oorlogsmonumenten en begraafplaats: ingetogen gedrag'] },
+  'Koh Samui': { emoji:'🏝️', bgc:'#fdf3d8', dates:'28 juli - 6 augustus', mapq:'Choeng Mon Beach Koh Samui',
+    doen: [
+      ['Strand en pool bij Deva Beach (Choeng Mon) en So KohKoon (Bangrak)', 'Choeng Mon Beach Koh Samui'],
+      ['Tree Bridge Zipline door de jungle (30 jul)', 'Tree Bridge Zipline Koh Samui'],
+      ['Fisherman\'s Village vrijdagmarkt in Bophut (31 jul)', 'Fisherman Village Bophut'],
+      ['Ang Thong Marine Park cruise met kajakken (2 aug)', 'Ang Thong National Marine Park'],
+      ['Beanbags en vuurshow bij Coco Tam\'s', 'Coco Tams Bophut']
+    ],
+    tips: [
+      ['Big Buddha (Wat Phra Yai), vlakbij Bangrak, mooi rond zonsondergang', 'Wat Phra Yai Koh Samui'],
+      ['Wat Plai Laem met de 18-armige Guanyin', 'Wat Plai Laem'],
+      ['Na Muang watervallen in het binnenland', 'Na Muang Waterfall Koh Samui'],
+      ['Lad Koh viewpoint langs de kustweg', 'Lad Koh Viewpoint'],
+      ['Dagtrip snorkelen bij Koh Tao (30-45 min boot), nog open als extraatje', 'Koh Tao'],
+      ['Met een songthaew (pick-up taxi) langs de kust hoppen']
+    ],
+    eten: ['Verse kokosnoot op het strand', 'Seafood bbq met gegrilde gamba\'s', 'Massaman curry (mild, ook voor de meiden)', 'Roti pancake met banaan en nutella', 'Som tam bij een strandtentje', 'Smoothiebowls voor het ontbijt'],
+    gewoonten: ['Bikini prima op het strand, maar bedek je in winkels en tempels', 'Songthaew: prijs afspreken voor je instapt', 'Reef-safe zonnebrand, verplicht in het marinepark', 'Happy hour begint bij zonsondergang, plan je cocktail'] },
+  'Koh Phangan': { emoji:'🌅', bgc:'#ffe9d6', dates:'6 - 11 augustus · romantische week', mapq:'Haad Yao Beach Koh Phangan',
+    doen: [
+      ['Haad Yao Beach voor de deur van Long Bay Resort', 'Haad Yao Beach Koh Phangan'],
+      ['Snorkelen bij het koraalrif voor de kust', 'Haad Yao Beach Koh Phangan'],
+      ['Massage op het strand', 'Haad Yao Beach Koh Phangan'],
+      ['SUP of kayak huren bij Havana Beach Resort', 'Havana Beach Resort Koh Phangan'],
+      ['Eiland verkennen en beachfront diners, optioneel een priveboot']
+    ],
+    tips: [
+      ['Thong Nai Pan Noi, misschien wel het mooiste strand van het eiland', 'Thong Nai Pan Noi Beach'],
+      ['Salad Beach, direct naast Haad Yao', 'Haad Salad Beach'],
+      ['Zen Beach voor zonsondergang met trommels en jongleurs', 'Zen Beach Koh Phangan'],
+      ['Phantip nachtmarkt in Thong Sala, lokaal en goedkoop eten', 'Phantip Night Market Thong Sala'],
+      ['Amsterdam Bar, sunset spot met uitzicht (heet echt zo)', 'Amsterdam Bar Koh Phangan'],
+      ['Domsila viewpoint boven de Than Sadet waterval', 'Than Sadet Waterfall']
+    ],
+    eten: ['Verse vis van de beach bbq', 'Kokoscurry met garnalen', 'Pad see ew (brede noedels)', 'Mango sticky rice bij zonsondergang', 'Smoothiebowls, het eiland staat er vol mee'],
+    gewoonten: ['Alles is hier relaxed, niets hoeft', 'Scooter alleen met helm en ervaring, de wegen zijn heuvelachtig', 'Neem cash mee, op Haad Yao is weinig pin', 'De zonsondergang is aan jullie kant van het eiland, elke avond gratis show'] }
+};
+function locList(items, lav){
+  var out = '<ul class="d-ul' + (lav ? ' lav' : '') + '">';
+  items.forEach(function(it){
+    var txt = typeof it === 'string' ? it : it[0];
+    var q = typeof it === 'string' ? null : it[1];
+    out += '<li>' + esc(txt) + (q ? ' <a href="' + mapsUrl(q) + '" target="_blank" rel="noopener" style="text-decoration:none">📍</a>' : '') + '</li>';
+  });
+  return out + '</ul>';
+}
+function openLocDetail(loc){
+  var L = LOCDET[loc]; if (!L) return;
+  var el = document.getElementById('detail');
+  var html = '<div class="d-top"><button class="d-back" id="d-back" aria-label="Terug">' +
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>' +
+    '</button><h2>' + esc(loc) + '</h2></div>';
+  html += '<div class="d-wrap">';
+  html += '<div class="d-card"><div class="d-hero"><div class="d-thumb" style="background:' + L.bgc + '">' + L.emoji + '</div><div>';
+  html += '<h3>' + esc(loc) + '</h3><div class="d-loc">' + icoCalA() + esc(L.dates) + '</div></div></div></div>';
+  html += '<div class="d-card"><div class="d-sec-title">Kaart</div>';
+  html += '<iframe src="https://maps.google.com/maps?q=' + encodeURIComponent(L.mapq) + '&z=13&output=embed" style="width:100%;height:220px;border:0;border-radius:10px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+  html += '<a class="btn-blue" style="margin-top:12px" href="' + mapsUrl(L.mapq) + '" target="_blank" rel="noopener">' + icoPin() + ' Open in Google Maps</a></div>';
+  html += '<div class="d-card"><div class="d-sec-title">Dit gaan we doen</div>' + locList(L.doen, false) + '</div>';
+  html += '<div class="d-card"><div class="d-sec-title">Nog leuk, als we er zin in hebben</div>' + locList(L.tips, true) + '</div>';
+  html += '<div class="d-card"><div class="d-sec-title">Eten dat je echt moet proberen</div>' + locList(L.eten, false) + '</div>';
+  html += '<div class="d-card"><div class="d-sec-title">Gewoonten en goed om te weten</div>' + locList(L.gewoonten, true) + '</div>';
+  html += '<div class="d-card"><div class="d-sec-title">Een beetje Thais</div>';
+  THAI.forEach(function(t){ html += '<div class="thai-row"><span class="nl">' + esc(t[0]) + '</span><span class="th">' + esc(t[1]) + '</span></div>'; });
+  html += '</div>';
+  html += '</div>';
+  el.innerHTML = html; el.classList.add('open'); el.scrollTop = 0;
+  document.getElementById('d-back').addEventListener('click', closeDetail);
+}
+
+/* ================= OMREKENEN BAHT ================= */
+var FX_FALLBACK = 38.4;
+function getRate(cb){
+  try {
+    var c = JSON.parse(localStorage.getItem('fx_thb') || 'null');
+    if (c && Date.now() - c.t < 43200000) { cb(c.r, true); return; }
+  } catch(e){}
+  fetch('https://api.frankfurter.app/latest?from=EUR&to=THB')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var r = d && d.rates && d.rates.THB;
+      if (r) { try { localStorage.setItem('fx_thb', JSON.stringify({t: Date.now(), r: r})); } catch(e){} cb(r, true); }
+      else cb(FX_FALLBACK, false);
+    })
+    .catch(function(){ cb(FX_FALLBACK, false); });
+}
+function openConverter(){
+  var el = document.getElementById('detail');
+  var html = '<div class="d-top"><button class="d-back" id="d-back" aria-label="Terug">' +
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>' +
+    '</button><h2>Omrekenen Baht</h2></div>';
+  html += '<div class="d-wrap">';
+  html += '<div class="cv-hero">💶🔁🪙</div>';
+  html += '<div class="d-card">';
+  html += '<div class="cv-label">Van</div><div class="cv-row"><input type="number" inputmode="decimal" id="cv-from" value="100"><span class="unit" id="cv-from-unit">EURO</span></div>';
+  html += '<button class="cv-swap" id="cv-swap" aria-label="Wissel">⬇️⬆️ wissel</button>';
+  html += '<div class="cv-label">Naar</div><div class="cv-row"><input type="text" id="cv-to" readonly><span class="unit" id="cv-to-unit">BAHT</span></div>';
+  html += '<div class="cv-rate"><span class="lbl">Currency rate</span><span class="val" id="cv-rate">1 EUR = ' + FX_FALLBACK.toString().replace('.', ',') + ' THB</span></div>';
+  html += '<button class="cv-btn" id="cv-calc">Berekenen</button>';
+  html += '</div>';
+  html += '<div class="d-card"><div class="d-sec-title">Spiekbriefje</div><div id="cv-cheat" style="font-size:14px;color:#4b5563;line-height:1.8"></div></div>';
+  html += '</div>';
+  el.innerHTML = html; el.classList.add('open'); el.scrollTop = 0;
+  document.getElementById('d-back').addEventListener('click', closeDetail);
+
+  var rate = FX_FALLBACK, eur2thb = true;
+  function calc(){
+    var v = parseFloat(String(document.getElementById('cv-from').value).replace(',', '.'));
+    var out = '';
+    if (!isNaN(v)) {
+      var res = eur2thb ? v * rate : v / rate;
+      out = res.toLocaleString('nl-NL', {maximumFractionDigits: 2});
+    }
+    document.getElementById('cv-to').value = out;
+  }
+  function paint(live){
+    document.getElementById('cv-from-unit').textContent = eur2thb ? 'EURO' : 'BAHT';
+    document.getElementById('cv-to-unit').textContent = eur2thb ? 'BAHT' : 'EURO';
+    document.getElementById('cv-rate').textContent = '1 EUR = ' + rate.toFixed(1).replace('.', ',') + ' THB' + (live ? '' : ' (vaste koers)');
+    var cheat = '';
+    [100, 500, 1000, 2000, 5000].forEach(function(b){
+      cheat += b.toLocaleString('nl-NL') + ' THB ≈ €' + (b / rate).toLocaleString('nl-NL', {maximumFractionDigits: 0}) + '<br>';
+    });
+    cheat += 'Snel: baht delen door ' + Math.round(rate) + ', of 1.000 baht ≈ €' + Math.round(1000 / rate);
+    document.getElementById('cv-cheat').innerHTML = cheat;
+    calc();
+  }
+  document.getElementById('cv-from').addEventListener('input', calc);
+  document.getElementById('cv-calc').addEventListener('click', calc);
+  document.getElementById('cv-swap').addEventListener('click', function(){
+    eur2thb = !eur2thb;
+    var to = document.getElementById('cv-to').value;
+    if (to) document.getElementById('cv-from').value = String(to).replace(/\./g, '').replace(',', '.');
+    paint(painted);
+  });
+  var painted = false;
+  paint(false);
+  getRate(function(r, live){ rate = r; painted = live; paint(live); });
 }
 
 /* ================= DETAIL PAGES ================= */
@@ -993,6 +1291,7 @@ document.getElementById('btn-next').addEventListener('click', function(){ if (cu
 document.getElementById('nav-label').addEventListener('click', function(){ var t = todayIndex(); if (t !== cur) { var d = t > cur ? 1 : -1; cur = t; render(d); } });
 document.getElementById('btn-cal').addEventListener('click', function(){ document.getElementById('cal-overlay').classList.add('open'); });
 document.getElementById('btn-menu').addEventListener('click', function(){ document.getElementById('menu-overlay').classList.add('open'); });
+document.getElementById('menu-convert').addEventListener('click', function(e){ e.preventDefault(); closeOverlays(); openConverter(); });
 document.querySelectorAll('.overlay').forEach(function(o){
   o.addEventListener('click', function(e){ if (e.target === o) closeOverlays(); });
 });
