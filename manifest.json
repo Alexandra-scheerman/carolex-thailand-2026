@@ -1,0 +1,15 @@
+{
+  "name": "Carolex Thailand 2026",
+  "short_name": "Thailand",
+  "description": "Dag-tot-dag reisplanner voor de Thailand-trip van Alexandra, Caroline, Julia en Lieve",
+  "start_url": "Vandaag.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ef977f",
+  "theme_color": "#ef977f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
