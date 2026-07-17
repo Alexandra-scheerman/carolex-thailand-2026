@@ -395,6 +395,54 @@ var HOTELS = {
 };
 
 var DAYS = [
+ { iso:'2026-07-18', dl:'18 Juli', wd:'Zaterdag', loc:'Thuis', temp:'22', ico:'sun', phase:'travel', tag:'Voorbereiding', hotel:null,
+   prog:[
+     { time:'--:--', title:'Caroline: naar Amsterdam', sub:'Afspreken in de stad' },
+     { time:'--:--', title:'Alex: shoppen', sub:'Zie de Kopen & Pakken checklist voor wat er nog nodig is' },
+     { time:'--:--', title:'Alex: wassen', sub:'Eerste lading vakantiekleding' }
+   ],
+   rem:[
+     { t:'Checklist bijhouden', d:'Vink gekochte spullen af op de Kopen & Pakken pagina, dan zie je meteen wat er nog mist' }
+   ]},
+ { iso:'2026-07-19', dl:'19 Juli', wd:'Zondag', loc:'Thuis', temp:'22', ico:'sun', phase:'travel', tag:'Voorbereiding', hotel:null,
+   prog:[
+     { time:'--:--', title:'Caroline: terug naar Breda', sub:'Daarna wassen en inpakken' },
+     { time:'--:--', title:'Alex: wassen en inpakken' },
+     { time:'--:--', title:'Alex: shoppen', sub:'Laatste dingen van de checklist' }
+   ],
+   rem:[
+     { t:'Morgen wordt regeldag', d:'Vanaf morgen kan de TDAC ingevuld worden, plus de rest van de takenlijst' }
+   ]},
+ { iso:'2026-07-20', dl:'20 Juli', wd:'Maandag', loc:'Thuis', temp:'23', ico:'sun', phase:'travel', tag:'Regeldag', hotel:null,
+   prog:[
+     { time:'--:--', title:'TDAC invullen (visa-ding)', sub:'Vanaf vandaag mogelijk: alle 4 apart via tdac.immigration.go.th · gratis en verplicht voor aankomst',
+       act:[ {label:'Naar TDAC website', href:'https://tdac.immigration.go.th'} ] },
+     { time:'--:--', title:'ABN: wereldpinnen aanzetten', sub:'ABN-app, pas, instellingen, geografische beperking op Wereld. Voor beide passen!\nEn genoeg geld op de rekening: ~€1.210 betalen jullie ter plaatse (veel cash) + eten ~€1.500+' },
+     { time:'--:--', title:'KPN: bundel buiten de EU checken', sub:'Of data uit: bij aankomst een Thaise SIM kopen (~500 THB / €14, veel goedkoper dan roaming)' },
+     { time:'--:--', title:'Alles uitprinten', sub:'Planning-PDF + Boekingenbundel-PDF van de startpagina' },
+     { time:'--:--', title:'Toestemmingsformulier reizen met minderjarige', sub:'Rijksoverheid-formulier laten invullen + kopie paspoort van de gezaghebbende ouder(s). Nodig voor de heenreis met de meiden en voor Marjolein op de terugreis. Zoek op rijksoverheid.nl naar toestemmingsformulier reizen minderjarige' },
+     { time:'--:--', title:'Konijnenschema maken', sub:'Voer- en verzorgschema voor de oppas, 22 jul t/m 12 aug' },
+     { time:'--:--', title:'Caroline: werken aan Blossombs' },
+     { time:'--:--', title:'Alex: voorbereiding afspraak Annemarie', sub:'4 uur inplannen voor de huisstijl-voorbereiding' },
+     { time:'--:--', title:'Middag: Alex naar Annemarie (huisstijl)', sub:'Daarna samen uit eten' }
+   ],
+   rem:[
+     { t:'Zipline', d:'De boeking is al bevestigd; het kamernummer kan pas na check-in bij Deva Beach op 28 jul' },
+     { t:'Morgen: KLM check-in', d:'Opent di 21 jul om 17:15 via de KLM app' }
+   ]},
+ { iso:'2026-07-21', dl:'21 Juli', wd:'Dinsdag', loc:'Breda', temp:'23', ico:'sun', phase:'travel', tag:'Laatste dag thuis', hotel:null,
+   prog:[
+     { time:'--:--', title:'Restjes van de takenlijst afronden', sub:'Alles wat maandag niet gelukt is: TDAC, printen, formulieren, konijnenschema' },
+     { time:'--:--', title:'Caroline: printen', sub:'Als dat maandag nog niet gebeurd is' },
+     { time:'--:--', title:'Caroline: werken, laatste dagje!' },
+     { time:'--:--', title:'Alex: naar Breda', sub:'Laatste hand aan de koffers en laatste shopping' },
+     { time:'17:15', title:'KLM online check-in opent', sub:'Voor YSSAS6 en YT6FMW, even afstemmen met Marjolein over de kids' }
+   ],
+   rem:[
+     { t:'Handbagage wegen', d:'Max 12 kg pp bij KLM, check met de bagageweegschaal' },
+     { t:'Samenreiskorting regelen', d:'Samenreiscode aanmaken en delen voor de trein van morgen (10:48 Breda naar Schiphol)' },
+     { t:'Morgen 14:15 op Schiphol', d:'Paspoorten en TDAC-bevestigingen in het tasje' }
+   ]},
  { iso:'2026-07-22', dl:'22 Juli', wd:'Woensdag', loc:'Amsterdam', temp:'21', ico:'plane', phase:'travel', tag:'Reisdag · met de kids', hotel:'board',
    prog:[
      { time:'10:48', title:'Trein Breda naar Schiphol', sub:'Spoor 3, IC richting Enkhuizen\n11:46 Utrecht CS, overstap zelfde perron (spoor 7 naar 5), 11:51 IC richting Den Haag C\n12:25 aankomst Schiphol · backup: 11:19 naar 12:55' },
@@ -686,16 +734,19 @@ function render(){
   document.getElementById('nav-label').textContent = isToday ? 'Vandaag' : (day.wd + ' ' + day.dl.toLowerCase());
   document.getElementById('d-date').textContent = day.dl;
   document.getElementById('d-weekday').textContent = day.wd;
-  document.getElementById('d-count').textContent = 'Dag ' + (cur+1) + ' van ' + DAYS.length;
+  var PREP = 4;
+  var togo = PREP - cur;
+  document.getElementById('d-count').textContent = (cur < PREP)
+    ? ('Nog ' + togo + (togo === 1 ? ' dag' : ' dagen') + ' tot vertrek')
+    : ('Dag ' + (cur+1-PREP) + ' van ' + (DAYS.length-PREP));
   document.getElementById('d-loc').textContent = day.loc;
   document.getElementById('d-ico').innerHTML = (day.ico === 'plane') ? icoPlane() : icoSun();
   document.getElementById('d-temp').textContent = day.temp;
 
   /* hotel card */
   var h = HOTELS[day.hotel];
-  var hc = '';
+  var hc = '<div class="phase-tag">' + esc(day.tag) + '</div>';
   if (h) {
-    hc += '<div class="phase-tag">' + esc(day.tag) + '</div>';
     hc += '<div class="hotel-card">';
     hc += '<div class="hotel-thumb" style="background:' + h.bgc + '">' + h.emoji + '</div>';
     hc += '<div class="hotel-info">';
