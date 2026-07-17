@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛍️ Kopen &amp; Pakken — Thailand 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #2d3748; }
+  .header { background: linear-gradient(135deg, #1a6b3a 0%, #2d9e5a 50%, #f4a820 100%); color: white; padding: 24px 20px; text-align: center; }
+  .header h1 { font-size: 1.6em; }
+  .header p { opacity: 0.92; margin-top: 4px; font-size: 0.95em; }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px 14px; }
+  .progress { background: white; border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); font-size: 0.9em; font-weight: 600; }
+  .progress-bar { background: #edf2f7; border-radius: 10px; height: 10px; margin-top: 8px; overflow: hidden; }
+  .progress-fill { height: 10px; background: linear-gradient(90deg, #48bb78, #38a169); width: 0%; transition: width 0.3s; }
+  .section { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 16px; overflow: hidden; }
+  .section-header { padding: 14px 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #edf2f7; background: #f7fafc; }
+  .section-header h2 { font-size: 1.05em; font-weight: 700; flex: 1; }
+  .section-header .count { font-size: 0.8em; color: #718096; font-weight: 600; }
+  .section-body { padding: 6px 10px; }
+  label.item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 8px; border-bottom: 1px solid #edf2f7; cursor: pointer; font-size: 0.95em; -webkit-tap-highlight-color: transparent; }
+  label.item:last-child { border-bottom: none; }
+  label.item input { width: 22px; height: 22px; flex-shrink: 0; accent-color: #2d9e5a; margin-top: 1px; }
+  label.item.checked span.txt { text-decoration: line-through; color: #a0aec0; }
+  label.item small { display: block; color: #718096; font-size: 0.85em; margin-top: 1px; }
+  label.item.checked small { color: #cbd5e0; }
+  .pill { font-size: 0.72em; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+  .pill.urgent { background: #fed7d7; color: #822727; }
+  .back { display: inline-block; margin: 10px 0 0; color: white; text-decoration: none; font-size: 0.9em; background: rgba(255,255,255,0.2); padding: 5px 14px; border-radius: 16px; }
+  .reset-btn { display: block; margin: 10px auto 30px; background: none; border: 1px solid #cbd5e0; color: #718096; border-radius: 20px; padding: 8px 18px; font-size: 0.85em; cursor: pointer; }
+  .print-btn { position: fixed; bottom: 20px; right: 20px; background: #2d9e5a; color: white; border: none; border-radius: 30px; padding: 12px 20px; font-size: 0.95em; font-weight: 600; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+  @media print {
+    .print-btn, .reset-btn, .back { display: none; }
+    body { background: white; }
+    .header { background: #1a6b3a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { box-shadow: none; border: 1px solid #cbd5e0; break-inside: avoid-page; }
+    label.item input { accent-color: black; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🛍️ Kopen &amp; Pakken</h1>
+  <p>Thailand 2026 · vertrek wo 22 juli · alleen handbagage (12kg pp, 55×35×25)</p>
+  <a class="back" href="Thailand_Trip_Planner.html">← Terug naar reisplanner</a>
+</div>
+
+<div class="container">
+
+  <div class="progress">
+    <span id="progress-text">0 van 0 afgevinkt</span>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span>🛒</span><h2>Nog kopen (deze week!)</h2><span class="count"></span></div>
+    <div class="section-body" data-cat="kopen">
+      <label class="item"><input type="checkbox"><span class="txt">Handbagage-trolleys<small>Max 55×35×25 cm · licht model (elke gram telt bij 12kg limiet) · check eerst wat jullie al hebben</small></span><span class="pill urgent">Urgent</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">DEET muggenspray 50%<small>Minimaal 2 grote flessen · let op: max 100ml per flesje in handbagage! Koop travel-size of koop bij in Thailand (7-Eleven heeft prima spray)</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Reef-safe zonnebrand SPF50<small>Verplicht in Ang Thong park · travel-size voor handbagage, grote fles in Thailand bijkopen</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Waterschoenen (4 paar)<small>Voor Erawan watervallen (26 jul) — rotsen zijn glad · Decathlon</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Imodium + ORS-zakjes<small>Dubbele voorraad Imodium · 10+ ORS · apotheek/Etos</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Drybag (waterdichte zak)<small>Voor boottochten: Ang Thong, ferry, longtail</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Powerbank<small>Let op: moet in handbagage (mag niet in ruim) · max 100Wh</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Universele reisstekker (Thailand: type A/B/C)<small>NL stekkers passen meestal, maar 1 wereldstekker is handig</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Zeeziektabletten<small>Voor de Ang Thong boottocht + ferry's</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Vaste toiletartikelen (shampoo bar, vaste zeep)<small>Scheelt vloeistoffen-gedoe bij handbagage!</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Ziplock-zakjes + 1L vloeistofzakjes<small>Voor security: alle vloeistoffen ≤100ml in 1L zak per persoon</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Snacks voor de vlucht<small>11 uur vliegen met de meiden</small></span></label>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span>👗</span><h2>Kleding (per persoon)</h2><span class="count"></span></div>
+    <div class="section-body" data-cat="kleding">
+      <label class="item"><input type="checkbox"><span class="txt">5–6 lichte T-shirts/topjes<small>Katoen/linnen · 30-35°C en vochtig · onderweg laten wassen (goedkoop!)</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">3–4 korte broeken/rokjes</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">1 lange broek + bedekkende top<small>Voor tempels + airco-bussen</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Sarong/lichte sjaal<small>Tempelbezoek: schouders + knieën bedekt</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Licht regenjack of poncho<small>Regenseizoen: korte stevige buien in de middag</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Zwemkleding ×2–3<small>Ook voor Elephants World (27 jul) — je gaat de rivier in!</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">UV-shirt / rash guard (kids)<small>Voor snorkelen en lange stranddagen</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Slippers + gesloten schoenen/sandalen<small>Gesloten schoenen verplicht bij zipline + fietstour</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Ondergoed ×7 + lichte pyjama</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">1 leuke avondoutfit (volwassenen)<small>Voor de romantische week 🥂</small></span></label>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span>🏥</span><h2>Reisapotheek</h2><span class="count"></span></div>
+    <div class="section-body" data-cat="apotheek">
+      <label class="item"><input type="checkbox"><span class="txt">Eigen medicatie voor 3 weken + reserve<small>In handbagage, in originele verpakking</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Paracetamol + ibuprofen (ook kinderdosering)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Imodium (dubbel) + ORS ×10</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Antihistamine (crème + tabletten)<small>Voor muggenbulten en allergie</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Pleisters, blarenpleisters, desinfectie, pincet</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Aftersun + aloë vera</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Oordruppels (zwemwater) + oogdruppels</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Thermometer (klein/digitaal)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Handgel</span></label>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span>🔌</span><h2>Tech &amp; documenten</h2><span class="count"></span></div>
+    <div class="section-body" data-cat="tech">
+      <label class="item"><input type="checkbox"><span class="txt">Paspoorten ×4 (geldig tot min. feb 2027!)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Geprinte boekingenbundel + planning<small>PDF's staan op de startpagina van de site</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">TDAC-bevestigingen ×4<small>Invullen vanaf ma 20 jul · screenshot in telefoon + print</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Kopie paspoorten (foto + print, apart bewaren)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Pinpas + creditcard + evt. Wise-kaart<small>Bank geïnformeerd over Thailand? Limieten gecheckt? (~€1.650 ter plaatse te betalen)</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Telefoonopladers + kabels ×4</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Powerbank (opgeladen, in handbagage)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Waterdicht telefoonhoesje</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Koptelefoons/earbuds ×4 + tablet met gedownloade films/series (kids)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Apps: Grab, KLM, Bangkok Airways, Booking.com, Google Maps offline (Bangkok + Samui + Phangan)</span></label>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span>🌞</span><h2>Zon &amp; strand</h2><span class="count"></span></div>
+    <div class="section-body" data-cat="strand">
+      <label class="item"><input type="checkbox"><span class="txt">Zonnebrillen ×4 + zonnehoedjes/petten ×4</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Snorkelmasker (kids)<small>Of huren ter plaatse — scheelt bagageruimte</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Sneldrogende handdoek ×4<small>Klein oprolbaar — hotels hebben strandlakens meestal ook</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Lichte dagrugzak (1-2 stuks)<small>Voor dagtochten: Erawan, Ang Thong, fietstour</small></span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Herbruikbare waterfles ×4</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Lippenbalsem met SPF</span></label>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span>✈️</span><h2>In het vliegtuig (handbagage-check)</h2><span class="count"></span></div>
+    <div class="section-body" data-cat="vlucht">
+      <label class="item"><input type="checkbox"><span class="txt">Alle vloeistoffen ≤100ml in 1L ziplock (per persoon)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Nekkussen + slaapmasker + oordopjes</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Vestje/laagje (airco aan boord)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Entertainment kids gedownload</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Pen (voor evt. formulieren)</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Tandenborstel-setje voor in de nachtvlucht</span></label>
+      <label class="item"><input type="checkbox"><span class="txt">Weegcheck: max 12kg per koffer! 🎒<small>Weeg thuis — KLM controleert bij de gate</small></span></label>
+    </div>
+  </div>
+
+  <button class="reset-btn" onclick="if(confirm('Alles uitvinken?')){localStorage.removeItem('pak_checks');location.reload();}">↺ Alles uitvinken</button>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Print</button>
+
+<script>
+(function(){
+  var KEY='pak_checks';
+  var saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  var boxes=document.querySelectorAll('label.item input');
+  boxes.forEach(function(b,i){
+    var id='c'+i;
+    if(saved[id]){ b.checked=true; b.closest('label').classList.add('checked'); }
+    b.addEventListener('change',function(){
+      b.closest('label').classList.toggle('checked', b.checked);
+      saved[id]=b.checked;
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  function update(){
+    var total=boxes.length, done=0;
+    boxes.forEach(function(b){ if(b.checked) done++; });
+    document.getElementById('progress-text').textContent=done+' van '+total+' afgevinkt';
+    document.getElementById('progress-fill').style.width=(total? (done/total*100):0)+'%';
+    document.querySelectorAll('.section').forEach(function(s){
+      var bs=s.querySelectorAll('input'), d=0;
+      bs.forEach(function(b){ if(b.checked) d++; });
+      var c=s.querySelector('.count');
+      if(c) c.textContent=d+'/'+bs.length;
+    });
+  }
+  update();
+})();
+</script>
+</body>
+</html>
