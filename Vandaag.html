@@ -102,6 +102,10 @@
   .hotel-thumb {
     width: 98px; height: 98px; border-radius: 8px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center; font-size: 44px;
+    position: relative; overflow: hidden;
+  }
+  .hotel-thumb img, .d-thumb img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   }
   .hotel-info { flex: 1; min-width: 0; padding-top: 2px; }
   .hotel-info h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.2px; line-height: 1.22; color: var(--ink); }
@@ -163,6 +167,10 @@
   .foot {
     text-align: center; color: rgba(255,255,255,.85); font-size: 12px; padding: 6px 20px 20px;
   }
+  @keyframes slideInFromRight { from { opacity: .2; transform: translateX(46px); } to { opacity: 1; transform: none; } }
+  @keyframes slideInFromLeft { from { opacity: .2; transform: translateX(-46px); } to { opacity: 1; transform: none; } }
+  #day-view.fwd { animation: slideInFromRight .24s ease-out; }
+  #day-view.bwd { animation: slideInFromLeft .24s ease-out; }
   .foot a { color: #fff; }
 
   /* ---------- detail pages ---------- */
@@ -174,7 +182,7 @@
   .d-wrap { max-width: 430px; margin: 0 auto; padding: 0 12px 50px; }
   .d-card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; border: 1px solid #eef0f3; }
   .d-hero { display: flex; gap: 14px; align-items: flex-start; }
-  .d-thumb { width: 72px; height: 72px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 34px; flex-shrink: 0; }
+  .d-thumb { width: 72px; height: 72px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 34px; flex-shrink: 0; position: relative; overflow: hidden; }
   .d-hero h3 { font-size: 18px; font-weight: 700; line-height: 1.25; }
   .d-loc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; margin-top: 4px; }
   .d-hero .btn { margin-top: 10px; min-height: 34px; padding: 4px 14px; font-size: 14px; }
@@ -305,6 +313,7 @@
       </button>
     </div>
 
+    <div id="day-view">
     <header class="day-head">
       <div>
         <h1 id="d-date"></h1>
@@ -330,6 +339,7 @@
       <h2>Aan denken en nog doen</h2>
       <ul class="rem" id="reminders"></ul>
     </section>
+    </div>
 
     <div class="foot">
       Carolex · Thailand 2026 · <a href="index.html">startpagina</a> · <a href="Thailand_Trip_Planner.html">volledig overzicht</a>
@@ -369,25 +379,25 @@ var BUNDLE = 'Thailand_Boekingen_Bundel.pdf';
 var GRAB = 'https://www.grab.com/dl/';
 
 var HOTELS = {
-  ascott: { name:'Ascott Sathorn', emoji:'🏙️', bgc:'#fde8df', addr:'7 S Sathorn Rd, Bangkok',
+  ascott: { name:'Ascott Sathorn', emoji:'🏙️', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/20/3b/c5/kitchen-area-of-1-bedroom.jpg?w=300&h=300&s=1', bgc:'#fde8df', addr:'7 S Sathorn Rd, Bangkok',
     tel:'+66 2 676 6868', dates:'23 juli - 25 juli', nights:'2 nachten',
     note:'Trip.com 1482190417238129 · Deluxe 2BR apt · ontbijt incl. · €356,58 betaald · aankomst 11:30 doorgegeven, early check-in bij beschikbaarheid · direct mailen: frontoffice.asb@the-ascott.com' },
-  dheva: { name:'Dheva Mantra Resort', emoji:'🌉', bgc:'#e7efe3', addr:'9/99 Moo 3, Thamakham, Kanchanaburi',
+  dheva: { name:'Dheva Mantra Resort', emoji:'🌉', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/53/c7/5a/pool.jpg?w=300&h=300&s=1', bgc:'#e7efe3', addr:'9/99 Moo 3, Thamakham, Kanchanaburi',
     tel:'+66 34 615 999', dates:'25 juli - 28 juli', nights:'3 nachten',
     note:'Booking.com 5189815737 · pin 8989 · familiekamer + extra bed · €475 betaald, extra bed 1.800 THB (€49) ter plaatse' },
-  deva: { name:'Deva Beach Resort', emoji:'🏝️', bgc:'#e0f0f2', addr:'69/34 Moo 5, Choeng Mon Beach, Bo Phut, Koh Samui',
+  deva: { name:'Deva Beach Resort', emoji:'🏝️', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/43/3c/57/deva-samui-resort-spa.jpg?w=300&h=300&s=1', bgc:'#e0f0f2', addr:'69/34 Moo 5, Choeng Mon Beach, Bo Phut, Koh Samui',
     tel:'+66 77 417 300', dates:'28 juli - 1 aug', nights:'4 nachten',
     note:'Booking.com 5370602685 · pin 2632 · volledig betaald (€654,65 via Booking.com) · ontbijt niet inbegrepen: 450 THB pp per dag (€12), cash aan de balie' },
-  kohkoon: { name:'So KohKoon Beach Resort', emoji:'🏖️', bgc:'#fdf3d8', addr:'73/2 Moo 4, Bangrak Beach, Bophut, Koh Samui',
+  kohkoon: { name:'So KohKoon Beach Resort', emoji:'🏖️', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/12/df/57/kohkoon-beach-resort.jpg?w=300&h=300&s=1', bgc:'#fdf3d8', addr:'73/2 Moo 4, Bangrak Beach, Bophut, Koh Samui',
     tel:'+66 77 961 760', dates:'1 aug - 4 aug', nights:'3 nachten',
     note:'Ref BBA26062020786987 (Caroline) · Beach Front Villa · 21.000 THB (€568) · WhatsApp +66 94 009 0065 · aankomst ±13:30 doorgegeven' },
-  beach79: { name:'79 Beach Club & Resort', emoji:'🥂', bgc:'#f6e6ef', addr:'Bangrak Beach, Koh Samui',
+  beach79: { name:'79 Beach Club & Resort', emoji:'🥂', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/22/61/b1/caption.jpg?w=300&h=300&s=1', bgc:'#f6e6ef', addr:'Bangrak Beach, Koh Samui',
     tel:'+66 92 949 7979', dates:'4 aug - 6 aug', nights:'2 nachten',
     note:'Ref BBA26062820839464 · Grand Deluxe · ontbijt incl. · 13.600 THB (€368) betaald' },
-  longbay: { name:'Long Bay Resort', emoji:'🌅', bgc:'#ffe9d6', addr:'58/5 Moo 8, Haad Yao Beach, Koh Phangan',
+  longbay: { name:'Long Bay Resort', emoji:'🌅', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/23/8a/b0/pool--v17026901.jpg?w=300&h=300&s=1', bgc:'#ffe9d6', addr:'58/5 Moo 8, Haad Yao Beach, Koh Phangan',
     tel:'+66 77 349 057', dates:'6 aug - 11 aug', nights:'5 nachten',
     note:'Ref BBA26062820839308 · Deluxe Cottage · totaal 40.000 THB (€1.040) · aanbetaald 20.000 THB (€545,13) · restant 20.000 THB (€520) bij aankomst: cash of creditcard +3% · gratis piertransfer' },
-  sora: { name:'Sora Resort & Suites', emoji:'🌆', bgc:'#e3e7f7', addr:'22 Soi Sukhumvit 12, Khlong Toei, Bangkok',
+  sora: { name:'Sora Resort & Suites', emoji:'🌆', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/53/b1/2e/12th-avenue-hotel-bangkok.jpg?w=300&h=300&s=1', bgc:'#e3e7f7', addr:'22 Soi Sukhumvit 12, Khlong Toei, Bangkok',
     tel:'+66 2 664 7000', dates:'11 aug - 12 aug', nights:'1 nacht',
     note:'Booking.com 6904734534 · pin 3677 · front office: fo_sukhumvit@sorahotels.com · late aankomst ±20:30 doorgegeven' },
   board: { name:'Aan boord KLM', emoji:'✈️', bgc:'#e3e7f7', addr:'Nachtvlucht naar Bangkok',
@@ -728,7 +738,7 @@ function todayIndex(){
 /* ================= RENDER ================= */
 var cur = todayIndex();
 
-function render(){
+function render(dir){
   var day = DAYS[cur];
   var isToday = (cur === todayIndex() && (function(){ var n=new Date(); var iso=n.getFullYear()+'-'+('0'+(n.getMonth()+1)).slice(-2)+'-'+('0'+n.getDate()).slice(-2); return iso===day.iso; })());
   document.getElementById('nav-label').textContent = isToday ? 'Vandaag' : (day.wd + ' ' + day.dl.toLowerCase());
@@ -748,7 +758,7 @@ function render(){
   var hc = '<div class="phase-tag">' + esc(day.tag) + '</div>';
   if (h) {
     hc += '<div class="hotel-card">';
-    hc += '<div class="hotel-thumb" style="background:' + h.bgc + '">' + h.emoji + '</div>';
+    hc += '<div class="hotel-thumb" style="background:' + h.bgc + '">' + h.emoji + (h.img ? '<img src="' + h.img + '" alt="" loading="lazy" onerror="this.remove()">' : '') + '</div>';
     hc += '<div class="hotel-info">';
     hc += '<h3>' + esc(h.name) + '</h3>';
     hc += '<div class="hotel-row">' + icoPin() + '<span>' + esc(h.addr) + '</span></div>';
@@ -811,6 +821,12 @@ function render(){
   });
 
   window.scrollTo(0, 0);
+  if (dir) {
+    var dv = document.getElementById('day-view');
+    dv.classList.remove('fwd', 'bwd');
+    void dv.offsetWidth;
+    dv.classList.add(dir > 0 ? 'fwd' : 'bwd');
+  }
 }
 
 function buildDayLists(){
@@ -824,9 +840,11 @@ function buildDayLists(){
   document.querySelectorAll('.day-list a').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
-      cur = parseInt(a.getAttribute('data-i'), 10);
+      var ni = parseInt(a.getAttribute('data-i'), 10);
+      var d = ni === cur ? 0 : (ni > cur ? 1 : -1);
+      cur = ni;
       closeOverlays();
-      render();
+      render(d);
     });
   });
 }
@@ -916,6 +934,7 @@ function openDetail(type, key){
     var x = HDET[key] || {};
     title = (key === 'board') ? 'Vlucht details' : 'Hotel details';
     name = h.name; loc = (key === 'board') ? 'KLM' : h.addr.split(', ').slice(-1)[0]; emoji = h.emoji; bgc = h.bgc; addr = h.addr;
+    var heroImg = h.img;
     dateRows = dRow(icoCalA(), 'Datums', '<span class="val">' + esc(h.dates) + ' · ' + esc(h.nights) + '</span>');
     if (h.tel) contactRows += dRow(icoPhoneA(), 'Telefoon', '<a class="val" href="tel:' + h.tel.replace(/\s/g,'') + '">' + esc(h.tel) + '</a>');
     if (x.wa) contactRows += dRow(icoPhoneA(), 'WhatsApp', '<a class="val" href="https://wa.me/' + x.wa.replace(/[^0-9]/g,'') + '" target="_blank" rel="noopener">' + esc(x.wa) + '</a>');
@@ -940,7 +959,7 @@ function openDetail(type, key){
     '</button><h2>' + title + '</h2></div>';
   html += '<div class="d-wrap">';
 
-  html += '<div class="d-card"><div class="d-hero"><div class="d-thumb" style="background:' + bgc + '">' + emoji + '</div><div>';
+  html += '<div class="d-card"><div class="d-hero"><div class="d-thumb" style="background:' + bgc + '">' + emoji + (typeof heroImg !== 'undefined' && heroImg ? '<img src="' + heroImg + '" alt="" onerror="this.remove()">' : '') + '</div><div>';
   html += '<h3>' + esc(name) + '</h3>';
   html += '<div class="d-loc">' + icoPin() + esc(loc) + '</div>';
   html += '<button class="btn" data-copy="' + esc(addr) + '">Copy adres</button>';
@@ -969,9 +988,9 @@ function openDetail(type, key){
 function closeDetail(){ document.getElementById('detail').classList.remove('open'); }
 
 /* ================= NAV ================= */
-document.getElementById('btn-prev').addEventListener('click', function(){ if (cur > 0) { cur--; render(); } });
-document.getElementById('btn-next').addEventListener('click', function(){ if (cur < DAYS.length-1) { cur++; render(); } });
-document.getElementById('nav-label').addEventListener('click', function(){ cur = todayIndex(); render(); });
+document.getElementById('btn-prev').addEventListener('click', function(){ if (cur > 0) { cur--; render(-1); } });
+document.getElementById('btn-next').addEventListener('click', function(){ if (cur < DAYS.length-1) { cur++; render(1); } });
+document.getElementById('nav-label').addEventListener('click', function(){ var t = todayIndex(); if (t !== cur) { var d = t > cur ? 1 : -1; cur = t; render(d); } });
 document.getElementById('btn-cal').addEventListener('click', function(){ document.getElementById('cal-overlay').classList.add('open'); });
 document.getElementById('btn-menu').addEventListener('click', function(){ document.getElementById('menu-overlay').classList.add('open'); });
 document.querySelectorAll('.overlay').forEach(function(o){
@@ -982,8 +1001,8 @@ document.querySelectorAll('[data-close]').forEach(function(b){
 });
 document.addEventListener('keydown', function(e){
   var detailOpen = document.getElementById('detail').classList.contains('open');
-  if (e.key === 'ArrowLeft' && !detailOpen && cur > 0) { cur--; render(); }
-  if (e.key === 'ArrowRight' && !detailOpen && cur < DAYS.length-1) { cur++; render(); }
+  if (e.key === 'ArrowLeft' && !detailOpen && cur > 0) { cur--; render(-1); }
+  if (e.key === 'ArrowRight' && !detailOpen && cur < DAYS.length-1) { cur++; render(1); }
   if (e.key === 'Escape') { closeDetail(); closeOverlays(); }
 });
 
@@ -997,9 +1016,9 @@ document.addEventListener('touchend', function(e){
   if (document.getElementById('detail').classList.contains('open')) { touchX = null; return; }
   var dx = e.changedTouches[0].clientX - touchX;
   var dy = e.changedTouches[0].clientY - touchY;
-  if (Math.abs(dx) > 70 && Math.abs(dy) < 50) {
-    if (dx < 0 && cur < DAYS.length-1) { cur++; render(); }
-    if (dx > 0 && cur > 0) { cur--; render(); }
+  if (Math.abs(dx) > 55 && Math.abs(dx) > 1.4 * Math.abs(dy)) {
+    if (dx < 0 && cur < DAYS.length-1) { cur++; render(1); }   /* swipe naar links: dag verder */
+    if (dx > 0 && cur > 0) { cur--; render(-1); }              /* swipe naar rechts: terug in de tijd */
   }
   touchX = null;
 }, {passive:true});
