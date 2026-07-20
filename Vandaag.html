@@ -667,13 +667,14 @@ var DAYS = [
      { time:'--:--', title:'Vrije romantische dag', sub:'Strand, pool, JetSurf, beach club dinner, sunset' }
    ],
    rem:[
-     { t:'Ferry morgen is geboekt', d:'Seatran 14:30 vanaf Bangrak Pier, naast het hotel · uiterlijk 13:50 inchecken · e-ticket #AB26071700076 op de telefoon' },
+     { t:'Ferry morgen is geboekt', d:'Seatran 14:30 vanaf Bangrak Pier, naast het hotel · uiterlijk 13:50 inchecken · het e-ticket staat in de app bij morgen (ook offline)' },
      { t:'Transfer Long Bay is geregeld', d:'Gratis pickup op Thongsala Pier is bevestigd; de chauffeur wacht bij het meeting point' }
    ]},
  { iso:'2026-08-06', dl:'6 Augustus', wd:'Donderdag', loc:'Koh Phangan', temp:'31', ico:'sun', phase:'rom', tag:'Reisdag · romantische week', hotel:'longbay',
    prog:[
      { time:'12:00', title:'Check-out 79 Beach Club', sub:'Koffers kunnen tot 13:40 bij het hotel blijven' },
-     { time:'13:50', title:'Inchecken Bangrak Seatran Pier', sub:'De pier ligt naast het hotel · 40 min voor vertrek\nE-ticket #AB26071700076 op de telefoon tonen', det:'ferry6' },
+     { time:'13:50', title:'Inchecken Bangrak Seatran Pier', sub:'De pier ligt naast het hotel · 40 min voor vertrek\nE-ticket #AB26071700076 tonen', det:'ferry6',
+       act:[ {label:'Bekijk e-ticket (pdf)', href:'boekingen/ferry-6-aug.pdf'} ] },
      { time:'14:30', title:'Seatran ferry naar Thong Sala', sub:'Aankomst 15:05 op Koh Phangan', det:'ferry6' },
      { time:'15:05', title:'Gratis transfer naar Long Bay', sub:'Naar het meeting point op de pier lopen, de chauffeur wacht daar\nAankomst resort ~15:45' },
      { time:'--:--', title:'Inchecken Long Bay Resort', box:'Long Bay Resort\n58/5 Moo 8, Haad Yao Beach, Koh Phangan',
@@ -1228,6 +1229,7 @@ var ACTS = {
   ferry6: { name:'Seatran ferry naar Koh Phangan', loc:'Koh Samui', emoji:'⛴️', bgc:'#e3e7f7',
     addr:'Bangrak Seatran Pier, Koh Samui', date:'Donderdag 6 augustus', time:'14:30 - 15:05 · uiterlijk 13:50 inchecken',
     desc:'Oversteek van Bangrak Pier (naast 79 Beach Club) naar Thong Sala op Koh Phangan. 2 personen, e-ticket #AB26071700076 via 12go, op de telefoon tonen bij het inchecken. Gratis annuleren tot 4 aug. Na aankomst wacht de chauffeur van Long Bay bij het meeting point op de pier.',
+    pdf:'boekingen/ferry-6-aug.pdf', pdfLabel:'Bekijk e-ticket (pdf)',
     booked:{label:'12go.asia', href:'https://12go.asia'} },
   ferry11: { name:'Lomprayah ferry naar Koh Samui', loc:'Koh Phangan', emoji:'⛴️', bgc:'#e3e7f7',
     addr:'Thong Sala Pier, Koh Phangan', date:'Dinsdag 11 augustus', time:'15:00 - 15:30 · uiterlijk 14:00 inchecken',

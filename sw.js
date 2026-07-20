@@ -26,6 +26,7 @@ var ASSETS = [
   'boekingen/vlucht-pg145.pdf',
   'boekingen/activiteit-co-van-kessel.pdf',
   'boekingen/activiteit-elephants-world.pdf',
+  'boekingen/ferry-6-aug.pdf',
   'boekingen/ferry-11-aug.pdf',
   'boekingen/angthong-ticket-1.pkpass',
   'boekingen/angthong-ticket-2.pkpass',
