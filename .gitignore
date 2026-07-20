@@ -6,3 +6,10 @@ pp-*.jpeg
 pp_*.jpeg
 *passport*
 *Kanchapdf
+
+# Lokaal spul, niet voor de site
+.DS_Store
+_to_delete/
+Print Car/
+*.bundle
+*.bundle.lock
