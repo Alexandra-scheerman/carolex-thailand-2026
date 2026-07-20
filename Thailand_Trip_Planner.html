@@ -222,7 +222,7 @@
     <div class="stat"><div class="num">14</div><div class="lbl">Met de kids</div></div>
     <div class="stat"><div class="num">6</div><div class="lbl">Romantisch</div></div>
     <div class="stat"><div class="num">8/8</div><div class="lbl">Verblijven geboekt</div></div>
-    <div class="stat"><div class="num">5</div><div class="lbl">Dagen tot vertrek</div></div>
+    <div class="stat"><div class="num" id="d-togo">2</div><div class="lbl" id="d-togo-lbl">Dagen tot vertrek</div></div>
   </div>
 
   <!-- VANDAAG REGELEN -->
@@ -250,12 +250,12 @@
           <div class="check-meta"><span class="badge done">Klaar</span></div>
         </li>
         <li>
-          <div class="check-icon warn">!</div>
+          <div class="check-icon done">✓</div>
           <div class="check-text">
-            <strong>TDAC (Thailand Digital Arrival Card) invullen — kan vanaf ma 20 juli</strong>
-            <span>Verplicht, max 72 uur voor aankomst (aankomst = do 23 jul 09:30). Voor alle 4 apart via <a href="https://tdac.immigration.go.th">tdac.immigration.go.th</a>. Gratis, 10 min per persoon.</span>
+            <strong>TDAC ingevuld voor alle 4 ✅ (20 jul)</strong>
+            <span>Bevestigd voor aankomst 23 jul: Alexandra E9625B2 · Caroline 9BA0F88 · Julia BA324C0 · Lieve 735266E. De bevestigingen staan als pdf in de app (dag 20 jul en bij de landing op 23 jul) en in <a href="boekingen/tdac-alle-4.pdf" target="_blank" rel="noopener">boekingen/tdac-alle-4.pdf</a>.</span>
           </div>
-          <div class="check-meta"><span class="badge warn">Ma 20 jul</span></div>
+          <div class="check-meta"><span class="badge done">Klaar</span></div>
         </li>
         <li>
           <div class="check-icon todo">×</div>
@@ -758,7 +758,7 @@
         <div>
           <h3 class="sub">Documenten</h3>
           <ul class="pre-list">
-            <li><span class="priority critical">Must</span> <div><strong>TDAC invullen — vanaf ma 20 juli</strong> — alle 4 apart via <a href="https://tdac.immigration.go.th">tdac.immigration.go.th</a> (max 72u voor aankomst 23 jul)</div></li>
+            <li><span class="priority ok">Klaar</span> <div><strong>TDAC ingevuld voor alle 4 ✅ (20 jul)</strong> — E9625B2 · 9BA0F88 · BA324C0 · 735266E · <a href="boekingen/tdac-alle-4.pdf" target="_blank" rel="noopener">pdf met alle 4</a></div></li>
             <li><span class="priority ok">Klaar</span> <div><strong>Geen visum nodig</strong> — 21 dagen &lt; 30 dagen visumvrij voor NL</div></li>
             <li><span class="priority ok">Klaar</span> <div><strong>Paspoorten gecheckt 17 jul — alle 4 ruim geldig ✅</strong> Alexandra tot mei 2028 · Caroline tot feb 2035 · Lieve tot apr 2029 · Julia tot mei 2031 (vereist: min. feb 2027)</div></li>
             <li><span class="priority ok">Klaar</span> <div><strong>Univé doorlopende reis- + annuleringsverzekering</strong> — polis 72794726 ✅</div></li>
@@ -885,6 +885,21 @@
     }
   });
   var ov = document.getElementById('menu-overlay');
+  (function(){
+    var el = document.getElementById('d-togo'); var lbl = document.getElementById('d-togo-lbl');
+    if (el) {
+      var msPerDag = 86400000;
+      var nu = new Date(); var vandaag = new Date(nu.getFullYear(), nu.getMonth(), nu.getDate());
+      var togo = Math.round((new Date(2026, 6, 22) - vandaag) / msPerDag);
+      if (togo > 0) { el.textContent = togo; lbl.textContent = togo === 1 ? 'Dag tot vertrek' : 'Dagen tot vertrek'; }
+      else {
+        var dag = Math.round((vandaag - new Date(2026, 6, 22)) / msPerDag) + 1;
+        if (dag >= 1 && dag <= 22) { el.textContent = dag; lbl.textContent = 'Dag van de reis (van 22)'; }
+        else if (dag > 22) { el.textContent = '\u2713'; lbl.textContent = 'Reis afgerond'; }
+        else { el.textContent = 0; lbl.textContent = 'Vertrekdag!'; }
+      }
+    }
+  })();
   document.getElementById('btn-menu').addEventListener('click', function(){ ov.classList.add('open'); });
   document.getElementById('menu-close').addEventListener('click', function(){ ov.classList.remove('open'); });
   ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });

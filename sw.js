@@ -9,6 +9,7 @@ var ASSETS = [
   'Thailand_Financien.html',
   'Email_Overzicht_Thailand.html',
   'manifest.json',
+  'herinneringen.ics',
   'icon-192.png',
   'icon-512.png',
   'Thailand_Planning_Print.pdf',

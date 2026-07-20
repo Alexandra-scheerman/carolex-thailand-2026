@@ -1,0 +1,175 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Carolex//Thailand 2026//NL
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Thailand 2026 herinneringen
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-01@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260721T171500
+DURATION:PT15M
+SUMMARY:KLM online check-in opent
+DESCRIPTION:Inchecken voor KL0843 van morgen via de KLM app. Boekingen
+  YSSAS6 (Caroline en Alexandra) en YT6FMW (kids\, even afstemmen met 
+ Marjolein).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:KLM online check-in opent
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-02@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260724T170000
+DURATION:PT15M
+SUMMARY:Pinnen: cash voor Kanchanaburi
+DESCRIPTION:Morgen taxi naar Kanchanaburi: 3.500 THB cash. Ook alvast 
+ 2.100 THB voor het Erawan-vervoer. Vandaag ook de taxi bevestigen bij
+  de Ascott-concierge.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Pinnen: cash voor Kanchanaburi
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-03@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260726T170000
+DURATION:PT15M
+SUMMARY:Pinnen: 6.700 THB voor Elephants World
+DESCRIPTION:Morgen contant betalen bij Elephants World (zo per mail af
+ gesproken). Pinnen kan daar niet\, dus vandaag regelen.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Pinnen: 6.700 THB voor Elephants World
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-04@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260727T151000
+DURATION:PT15M
+SUMMARY:Online inchecken PG145 (opent nu)
+DESCRIPTION:Bangkok Airways naar Koh Samui\, morgen 15:10. Boeking D5M
+ XV6. Inchecken via bangkokair.com/self-check-in.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Online inchecken PG145 (opent nu)
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-05@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260728T180000
+DURATION:PT15M
+SUMMARY:Kamernummer appen naar de zipline
+DESCRIPTION:Na check-in bij Deva Beach het kamernummer appen naar Tree
+  Bridge Zipline: WhatsApp +66 98 817 3924.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Kamernummer appen naar de zipline
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-06@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260801T170000
+DURATION:PT15M
+SUMMARY:Pinnen: 1.050 THB parkentree Ang Thong
+DESCRIPTION:Morgen cash betalen bij de incheckbalie van de Ang Thong-tour.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Pinnen: 1.050 THB parkentree Ang Thong
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-07@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260801T200000
+DURATION:PT15M
+SUMMARY:Zeeziektabletten innemen
+DESCRIPTION:Voor de boottocht van morgen naar Ang Thong: vanavond inne
+ men werkt het best. Morgenochtend eventueel nog een.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zeeziektabletten innemen
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-08@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260805T170000
+DURATION:PT15M
+SUMMARY:Pinnen: 20.000 THB restant Long Bay
+DESCRIPTION:Morgen bij aankomst op Koh Phangan betalen: 20.000 THB cas
+ h\, of creditcard met 3 procent toeslag.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Pinnen: 20.000 THB restant Long Bay
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-09@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260806T131500
+DURATION:PT15M
+SUMMARY:Zeeziektablet voor de ferry
+DESCRIPTION:De Seatran ferry vertrekt om 14:30 vanaf Bangrak Pier. Uit
+ erlijk 13:50 inchecken.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zeeziektablet voor de ferry
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-10@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260810T175000
+DURATION:PT15M
+SUMMARY:Online inchecken PG168 (opent nu)
+DESCRIPTION:Bangkok Airways naar Bangkok\, morgen 17:50. Boeking E366N
+ 9\, incheckmail alexandra.nell1@runningportabledoor.com. Via bangkoka
+ ir.com/self-check-in.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Online inchecken PG168 (opent nu)
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-11@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260811T120500
+DURATION:PT15M
+SUMMARY:KLM online check-in terugvlucht opent
+DESCRIPTION:KL0844 vertrekt morgen om 12:05. Inchecken via de KLM app.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:KLM online check-in terugvlucht opent
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:carolex-thailand-2026-rem-12@carolex
+DTSTAMP:20260720T120000Z
+DTSTART:20260811T134500
+DURATION:PT15M
+SUMMARY:Zeeziektablet voor de ferry
+DESCRIPTION:De Lomprayah ferry vertrekt om 15:00 vanaf Thongsala Pier.
+  Uiterlijk 14:00 inchecken.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zeeziektablet voor de ferry
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

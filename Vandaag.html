@@ -28,7 +28,6 @@
     --radius: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html { scroll-behavior: smooth; }
   body {
     font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
@@ -48,12 +47,11 @@
     position: sticky; top: 0; z-index: 300;
     background: var(--bg);
   }
-  .nav-pill, .menu-btn { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+  .nav-pill, .cal-pill, .menu-btn { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
   .nav-pill {
     flex: 1; background: var(--card); border-radius: 18px;
-    display: flex; align-items: center; height: 42px; padding: 0 10px;
+    display: flex; align-items: center; height: 36px; padding: 0 6px;
   }
-  .nav-pill .icon-btn { margin: 0 2px; }
   .icon-btn {
     background: none; border: none; cursor: pointer; padding: 6px;
     display: inline-flex; align-items: center; justify-content: center;
@@ -61,21 +59,20 @@
   }
   .icon-btn:active { background: #f3f4f6; }
   .icon-btn svg { display: block; }
-  .nav-center {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0;
-  }
   .nav-label {
+    flex: 1; min-width: 0; text-align: center;
     font-size: 14px; font-weight: 500; color: var(--nav-ink);
     background: none; border: none; cursor: pointer; font-family: inherit;
-    white-space: nowrap; padding: 4px 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 4px 2px;
   }
-  .dots { display: flex; align-items: center; gap: 8px; }
-  .dots i { display: block; border-radius: 50%; background: #d7d9e0; }
-  .dots .d1 { width: 8px; height: 8px; }
-  .dots .d2 { width: 6px; height: 6px; opacity: .8; }
-  .dots .d3 { width: 4px; height: 4px; opacity: .6; }
+  .cal-pill {
+    width: 59px; height: 36px; flex-shrink: 0;
+    background: var(--card); border: none; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    color: var(--nav-ink);
+  }
   .menu-btn {
-    width: 42px; height: 42px; flex-shrink: 0;
+    width: 36px; height: 36px; flex-shrink: 0;
     background: var(--card); border: none; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; cursor: pointer;
     color: var(--nav-ink);
@@ -89,15 +86,18 @@
   .day-head h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.28px; line-height: 1.26; }
   .day-head .sub { font-size: 14px; font-weight: 600; letter-spacing: -0.14px; margin-top: 2px; }
   .day-head .sub small { font-size: 11px; opacity: .9; font-weight: 600; margin-left: 6px; }
-  .weather { text-align: right; display: flex; align-items: flex-start; gap: 8px; padding-top: 6px; }
-  .weather .loc { font-size: 14px; font-weight: 600; letter-spacing: -0.14px; padding-top: 3px; }
-  .weather .w-ico { display: flex; flex-direction: column; align-items: center; }
-  .weather .temp { font-size: 11px; font-weight: 600; margin-top: 1px; }
-
-  .phase-tag {
-    display: inline-block; margin: 0 22px 14px; padding: 4px 12px; border-radius: 20px;
-    font-size: 12px; font-weight: 600; background: rgba(255,255,255,.22); color: #fff;
+  .head-right { display: flex; align-items: flex-start; gap: 8px; }
+  .loc-pill {
+    background: var(--accent); border: none; border-radius: 30px; height: 36px;
+    padding: 0 16px; color: #fff; font-family: inherit; font-size: 14px; font-weight: 600;
+    letter-spacing: -0.14px; cursor: pointer;
   }
+  .wx-chip {
+    background: var(--accent); border: none; border-radius: 30px; width: 40px; min-height: 54px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #fff; cursor: pointer; padding: 7px 0 8px; font-family: inherit;
+  }
+  .wx-chip .temp { font-size: 11px; font-weight: 600; margin-top: 1px; }
 
   /* ---------- hotel card ---------- */
   .hotel-card {
@@ -173,15 +173,9 @@
   .foot {
     text-align: center; color: rgba(255,255,255,.85); font-size: 12px; padding: 6px 20px 20px;
   }
-  @keyframes slideInFromRight { from { opacity: .2; transform: translateX(46px); } to { opacity: 1; transform: none; } }
-  @keyframes slideInFromLeft { from { opacity: .2; transform: translateX(-46px); } to { opacity: 1; transform: none; } }
-  #day-view.fwd { animation: slideInFromRight .24s ease-out; }
-  #day-view.bwd { animation: slideInFromLeft .24s ease-out; }
   .foot a { color: #fff; }
 
   /* ---------- weather / converter / location ---------- */
-  .weather button { background: none; border: none; color: #fff; cursor: pointer; font-family: inherit; padding: 0; text-align: right; }
-  .weather .loc { text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); text-underline-offset: 3px; }
   .wx-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
   .wx-row:last-child { border-bottom: none; }
   .wx-row .wxi { font-size: 22px; width: 30px; text-align: center; }
@@ -296,7 +290,6 @@
     .sidebar h2 { font-size: 16px; font-weight: 600; padding: 4px 8px 12px; }
     .phone { max-width: 480px; }
     .sheet { border-radius: var(--radius); }
-    .topbar .nav-pill .dots { display: flex; }
     .overlay { align-items: center; }
     .panel { border-radius: 20px; }
   }
@@ -331,52 +324,22 @@
     <div class="topbar">
       <div class="nav-pill">
         <button class="icon-btn" id="btn-prev" aria-label="Vorige dag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
         </button>
-        <div class="nav-center">
-          <span class="dots"><i class="d3"></i><i class="d2"></i><i class="d1"></i></span>
-          <button class="nav-label" id="nav-label">Vandaag</button>
-          <span class="dots"><i class="d1"></i><i class="d2"></i><i class="d3"></i></span>
-        </div>
+        <button class="nav-label" id="nav-label">Vandaag</button>
         <button class="icon-btn" id="btn-next" aria-label="Volgende dag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-        <button class="icon-btn" id="btn-cal" aria-label="Kalender">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
         </button>
       </div>
+      <button class="cal-pill" id="btn-cal" aria-label="Kalender">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </button>
       <button class="menu-btn" id="btn-menu" aria-label="Menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
     </div>
 
-    <div id="day-view">
-    <header class="day-head">
-      <div>
-        <h1 id="d-date"></h1>
-        <div class="sub"><span id="d-weekday"></span><small id="d-count"></small></div>
-      </div>
-      <div class="weather">
-        <button class="loc" id="d-loc" aria-label="Locatie details"></button>
-        <button class="w-ico" id="w-btn" aria-label="Weersverwachting">
-          <span id="d-ico"></span>
-          <span class="temp" id="d-temp"></span>
-        </button>
-      </div>
-    </header>
-
-    <div id="hotel-slot"></div>
-
-    <section class="sheet">
-      <h2>Programma</h2>
-      <div class="tl" id="timeline"></div>
-    </section>
-
-    <section class="sheet" id="remind-sheet">
-      <h2>Aan denken en nog doen</h2>
-      <ul class="rem" id="reminders"></ul>
-    </section>
-    </div>
+    <div id="feed"></div>
 
     <div class="foot">
       Carolex · Thailand 2026 · <a href="index.html">startpagina</a> · <a href="Thailand_Trip_Planner.html">volledig overzicht</a>
@@ -396,6 +359,7 @@
     <h2>Menu <button class="close" data-close="menu-overlay">✕</button></h2>
     <ul class="menu-list">
       <li><a href="#" id="menu-convert"><span class="mi">💱</span>Omrekenen Baht</a></li>
+      <li><a href="herinneringen.ics" target="_blank" rel="noopener"><span class="mi">🔔</span>Herinneringen in je agenda</a></li>
       <li><a href="index.html"><span class="mi">🌴</span>Startpagina</a></li>
       <li><a href="Thailand_Trip_Planner.html"><span class="mi">🗺️</span>Reisplanner (volledig overzicht)</a></li>
       <li><a href="Kopen_en_Pakken.html"><span class="mi">🛍️</span>Kopen &amp; Pakken checklist</a></li>
@@ -511,7 +475,7 @@ var DAYS = [
      { time:'09:30', title:'Landing', sub:'Bij de immigratie: paspoorten + TDAC alle 4',
        act:[ {label:'TDAC tonen (pdf)', href:'boekingen/tdac-alle-4.pdf'} ] },
      { time:'--:--', title:'Pinnen, SIM, DEET halen', sub:'Immigratie, THB pinnen (€200-300), simkaart, muggenspray' },
-     { time:'--:--', title:'Grab taxi naar hotel', box:'Ascott Sathorn Bangkok\n7 S Sathorn Rd, Bangkok',
+     { time:'--:--', title:'Grab taxi naar hotel', sub:'Zelf regelen met de Grab-app', box:'Ascott Sathorn Bangkok\n7 S Sathorn Rd, Bangkok',
        act:[ {label:'Copy adres', copy:'Ascott Sathorn Bangkok, 7 S Sathorn Rd, Bangkok'}, {label:'Open grab app', href: GRAB} ] },
      { time:'--:--', title:'Inchecken Ascott hotel', sub:'Aankomst 11:30 is doorgegeven: early check-in bij beschikbaarheid, anders bagage-opslag en faciliteiten gebruiken (officieel vanaf 14:00)', docs:true },
      { time:'--:--', title:'Avond: rustige wandeling + streetfood', sub:'Vroeg naar bed, jetlag' }
@@ -538,7 +502,7 @@ var DAYS = [
    ]},
  { iso:'2026-07-25', dl:'25 Juli', wd:'Zaterdag', loc:'Kanchanaburi', temp:'33', ico:'sun', phase:'kids', tag:'Reisdag · met de kids', hotel:'dheva',
    prog:[
-     { time:'08:30', title:'Check-out en taxi naar Kanchanaburi', sub:'Via de Ascott-concierge: externe taxi 3.500 THB (€91) cash, of hotel-limo 4.200 THB (€109) op de kamerrekening\n±2,5 uur rijden' },
+     { time:'08:30', title:'Check-out en taxi naar Kanchanaburi', sub:'Al gecommuniceerd met het hotel, loopt via de Ascott-concierge: externe taxi 3.500 THB (€91) cash, of hotel-limo 4.200 THB (€109) op de kamerrekening\n±2,5 uur rijden' },
      { time:'15:00', title:'Inchecken Dheva Mantra', box:'Dheva Mantra Resort\n9/99 Moo 3, Thamakham, Kanchanaburi',
        act:[ {label:'Copy adres', copy:'Dheva Mantra Resort, 9/99 Moo 3, Thamakham, Kanchanaburi'} ], docs:true },
      { time:'17:00', title:'Weekend Walking Street', sub:'Avondmarkt bij de brug over de rivier Kwai, tot 22:00, gratis' }
@@ -546,11 +510,12 @@ var DAYS = [
    rem:[
      { t:'Vroeg vertrekken', d:'In verband met verkeer rond Bangkok' },
      { t:'Muggenspray', d:'Voor de avond aan de rivier' },
-     { t:'Erawan regelen', d:'Vervoer voor morgen bij de receptie bevestigen: 2.100 THB (€55), prijs is per mail bevestigd' }
+     { t:'Erawan regelen', d:'Vervoer voor morgen bij de receptie bevestigen: 2.100 THB (€55), prijs is per mail bevestigd' },
+     { t:'Extra bed afrekenen', d:'Het extra bed betaal je ter plaatse: 1.800 THB (€49)' }
    ]},
  { iso:'2026-07-26', dl:'26 Juli', wd:'Zondag', loc:'Kanchanaburi', temp:'33', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'dheva',
    prog:[
-     { time:'--:--', title:'Erawan watervallen', sub:'7 niveaus, zwemmen, picknick\nVervoer via het resort: 2.100 THB (€55), per mail bevestigd', det:'erawan' },
+     { time:'--:--', title:'Erawan watervallen', sub:'7 niveaus, zwemmen, picknick\nVervoer al geregeld via het resort (per mail bevestigd): 2.100 THB (€55), alleen nog even bij de receptie melden', det:'erawan' },
      { time:'--:--', title:'Entree betalen', sub:'~300 THB pp (€8), cash' },
      { time:'--:--', title:'Avond: relaxen aan de rivier' }
    ],
@@ -574,7 +539,7 @@ var DAYS = [
    ]},
  { iso:'2026-07-28', dl:'28 Juli', wd:'Dinsdag', loc:'Koh Samui', temp:'31', ico:'sun', phase:'kids', tag:'Reisdag · met de kids', hotel:'deva',
    prog:[
-     { time:'09:30', title:'Vertrek uit Kanchanaburi', sub:'Taxi-van via het resort naar Suvarnabhumi, ±3 uur, 3.500 THB (€91)\nRustig ontbijten kan: Bangkok Airways wil je pas 1,5 uur voor vertrek bij de balie' },
+     { time:'09:30', title:'Vertrek uit Kanchanaburi', sub:'Taxi-van al geregeld via het resort (per mail bevestigd): naar Suvarnabhumi, ±3 uur, 3.500 THB (€91)\nRustig ontbijten kan: Bangkok Airways wil je pas 1,5 uur voor vertrek bij de balie' },
      { time:'12:30', title:'Aankomst luchthaven BKK', sub:'Trolleys inchecken (gratis, 20 kg ruim) · cabine max 7 kg\nBalie sluit pas om 14:30 (40 min voor vertrek), dus ruime marge' },
      { time:'15:10', title:'Vlucht PG145 naar Koh Samui', sub:'Nieuwe vertrektijd (was 13:40; in de boekings-pdf staat nog de oude tijd) · boeking D5MXV6 · ref 40-856922004 · pin 7653\nAankomst 16:15',
        act:[ {label:'Bekijk boeking (pdf)', href:'boekingen/vlucht-pg145.pdf'} ] },
@@ -622,7 +587,7 @@ var DAYS = [
  { iso:'2026-08-01', dl:'1 Augustus', wd:'Zaterdag', loc:'Koh Samui', temp:'31', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'kohkoon',
    prog:[
      { time:'12:00', title:'Check-out Deva Beach (voor 12:00)' },
-     { time:'--:--', title:'Taxi naar Bangrak', sub:'±15 minuten' },
+     { time:'--:--', title:'Taxi naar Bangrak', sub:'Zelf regelen: taxi of Grab, ±15 minuten' },
      { time:'14:00', title:'Inchecken So KohKoon', box:'So KohKoon Beach Resort\n73/2 Moo 4, Bangrak Beach, Bophut',
        act:[ {label:'Copy adres', copy:'So KohKoon Beach Resort, 73/2 Moo 4, Bangrak Beach, Bophut, Koh Samui'} ], docs:true },
      { time:'--:--', title:'Rustdag: strand en pool', sub:'Aankomst ±13:30 is doorgegeven, ze proberen early check-in, anders bagage-opslag en strand' }
@@ -678,7 +643,7 @@ var DAYS = [
      { time:'13:50', title:'Inchecken Bangrak Seatran Pier', sub:'De pier ligt naast het hotel · 40 min voor vertrek\nE-ticket #AB26071700076 tonen', det:'ferry6',
        act:[ {label:'Bekijk e-ticket (pdf)', href:'boekingen/ferry-6-aug.pdf'} ] },
      { time:'14:30', title:'Seatran ferry naar Thong Sala', sub:'Aankomst 15:05 op Koh Phangan', det:'ferry6' },
-     { time:'15:05', title:'Gratis transfer naar Long Bay', sub:'Naar het meeting point op de pier lopen, de chauffeur wacht daar\nAankomst resort ~15:45' },
+     { time:'15:05', title:'Gratis transfer naar Long Bay', sub:'Al geregeld met het resort: naar het meeting point op de pier lopen, de chauffeur wacht daar\nAankomst resort ~15:45' },
      { time:'--:--', title:'Inchecken Long Bay Resort', box:'Long Bay Resort\n58/5 Moo 8, Haad Yao Beach, Koh Phangan',
        act:[ {label:'Copy adres', copy:'Long Bay Resort, 58/5 Moo 8, Haad Yao Beach, Koh Phangan'} ],
        sub:'Restant betalen bij aankomst: 20.000 THB (€520), cash of creditcard +3%', docs:true }
@@ -720,24 +685,25 @@ var DAYS = [
  { iso:'2026-08-11', dl:'11 Augustus', wd:'Dinsdag', loc:'Bangkok', temp:'33', ico:'sun', phase:'rom', tag:'Reisdag · romantische week', hotel:'sora',
    prog:[
      { time:'11:00', title:'Check-out Long Bay Resort', sub:'Koffers kunnen bij het resort blijven tot de transfer' },
-     { time:'13:00', title:'Gratis transfer naar Thongsala Pier', sub:'Uiterlijk 14:00 inchecken bij de pier (60 min voor vertrek)\nE-ticket #C646580 tonen', det:'ferry11',
+     { time:'13:00', title:'Gratis transfer naar Thongsala Pier', sub:'Al geregeld met het resort\nUiterlijk 14:00 inchecken bij de pier (60 min voor vertrek)\nE-ticket #C646580 tonen', det:'ferry11',
        act:[ {label:'Bekijk e-ticket (pdf)', href:'boekingen/ferry-11-aug.pdf'} ] },
-     { time:'15:00', title:'Lomprayah ferry naar Samui', sub:'Aankomst ~15:30 Bangrak Pier · taxi ±10 min naar het vliegveld', det:'ferry11' },
+     { time:'15:00', title:'Lomprayah ferry naar Samui', sub:'Aankomst ~15:30 Bangrak Pier · taxi naar het vliegveld zelf regelen, ±10 min', det:'ferry11' },
      { time:'17:50', title:'Vlucht PG168 naar Bangkok', sub:'Aankomst 19:05 · Alexandra 7A, Caroline 7B · boeking E366N9\nTrolleys gratis inchecken, cabine max 7 kg',
        act:[ {label:'Bekijk boeking (pdf)', href:'boekingen/vlucht-pg168.pdf'} ] },
      { time:'--:--', title:'Taxi naar Sukhumvit', box:'Sora Resort & Suites Sukhumvit\n22 Soi Sukhumvit 12, Khlong Toei, Bangkok',
        act:[ {label:'Copy adres', copy:'Sora Resort and Suites Sukhumvit, 22 Soi Sukhumvit 12, Khlong Toei, Bangkok'}, {label:'Open grab app', href: GRAB} ],
-       sub:'Met Grab: ~400-550 THB (€11-14), officiele Grab-zone op de luchthaven · late aankomst ±20:30 is doorgegeven' },
+       sub:'Zelf regelen met Grab: ~400-550 THB (€11-14), officiele Grab-zone op de luchthaven · late aankomst ±20:30 is doorgegeven' },
      { time:'--:--', title:'Laatste pad thai en souvenirs 🍜' }
    ],
    rem:[
      { t:'Powerbank en medicijnen', d:'Weer in het tasje, trolleys gaan het ruim in' },
+     { t:'Borg Sora: 1.000 THB cash', d:'Bij check-in betaal je 1.000 THB (€26) borg, contant. Die krijg je bij het uitchecken terug' },
      { t:'Morgen vroeg weg', d:'Vlucht om 12:05, rond 08:30 het hotel uit' },
      { t:'KLM check-in', d:'Online check-in opent vandaag om 12:05 via de KLM app' }
    ]},
  { iso:'2026-08-12', dl:'12 Augustus', wd:'Woensdag', loc:'Bangkok', temp:'33', ico:'plane', phase:'travel', tag:'Naar huis', hotel:'board',
    prog:[
-     { time:'08:30', title:'Vertrek hotel', sub:'Hoteltransfer is aangevraagd, anders Grab of taxi (±40 min)' },
+     { time:'08:30', title:'Vertrek hotel', sub:'Hoteltransfer is aangevraagd bij Sora; geen bevestiging, dan zelf Grab of taxi regelen (±40 min)' },
      { time:'09:30', title:'Uiterlijk inchecken KLM' },
      { time:'12:05', title:'Vlucht KL0844 naar Amsterdam', sub:'Caroline 36B · Alexandra 36A', docs:true },
      { time:'19:10', title:'Landing Schiphol 🧡' }
@@ -786,101 +752,145 @@ function todayIndex(){
   return DAYS.length-1;
 }
 
-/* ================= RENDER ================= */
-var cur = todayIndex();
+/* ================= RENDER (verticale feed) ================= */
+var PREP = 4;
 
-function render(dir){
-  var day = DAYS[cur];
-  var isToday = (cur === todayIndex() && (function(){ var n=new Date(); var iso=n.getFullYear()+'-'+('0'+(n.getMonth()+1)).slice(-2)+'-'+('0'+n.getDate()).slice(-2); return iso===day.iso; })());
-  document.getElementById('nav-label').textContent = isToday ? 'Vandaag' : (day.wd + ' ' + day.dl.toLowerCase());
-  document.getElementById('d-date').textContent = day.dl;
-  document.getElementById('d-weekday').textContent = day.wd;
-  var PREP = 4;
-  var togo = PREP - cur;
-  document.getElementById('d-count').textContent = (cur < PREP)
+function realTodayIso(){
+  var n = new Date();
+  return n.getFullYear() + '-' + ('0'+(n.getMonth()+1)).slice(-2) + '-' + ('0'+n.getDate()).slice(-2);
+}
+function labelFor(i){
+  var d = DAYS[i];
+  var diff = Math.round((new Date(d.iso + 'T12:00:00') - new Date(realTodayIso() + 'T12:00:00')) / 86400000);
+  if (diff === 0) return 'Vandaag';
+  if (diff === 1) return 'Morgen';
+  if (diff === -1) return 'Gisteren';
+  return d.dl;
+}
+function dayCountText(i){
+  var togo = PREP - i;
+  return (i < PREP)
     ? ('Nog ' + togo + (togo === 1 ? ' dag' : ' dagen') + ' tot vertrek')
-    : ('Dag ' + (cur+1-PREP) + ' van ' + (DAYS.length-PREP));
-  document.getElementById('d-loc').textContent = day.loc;
-  document.getElementById('d-ico').innerHTML = (day.ico === 'plane') ? icoPlane() : icoSun();
-  document.getElementById('d-temp').textContent = day.temp + '°';
-  updateWeather(day.loc);
-  document.getElementById('d-loc').onclick = function(){ if (LOCDET[day.loc]) openLocDetail(day.loc); };
-  document.getElementById('w-btn').onclick = function(){ openForecast(day.loc); };
+    : ('Dag ' + (i+1-PREP) + ' van ' + (DAYS.length-PREP));
+}
 
-  /* hotel card */
-  var h = HOTELS[day.hotel];
-  var hc = '<div class="phase-tag">' + esc(day.tag) + '</div>';
-  if (h) {
-    hc += '<div class="hotel-card">';
-    hc += '<div class="hotel-thumb" style="background:' + h.bgc + '">' + h.emoji + (h.img ? '<img src="' + h.img + '" alt="" loading="lazy" onerror="this.remove()">' : '') + '</div>';
-    hc += '<div class="hotel-info">';
-    hc += '<h3>' + esc(h.name) + '</h3>';
-    hc += '<div class="hotel-row">' + icoPin() + '<span>' + esc(h.addr) + '</span></div>';
-    if (h.tel) hc += '<div class="hotel-row">' + icoPhone() + '<a href="tel:' + h.tel.replace(/\s/g,'') + '">' + esc(h.tel) + '</a></div>';
-    hc += '<div class="hotel-row">' + icoCal() + '<span>' + esc(h.dates) + '</span><span class="right">' + esc(h.nights) + '</span></div>';
-    if (h.note) hc += '<div class="hotel-row" style="font-size:12px;line-height:1.4;">' + esc(h.note) + '</div>';
-    hc += '</div><span class="hotel-chevron">' + icoChev() + '</span></div>';
-  }
-  document.getElementById('hotel-slot').innerHTML = hc;
+function buildFeed(){
+  var out = '';
+  DAYS.forEach(function(day, i){
+    out += '<section class="day" id="day-' + i + '" data-i="' + i + '">';
 
-  /* timeline */
-  var tl = '';
-  day.prog.forEach(function(p){
-    tl += '<div class="tl-item' + (p.det ? ' tap' : '') + '"' + (p.det ? ' data-det="' + p.det + '"' : '') + '>';
-    tl += '<div class="tl-time">' + esc(p.time || '--:--') + '</div>';
-    tl += '<div class="tl-title">' + esc(p.title) + '</div>';
-    if (p.box) tl += '<div class="tl-sub">' + esc(p.box) + '</div>';
-    if (p.sub) tl += '<div class="tl-sub">' + esc(p.sub) + '</div>';
-    if (p.act && p.act.length) {
-      tl += '<div class="tl-actions">';
-      p.act.forEach(function(a){
-        if (a.copy) tl += '<button class="btn" data-copy="' + esc(a.copy) + '">' + esc(a.label) + '</button>';
-        else if (a.href) tl += '<a class="btn" href="' + a.href + '" target="_blank" rel="noopener">' + esc(a.label) + '</a>';
-      });
-      tl += '</div>';
+    /* dagband */
+    out += '<header class="day-head"><div>';
+    out += '<h1>' + esc(day.dl) + '</h1>';
+    out += '<div class="sub"><span>' + esc(day.wd) + '</span><small>' + dayCountText(i) + '</small></div>';
+    out += '</div><div class="head-right">';
+    out += '<button class="loc-pill" data-locbtn="' + esc(day.loc) + '">' + esc(day.loc) + '</button>';
+    out += '<button class="wx-chip" data-wxbtn="' + esc(day.loc) + '" data-iso="' + day.iso + '" aria-label="Weersverwachting">';
+    out += '<span data-wxi>' + ((day.ico === 'plane') ? icoPlane() : icoSun()) + '</span>';
+    out += '<span class="temp" data-wxt>' + esc(day.temp) + '°</span></button>';
+    out += '</div></header>';
+
+    /* hotelkaart */
+    var h = HOTELS[day.hotel];
+    if (h) {
+      out += '<div class="hotel-card" data-hotel="' + day.hotel + '">';
+      out += '<div class="hotel-thumb" style="background:' + h.bgc + '">' + h.emoji + (h.img ? '<img src="' + h.img + '" alt="" loading="lazy" onerror="this.remove()">' : '') + '</div>';
+      out += '<div class="hotel-info">';
+      out += '<h3>' + esc(h.name) + '</h3>';
+      out += '<div class="hotel-row">' + icoPin() + '<span>' + esc(h.addr) + '</span></div>';
+      if (h.tel) out += '<div class="hotel-row">' + icoPhone() + '<a href="tel:' + h.tel.replace(/\s/g,'') + '">' + esc(h.tel) + '</a></div>';
+      out += '<div class="hotel-row">' + icoCal() + '<span>' + esc(h.dates) + '</span><span class="right">' + esc(h.nights) + '</span></div>';
+      out += '</div><span class="hotel-chevron">' + icoChev() + '</span></div>';
     }
-    if (p.det) tl += '<div class="tl-more">Bekijk details &rsaquo;</div>';
-    tl += '</div>';
-  });
-  var dayPdf = PDF[day.hotel];
-  if (dayPdf) {
-    var pdfLab = (day.hotel === 'board') ? 'Bekijk vluchttickets (pdf)' : 'Bekijk incheck document (pdf)';
-    tl += '<div class="tl-item" style="padding-top:2px;"><a class="btn wide" href="' + dayPdf + '" target="_blank" rel="noopener">' + pdfLab + ' <span class="chev">' + icoChev() + '</span></a></div>';
-  }
-  document.getElementById('timeline').innerHTML = tl;
 
-  /* reminders */
-  var rm = '';
-  day.rem.forEach(function(r){
-    rm += '<li><strong>' + esc(r.t) + '</strong><span>' + esc(r.d) + '</span></li>';
-  });
-  document.getElementById('reminders').innerHTML = rm;
-  document.getElementById('remind-sheet').style.display = day.rem.length ? '' : 'none';
+    /* programma */
+    out += '<section class="sheet"><h2>Programma</h2><div class="tl">';
+    day.prog.forEach(function(p){
+      out += '<div class="tl-item' + (p.det ? ' tap' : '') + '"' + (p.det ? ' data-det="' + p.det + '"' : '') + '>';
+      out += '<div class="tl-time">' + esc(p.time || '--:--') + '</div>';
+      out += '<div class="tl-title">' + esc(p.title) + '</div>';
+      if (p.box) out += '<div class="tl-sub">' + esc(p.box) + '</div>';
+      if (p.sub) out += '<div class="tl-sub">' + esc(p.sub) + '</div>';
+      if (p.act && p.act.length) {
+        out += '<div class="tl-actions">';
+        p.act.forEach(function(a){
+          if (a.copy) out += '<button class="btn" data-copy="' + esc(a.copy) + '">' + esc(a.label) + '</button>';
+          else if (a.href) out += '<a class="btn" href="' + a.href + '" target="_blank" rel="noopener">' + esc(a.label) + '</a>';
+        });
+        out += '</div>';
+      }
+      if (p.det) out += '<div class="tl-more">Bekijk details &rsaquo;</div>';
+      out += '</div>';
+    });
+    /* incheck document alleen op de dag van inchecken */
+    var dayPdf = PDF[day.hotel];
+    var checkinDay = !!(day.hotel && (i === 0 || DAYS[i-1].hotel !== day.hotel));
+    if (dayPdf && checkinDay) {
+      var pdfLab = (day.hotel === 'board') ? 'Bekijk vluchttickets (pdf)' : 'Naar incheck document (pdf)';
+      out += '<div class="tl-item" style="padding-top:2px;"><a class="btn wide" href="' + dayPdf + '" target="_blank" rel="noopener">' + pdfLab + ' <span class="chev">' + icoChev() + '</span></a></div>';
+    }
+    out += '</div></section>';
 
-  /* copy handlers */
-  document.querySelectorAll('[data-copy]').forEach(function(b){
+    /* aan denken */
+    if (day.rem.length) {
+      out += '<section class="sheet"><h2>Aan denken en nog doen</h2><ul class="rem">';
+      day.rem.forEach(function(r){
+        out += '<li><strong>' + esc(r.t) + '</strong><span>' + esc(r.d) + '</span></li>';
+      });
+      out += '</ul></section>';
+    }
+    out += '</section>';
+  });
+  document.getElementById('feed').innerHTML = out;
+
+  /* handlers */
+  document.querySelectorAll('#feed [data-copy]').forEach(function(b){
     b.addEventListener('click', function(){ copyText(b.getAttribute('data-copy')); });
   });
-
-  /* detail handlers */
-  var hcEl = document.querySelector('.hotel-card');
-  if (hcEl) hcEl.addEventListener('click', function(e){ if (e.target.closest('a')) return; openDetail('hotel', day.hotel); });
-  document.querySelectorAll('.tl-item.tap').forEach(function(elm){
+  document.querySelectorAll('#feed .hotel-card').forEach(function(c){
+    c.addEventListener('click', function(e){ if (e.target.closest('a')) return; openDetail('hotel', c.getAttribute('data-hotel')); });
+  });
+  document.querySelectorAll('#feed .tl-item.tap').forEach(function(elm){
     elm.addEventListener('click', function(e){ if (e.target.closest('a,button')) return; openDetail('act', elm.getAttribute('data-det')); });
   });
-
-  /* sidebar + calendar highlight */
-  document.querySelectorAll('.day-list a').forEach(function(a){
-    a.classList.toggle('current', a.getAttribute('data-i') == cur);
+  document.querySelectorAll('#feed .loc-pill').forEach(function(b){
+    b.addEventListener('click', function(){ var l = b.getAttribute('data-locbtn'); if (LOCDET[l]) openLocDetail(l); });
   });
+  document.querySelectorAll('#feed .wx-chip').forEach(function(b){
+    b.addEventListener('click', function(){ openForecast(b.getAttribute('data-wxbtn')); });
+  });
+}
 
-  window.scrollTo(0, 0);
-  if (dir) {
-    var dv = document.getElementById('day-view');
-    dv.classList.remove('fwd', 'bwd');
-    void dv.offsetWidth;
-    dv.classList.add(dir > 0 ? 'fwd' : 'bwd');
-  }
+/* ---- sticky header volgt de scroll ---- */
+var curIdx = 0;
+function headerH(){ var t = document.querySelector('.topbar'); return t ? t.offsetHeight : 60; }
+function updateNav(){
+  document.getElementById('nav-label').textContent = labelFor(curIdx);
+  document.querySelectorAll('.day-list a').forEach(function(a){
+    a.classList.toggle('current', a.getAttribute('data-i') == curIdx);
+  });
+}
+var wTick = false;
+window.addEventListener('scroll', function(){
+  if (wTick) return; wTick = true;
+  requestAnimationFrame(function(){
+    wTick = false;
+    var y = window.scrollY + headerH() + 90;
+    var best = 0;
+    for (var i = 0; i < DAYS.length; i++) {
+      var sec = document.getElementById('day-' + i);
+      if (sec && sec.offsetTop <= y) best = i; else break;
+    }
+    if (best !== curIdx) { curIdx = best; updateNav(); }
+  });
+}, {passive:true});
+
+function scrollToDay(i, smooth){
+  i = Math.max(0, Math.min(DAYS.length - 1, i));
+  var sec = document.getElementById('day-' + i);
+  if (!sec) return;
+  curIdx = i; updateNav();
+  window.scrollTo({ top: Math.max(0, sec.offsetTop - headerH() + 6), behavior: smooth ? 'smooth' : 'auto' });
 }
 
 function buildDayLists(){
@@ -890,7 +900,7 @@ function buildDayLists(){
     var h = HOTELS[d.hotel];
     var switchDay = !!(d.hotel && (i === 0 || d.hotel !== DAYS[i-1].hotel));
     var ticon = '';
-    if (switchDay) ticon = (d.hotel === 'board' || d.iso === '2026-07-28' || d.iso === '2026-08-11') ? ' ✈️' : ' 🧳';
+    if (switchDay) ticon = (d.hotel === 'board' || d.iso === '2026-07-28' || d.iso === '2026-08-11') ? ' \u2708\uFE0F' : ' \uD83E\uDDF3';
     var sub = h ? (d.hotel === 'board' ? 'Vliegen' : h.name) : d.tag;
     if (switchDay && d.hotel !== 'board') sub = 'Reisdag · ' + sub;
     html += '<li><a href="#" data-i="' + i + '"><span class="dnum" style="background:' + col + '">' + d.dl.split(' ')[0] + '<small>' + d.dl.split(' ')[1].slice(0,3).toLowerCase() + '</small></span>';
@@ -901,11 +911,8 @@ function buildDayLists(){
   document.querySelectorAll('.day-list a').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
-      var ni = parseInt(a.getAttribute('data-i'), 10);
-      var d = ni === cur ? 0 : (ni > cur ? 1 : -1);
-      cur = ni;
       closeOverlays();
-      render(d);
+      scrollToDay(parseInt(a.getAttribute('data-i'), 10), false);
     });
   });
 }
@@ -947,13 +954,26 @@ function getWx(loc, cb){
     })
     .catch(function(){ cb(null); });
 }
-function updateWeather(loc){
-  getWx(loc, function(d){
-    if (DAYS[cur].loc !== loc) return;
-    if (d && d.current) {
-      document.getElementById('d-temp').textContent = Math.round(d.current.temperature_2m) + '°';
-      document.getElementById('d-ico').innerHTML = '<span style="font-size:24px;line-height:1">' + wxEmoji(d.current.weather_code) + '</span>';
-    }
+function updateWeatherAll(){
+  var locs = {};
+  DAYS.forEach(function(d){ if (LOCMETA[d.loc]) locs[d.loc] = true; });
+  var today = realTodayIso();
+  Object.keys(locs).forEach(function(loc){
+    getWx(loc, function(w){
+      if (!w) return;
+      document.querySelectorAll('.wx-chip[data-wxbtn="' + loc + '"]').forEach(function(chip){
+        var iso = chip.getAttribute('data-iso');
+        var t = null, code = null;
+        if (iso === today && w.current) { t = w.current.temperature_2m; code = w.current.weather_code; }
+        else if (w.daily && w.daily.time) {
+          var idx = w.daily.time.indexOf(iso);
+          if (idx >= 0) { t = w.daily.temperature_2m_max[idx]; code = w.daily.weather_code[idx]; }
+        }
+        if (t === null) return;
+        chip.querySelector('[data-wxt]').textContent = Math.round(t) + '°';
+        chip.querySelector('[data-wxi]').innerHTML = '<span style="font-size:22px;line-height:1">' + wxEmoji(code) + '</span>';
+      });
+    });
   });
 }
 function openForecast(loc){
@@ -1183,20 +1203,27 @@ var PDF = {
 };
 var HDET = {
   ascott: { email:'frontoffice.asb@the-ascott.com', booked:{label:'Geboekt via Trip.com', href:'https://www.trip.com'},
+    site:{label:'Website Ascott Sathorn', href:'https://www.discoverasr.com/en/ascott-the-residence/thailand/ascott-sathorn-bangkok'}, room:'2-Bedroom Deluxe appartement · ontbijt inbegrepen',
     extraDocs:[ {label:'Incheckvoucher in het Thais (balie/taxi)', href:'boekingen/hotel-ascott-th.pdf'} ],
     desc:'Appartement-hotel in de wijk Sathorn, Bangkok. Deluxe 2-slaapkamer appartement met ontbijt voor de eerste twee nachten met de meiden. Aankomst 11:30 is doorgegeven: early check-in bij beschikbaarheid, anders bagage-opslag en gebruik van de faciliteiten.\n\nIncheckvoucher: bevestiging 21644005 · pin 2305 · boeking 1482190417238129 (zie Documenten, ook in het Thais).' },
   dheva: { email:'info@dhevamantraresort.com', booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
+    site:{label:'Website Dheva Mantra', href:'https://dhevamantraresort.com'}, room:'Deluxe familiekamer + extra bed',
     desc:'Resort aan de rivier Kwai bij Kanchanaburi. Deluxe familiekamer met extra bed (1.800 THB / €49 ter plaatse). Uitvalsbasis voor de Walking Street, Erawan en Elephants World. Taxi-van naar het vliegveld op 28 jul: 3.500 THB (€91), per mail bevestigd.' },
   deva: { wa:'+66 95 321 4107', booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
+    site:{label:'Deva Beach op Booking.com (fotos)', href:'https://www.booking.com/hotel/th/deva-samui.html'}, room:'Familiekamer met extra bed en slaapbank',
     desc:'Strandresort aan Choeng Mon Beach, Koh Samui, met extra bed en slaapbank. Volledig betaald via Booking.com (€654,65). Ontbijt is niet inbegrepen: aan de balie bestellen, 450 THB pp per dag (€12), cash.\n\nAirport-pickup is BEVESTIGD: 400 THB (€11) voor 4 personen, aan de balie betalen. De chauffeur wacht bij meeting point #2 (taxi stand boven, bij de uitgang) met een bordje Alexandra Scheerman. Niet met een andere taxi meegaan, anders wordt de pickup alsnog gerekend. Problemen of vertraging: +66 77 417 300 of WhatsApp +66 95 321 4107.' },
   kohkoon: { email:'kohkoonresort@gmail.com', wa:'+66 94 009 0065', booked:{label:'kohkoonresort.com', href:'https://www.kohkoonresort.com'},
+    site:{label:'Website So KohKoon', href:'https://www.kohkoonresort.com'}, room:'Beach Front Villa',
     desc:'Beach Front Villa direct aan Bangrak Beach, Koh Samui. 21.000 THB (€568), op naam van Caroline. Aankomst ±13:30 is doorgegeven; ze proberen early check-in. Vertrekpunt voor de Ang Thong-cruise en de overdracht van de meiden aan Marjolein op 4 aug.' },
   beach79: { email:'reservation@79samui.com', booked:{label:'79samui.com', href:'https://www.79samui.com'},
+    site:{label:'Website 79 Beach Club', href:'https://www.79samui.com'}, room:'Grand Deluxe kamer · ontbijt inbegrepen',
     desc:'Resort aan Bangrak Beach met Grand Deluxe kamer en ontbijt, naast de Seatran-pier. Start van de romantische week. 13.600 THB (€368), volledig betaald. Koffers kunnen op 6 aug tot 13:40 blijven staan.' },
   longbay: { email:'sukruthai.m@longbay-resort.com', booked:{label:'longbay-resort.com', href:'https://www.longbay-resort.com'},
+    site:{label:'Website Long Bay Resort', href:'https://www.longbay-resort.com'}, room:'Deluxe Cottage',
     desc:'Deluxe Cottage aan Haad Yao Beach, Koh Phangan: vijf nachten strand, snorkelen bij het koraalrif en zonsondergangen. Totaal 40.000 THB (€1.040), aanbetaald 20.000 THB; restant 20.000 THB (€520) bij aankomst, cash of creditcard +3%. Gratis piertransfers, pickup is bevestigd.' },
   sora: { email:'fo_sukhumvit@sorahotels.com', booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
-    desc:'Hotel aan Soi Sukhumvit 12, Bangkok, voor de laatste nacht. Gratis annuleren tot 4 aug. Late aankomst ±20:30 en vertrek 08:30 zijn doorgegeven; vervoer met Grab (~400-550 THB / €11-14 per rit).' },
+    site:{label:'Website Sora Hotels', href:'https://www.sorahotels.com'}, room:'Deluxe kamer met kingsize bed en city view · ontbijt inbegrepen',
+    desc:'Hotel aan Soi Sukhumvit 12, Bangkok, voor de laatste nacht. Gratis annuleren tot 4 aug. Late aankomst ±20:30 en vertrek 08:30 zijn doorgegeven; vervoer met Grab (~400-550 THB / €11-14 per rit).\n\nBorg bij check-in: 1.000 THB (€26) contant, die krijg je bij het uitchecken terug.' },
   board: { booked:{label:'KLM', href:'https://www.klm.nl'},
     desc:'KLM nachtvlucht KL0843 van Amsterdam naar Bangkok. Boekingen YSSAS6 (Caroline 36E, Alexandra 36D) en YT6FMW (kids, via Marjolein). Alleen handbagage: 12 kg pp, max 55x35x25 cm.' }
 };
@@ -1248,6 +1275,7 @@ var ACTS = {
 function icoMail(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><polyline points="3 7 12 13 21 7"/></svg>'; }
 function icoPhoneA(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.8.7a2 2 0 0 1 1.7 2z"/></svg>'; }
 function icoCalA(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'; }
+function icoBed(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17v-6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6"/><path d="M2 21v-4h20v4"/><path d="M6 9V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg>'; }
 function icoClock(){ return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>'; }
 function mapsUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
 function dRow(ico, lbl, valHtml){
@@ -1256,7 +1284,7 @@ function dRow(ico, lbl, valHtml){
 
 function openDetail(type, key){
   var el = document.getElementById('detail');
-  var title, name, loc, emoji, bgc, addr, dateRows, contactRows = '', desc, pdf, pdfLabel, booked, extraDocs = null;
+  var title, name, loc, emoji, bgc, addr, dateRows, contactRows = '', desc, pdf, pdfLabel, booked, extraDocs = null, siteLink = null;
   if (type === 'hotel') {
     var h = HOTELS[key]; if (!h) return;
     var x = HDET[key] || {};
@@ -1264,12 +1292,13 @@ function openDetail(type, key){
     name = h.name; loc = (key === 'board') ? 'KLM' : h.addr.split(', ').slice(-1)[0]; emoji = h.emoji; bgc = h.bgc; addr = h.addr;
     var heroImg = h.img;
     dateRows = dRow(icoCalA(), 'Datums', '<span class="val">' + esc(h.dates) + ' · ' + esc(h.nights) + '</span>');
+    if (x.room) dateRows += dRow(icoBed(), 'Geboekte kamer', '<span class="val">' + esc(x.room) + '</span>');
     if (h.tel) contactRows += dRow(icoPhoneA(), 'Telefoon', '<a class="val" href="tel:' + h.tel.replace(/\s/g,'') + '">' + esc(h.tel) + '</a>');
     if (x.wa) contactRows += dRow(icoPhoneA(), 'WhatsApp', '<a class="val" href="https://wa.me/' + x.wa.replace(/[^0-9]/g,'') + '" target="_blank" rel="noopener">' + esc(x.wa) + '</a>');
     if (x.email) contactRows += dRow(icoMail(), 'Email', '<a class="val" href="mailto:' + x.email + '">' + esc(x.email) + '</a>');
     desc = (x.desc || '') + (h.note ? '\n\n' + h.note : '');
     pdf = PDF[key]; pdfLabel = (key === 'board') ? 'Bekijk vluchttickets (pdf)' : 'Bekijk incheck document (pdf)';
-    booked = x.booked; extraDocs = x.extraDocs || null;
+    booked = x.booked; extraDocs = x.extraDocs || null; siteLink = x.site || null;
   } else {
     var a = ACTS[key]; if (!a) return;
     title = 'Activiteit details';
@@ -1310,7 +1339,8 @@ function openDetail(type, key){
   if (pdf) docBtns += '<a class="btn wide" style="margin-top:0" href="' + pdf + '" target="_blank" rel="noopener">' + pdfLabel + ' <span class="chev">' + icoChev() + '</span></a>';
   if (extraDocs) extraDocs.forEach(function(dd){ docBtns += '<a class="btn wide" style="margin-top:12px" href="' + dd.href + '" target="_blank" rel="noopener">' + esc(dd.label) + ' <span class="chev">' + icoChev() + '</span></a>'; });
   if (docBtns) html += '<div class="d-card"><div class="d-sec-title">Documenten</div>' + docBtns + '</div>';
-  if (booked) html += '<div class="d-card"><div class="d-sec-title">Geboekt via</div><a class="btn wide" style="margin-top:0" href="' + booked.href + '" target="_blank" rel="noopener">' + esc(booked.label) + ' <span class="chev">' + icoChev() + '</span></a></div>';
+  if (siteLink) html += '<div class="d-card"><div class="d-sec-title">Website</div><a class="btn wide" style="margin-top:0" href="' + siteLink.href + '" target="_blank" rel="noopener">' + esc(siteLink.label) + ' <span class="chev">' + icoChev() + '</span></a></div>';
+  if (booked && !(siteLink && booked.href === siteLink.href)) html += '<div class="d-card"><div class="d-sec-title">Geboekt via</div><a class="btn wide" style="margin-top:0" href="' + booked.href + '" target="_blank" rel="noopener">' + esc(booked.label) + ' <span class="chev">' + icoChev() + '</span></a></div>';
   html += '</div>';
 
   el.innerHTML = html;
@@ -1324,9 +1354,9 @@ function openDetail(type, key){
 function closeDetail(){ document.getElementById('detail').classList.remove('open'); }
 
 /* ================= NAV ================= */
-document.getElementById('btn-prev').addEventListener('click', function(){ if (cur > 0) { cur--; render(-1); } });
-document.getElementById('btn-next').addEventListener('click', function(){ if (cur < DAYS.length-1) { cur++; render(1); } });
-document.getElementById('nav-label').addEventListener('click', function(){ var t = todayIndex(); if (t !== cur) { var d = t > cur ? 1 : -1; cur = t; render(d); } });
+document.getElementById('btn-prev').addEventListener('click', function(){ scrollToDay(curIdx - 1, true); });
+document.getElementById('btn-next').addEventListener('click', function(){ scrollToDay(curIdx + 1, true); });
+document.getElementById('nav-label').addEventListener('click', function(){ scrollToDay(todayIndex(), true); });
 document.getElementById('btn-cal').addEventListener('click', function(){ document.getElementById('cal-overlay').classList.add('open'); });
 document.getElementById('btn-menu').addEventListener('click', function(){ document.getElementById('menu-overlay').classList.add('open'); });
 document.getElementById('menu-convert').addEventListener('click', function(e){ e.preventDefault(); closeOverlays(); openConverter(); });
@@ -1338,37 +1368,22 @@ document.querySelectorAll('[data-close]').forEach(function(b){
 });
 document.addEventListener('keydown', function(e){
   var detailOpen = document.getElementById('detail').classList.contains('open');
-  if (e.key === 'ArrowLeft' && !detailOpen && cur > 0) { cur--; render(-1); }
-  if (e.key === 'ArrowRight' && !detailOpen && cur < DAYS.length-1) { cur++; render(1); }
+  if ((e.key === 'ArrowLeft' || e.key === 'PageUp') && !detailOpen) { e.preventDefault(); scrollToDay(curIdx - 1, true); }
+  if ((e.key === 'ArrowRight' || e.key === 'PageDown') && !detailOpen) { e.preventDefault(); scrollToDay(curIdx + 1, true); }
   if (e.key === 'Escape') { closeDetail(); closeOverlays(); }
 });
 
-/* swipe */
-var touchX = null, touchY = null;
-document.addEventListener('touchstart', function(e){
-  touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
-}, {passive:true});
-document.addEventListener('touchend', function(e){
-  if (touchX === null) return;
-  if (document.getElementById('detail').classList.contains('open')) { touchX = null; return; }
-  var dx = e.changedTouches[0].clientX - touchX;
-  var dy = e.changedTouches[0].clientY - touchY;
-  if (Math.abs(dx) > 55 && Math.abs(dx) > 1.4 * Math.abs(dy)) {
-    if (dx < 0 && cur < DAYS.length-1) { cur++; render(1); }   /* swipe naar links: dag verder */
-    if (dx > 0 && cur > 0) { cur--; render(-1); }              /* swipe naar rechts: terug in de tijd */
-  }
-  touchX = null;
-}, {passive:true});
-
 buildDayLists();
-render();
+buildFeed();
+updateWeatherAll();
+window.jumpToToday = function(){ scrollToDay(todayIndex(), false); };
 
 /* ================= GATE ================= */
 (function(){
   var KEY='thailand_auth';
   var gate=document.getElementById('pw-gate');
   var content=document.getElementById('site-content');
-  function unlock(){ gate.style.display='none'; content.style.display=''; }
+  function unlock(){ gate.style.display='none'; content.style.display=''; setTimeout(function(){ if (window.jumpToToday) window.jumpToToday(); }, 0); }
   if(localStorage.getItem(KEY)==='ok'){ unlock(); }
   document.getElementById('pw-form').addEventListener('submit', function(e){
     e.preventDefault();
