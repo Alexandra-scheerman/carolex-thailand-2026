@@ -632,7 +632,7 @@ var DAYS = [
    ]},
  { iso:'2026-08-02', dl:'2 Augustus', wd:'Zondag', loc:'Koh Samui', temp:'31', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'kohkoon',
    prog:[
-     { time:'07:15', title:'Pickup Ang Thong cruise', sub:'Pickup 07:15-07:30 bij So KohKoon · grote boot (Highsea Tour)\nViewpoint-klim over 42 eilanden, Blue Lagoon, kajakken door grotten, snorkelstop\nGeboekt via GetYourGuide (GYGX7NAB9LFY), €150,98 betaald\nOntbijt en lunchbuffet aan boord · zuivelbeperking Julia is doorgegeven\nParkentree cash: 1.050 THB (€28) · terug bij het hotel ~16:00-17:00', det:'angthong' },
+     { time:'07:15', title:'Pickup Ang Thong cruise', sub:'Pickup 07:15-07:30 bij So KohKoon · grote boot (Highsea Tour)\nViewpoint-klim over 42 eilanden, Blue Lagoon, kajakken door grotten, snorkelstop\nGeboekt via GetYourGuide (GYGX7NAB9LFY), €150,98 betaald\nOntbijt en lunchbuffet aan boord · zuivelbeperking Julia is doorgegeven\nParkentree cash: 1.050 THB (€28) · terug bij het hotel ~16:00-17:00\nTickets: als Wallet-pass op de detailpagina en in de GetYourGuide-app', det:'angthong', act:[ {label:'Open op GetYourGuide', href:'https://gyg.me/sVGJVBKM'} ] },
      { time:'--:--', title:'Avond: uitrusten', sub:'Vroeg terug, samen eten bij het resort' }
    ],
    rem:[
@@ -1217,8 +1217,14 @@ var ACTS = {
     booked:{label:'treebridgezipline.com', href:'https://treebridgezipline.com'} },
   angthong: { name:'Ang Thong Marine Park cruise', loc:'Koh Samui', emoji:'🚤', bgc:'#e0f0f2',
     addr:'So KohKoon Beach Resort, Bangrak Beach, Koh Samui', date:'Zondag 2 augustus', time:'Pickup 07:15 - 07:30 · terug ±16:00 - 17:00',
-    desc:'Grote boot (Highsea Tour) door het marinepark met 42 eilanden: viewpoint-klim, Blue Lagoon, kajakken door grotten en snorkelstop. Ontbijt en lunchbuffet aan boord, zuivelbeperking van Julia is doorgegeven. Geboekt via GetYourGuide (ref GYGX7NAB9LFY), €150,98 betaald, gratis annuleren tot 1 aug 08:30. Parkentree 1.050 THB (€28) cash bij de incheckbalie. Het e-ticket staat in de GetYourGuide-app en je mail.',
-    booked:{label:'GetYourGuide', href:'https://www.getyourguide.com'} },
+    desc:'Grote boot (Highsea Tour) door het marinepark met 42 eilanden: viewpoint-klim, Blue Lagoon, kajakken door grotten en snorkelstop. Ontbijt en lunchbuffet aan boord, zuivelbeperking van Julia is doorgegeven. Geboekt via GetYourGuide (ref GYGX7NAB9LFY), €150,98 betaald, gratis annuleren tot 1 aug 08:30. Parkentree 1.050 THB (€28) cash bij de incheckbalie.\n\nDe 4 tickets staan hieronder als Wallet-pass (3 volwassenen + 1 kind) en in de GetYourGuide-app. Op de GetYourGuide-pagina zie je alvast fotos en alle details van wat jullie gaan doen.',
+    extraDocs:[
+      {label:'Ticket 1 (Wallet)', href:'boekingen/angthong-ticket-1.pkpass'},
+      {label:'Ticket 2 (Wallet)', href:'boekingen/angthong-ticket-2.pkpass'},
+      {label:'Ticket 3 (Wallet)', href:'boekingen/angthong-ticket-3.pkpass'},
+      {label:'Ticket 4, kind (Wallet)', href:'boekingen/angthong-ticket-4-kind.pkpass'}
+    ],
+    booked:{label:'Bekijk op GetYourGuide (fotos + details)', href:'https://gyg.me/sVGJVBKM'} },
   ferry6: { name:'Seatran ferry naar Koh Phangan', loc:'Koh Samui', emoji:'⛴️', bgc:'#e3e7f7',
     addr:'Bangrak Seatran Pier, Koh Samui', date:'Donderdag 6 augustus', time:'14:30 - 15:05 · uiterlijk 13:50 inchecken',
     desc:'Oversteek van Bangrak Pier (naast 79 Beach Club) naar Thong Sala op Koh Phangan. 2 personen, e-ticket #AB26071700076 via 12go, op de telefoon tonen bij het inchecken. Gratis annuleren tot 4 aug. Na aankomst wacht de chauffeur van Long Bay bij het meeting point op de pier.',
@@ -1264,7 +1270,7 @@ function openDetail(type, key){
     if (a.phone) contactRows += dRow(icoPhoneA(), 'Telefoon', '<a class="val" href="tel:' + a.phone.replace(/\s/g,'') + '">' + esc(a.phone) + '</a>');
     if (a.wa) contactRows += dRow(icoPhoneA(), 'WhatsApp', '<a class="val" href="https://wa.me/' + a.wa.replace(/[^0-9]/g,'') + '" target="_blank" rel="noopener">' + esc(a.wa) + '</a>');
     if (a.email) contactRows += dRow(icoMail(), 'Email', '<a class="val" href="mailto:' + a.email + '">' + esc(a.email) + '</a>');
-    desc = a.desc; pdf = a.pdf; pdfLabel = a.pdfLabel || 'Bekijk booking (pdf)'; booked = a.booked;
+    desc = a.desc; pdf = a.pdf; pdfLabel = a.pdfLabel || 'Bekijk booking (pdf)'; booked = a.booked; extraDocs = a.extraDocs || null;
     var mapHref = a.mapExact || null; var thaiAddr = a.thai || null;
   }
 
