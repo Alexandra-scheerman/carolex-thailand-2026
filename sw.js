@@ -6,6 +6,7 @@ var ASSETS = [
   'Vandaag.html',
   'Thailand_Trip_Planner.html',
   'Kopen_en_Pakken.html',
+  'Per_Persoon.html',
   'Thailand_Financien.html',
   'Email_Overzicht_Thailand.html',
   'manifest.json',
