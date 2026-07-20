@@ -22,6 +22,7 @@ var ASSETS = [
   'boekingen/hotel-long-bay.pdf',
   'boekingen/hotel-sora.pdf',
   'boekingen/vluchten-klm.pdf',
+  'boekingen/vlucht-pg145.pdf',
   'boekingen/activiteit-co-van-kessel.pdf',
   'boekingen/activiteit-elephants-world.pdf',
   'boekingen/ferry-11-aug.pdf'
