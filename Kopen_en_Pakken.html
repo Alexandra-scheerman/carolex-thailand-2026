@@ -177,6 +177,7 @@
       <label class="item"><input type="checkbox"><span class="txt">Alles uitprinten<small>Planning-PDF + Boekingenbundel-PDF van de startpagina</small></span></label>
       <label class="item"><input type="checkbox"><span class="txt">Rijksoverheid: reizen met kinderen regelen<small>Formulier "Toestemming reizen met minderjarige naar het buitenland" laten invullen + kopie paspoort van de gezaghebbende ouder(s). Nodig voor jullie heenreis mét de meiden én voor Marjolein op de terugreis. Zoek op rijksoverheid.nl naar "toestemmingsformulier reizen minderjarige"</small></span><span class="pill">Belangrijk</span></label>
       <label class="item"><input type="checkbox"><span class="txt">Konijnenschema maken<small>Voer- en verzorgschema voor de oppas, 22 jul t/m 12 aug</small></span></label>
+      <label class="item new"><input type="checkbox"><span class="txt">Gerbils naar ouders brengen<small>Inclusief voer en spullen, voor vertrek 22 jul</small></span></label>
     </div>
   </div>
 
@@ -250,6 +251,7 @@
       <label class="item"><input type="checkbox"><span class="txt">Waterdicht telefoonhoesje</span></label>
       <label class="item"><input type="checkbox"><span class="txt">Koptelefoons/earbuds ×4 + tablet met gedownloade films/series (kids)</span></label>
       <label class="item"><input type="checkbox"><span class="txt">Apps: Grab, KLM, Bangkok Airways, Booking.com, Google Maps offline (Bangkok + Samui + Phangan)</span></label>
+      <label class="item new"><input type="checkbox"><span class="txt">Extra telefoon mee + oplader<small>Opgeladen, als reserve</small></span></label>
     </div>
   </div>
 
@@ -330,6 +332,13 @@
   var saved={};
   try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
   var boxes=document.querySelectorAll('label.item input');
+  /* eenmalige migratie: nieuwe items verschuiven de nummering, bewaarde vinkjes blijven kloppen */
+  if(!localStorage.getItem('pak_v2')){
+    var oldBoxes=[]; boxes.forEach(function(b){ if(!b.closest('label').classList.contains('new')) oldBoxes.push(b); });
+    var ns={}; var all=Array.prototype.slice.call(boxes);
+    oldBoxes.forEach(function(b,i){ if(saved['c'+i]) ns['c'+all.indexOf(b)]=true; });
+    saved=ns; localStorage.setItem(KEY,JSON.stringify(saved)); localStorage.setItem('pak_v2','1');
+  }
   boxes.forEach(function(b,i){
     var id='c'+i;
     if(saved[id]){ b.checked=true; b.closest('label').classList.add('checked'); }

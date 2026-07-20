@@ -463,8 +463,8 @@ var DAYS = [
    ]},
  { iso:'2026-07-20', dl:'20 Juli', wd:'Maandag', loc:'Thuis', temp:'23', ico:'sun', phase:'travel', tag:'Regeldag', hotel:null,
    prog:[
-     { time:'--:--', title:'TDAC invullen (visa-ding)', sub:'Vanaf vandaag mogelijk: alle 4 apart via tdac.immigration.go.th · gratis en verplicht voor aankomst',
-       act:[ {label:'Naar TDAC website', href:'https://tdac.immigration.go.th'} ] },
+     { time:'--:--', title:'TDAC invullen: GEDAAN ✅', sub:'Alle 4 bevestigd voor aankomst 23 jul (Alexandra E9625B2, Caroline 9BA0F88, Julia BA324C0, Lieve 735266E)',
+       act:[ {label:'Bekijk TDAC (pdf)', href:'boekingen/tdac-alle-4.pdf'} ] },
      { time:'--:--', title:'ABN: wereldpinnen aanzetten', sub:'ABN-app, pas, instellingen, geografische beperking op Wereld. Voor beide passen!\nEn genoeg geld op de rekening: ~€1.210 betalen jullie ter plaatse (veel cash) + eten ~€1.500+' },
      { time:'--:--', title:'KPN: bundel buiten de EU checken', sub:'Of data uit: bij aankomst een Thaise SIM kopen (~500 THB / €14, veel goedkoper dan roaming)' },
      { time:'--:--', title:'Alles uitprinten', sub:'Planning-PDF + Boekingenbundel-PDF van de startpagina' },
@@ -494,20 +494,22 @@ var DAYS = [
  { iso:'2026-07-22', dl:'22 Juli', wd:'Woensdag', loc:'Amsterdam', temp:'21', ico:'plane', phase:'travel', tag:'Reisdag · met de kids', hotel:'board',
    prog:[
      { time:'10:48', title:'Trein Breda naar Schiphol', sub:'Spoor 3, IC richting Enkhuizen\n11:46 Utrecht CS, overstap zelfde perron (spoor 7 naar 5), 11:51 IC richting Den Haag C\n12:25 aankomst Schiphol · backup: 11:19 naar 12:55' },
-     { time:'14:15', title:'Uiterlijk op Schiphol', sub:'3 uur van tevoren aanwezig, vertrekhal 1 (KLM)' },
+     { time:'14:15', title:'Uiterlijk op Schiphol', sub:'3 uur van tevoren aanwezig, vertrekhal 1 (KLM)',
+       act:[ {label:'TDAC tonen (pdf)', href:'boekingen/tdac-alle-4.pdf'} ] },
      { time:'--:--', title:'Bagage en security', sub:'Alleen handbagage: 12 kg pp, max 55x35x25 cm\nVloeistoffen max 100 ml in 1L ziplock' },
      { time:'17:15', title:'Vertrek KL0843 naar Bangkok', sub:'Nachtvlucht · aankomst do 09:30 lokale tijd\nCaroline 36E · Alexandra 36D · kids via YT6FMW', docs:true }
    ],
    rem:[
      { t:'Trein: samenreiskorting', d:'Samenreiscode vooraf aanmaken en delen (Caroline en Lieve 40% korting), Railrunner voor Julia (2,50 euro), totaal ~37 euro · zelfde coupe blijven zitten, inchecken na 09:00' },
      { t:'Online check-in', d:'Opent di 21 juli 17:15 via de KLM app, voor YSSAS6 en YT6FMW (even afstemmen met Marjolein)' },
-     { t:'Paspoorten en TDAC', d:'Paspoorten x4 + TDAC-bevestigingen bij de hand in het tasje' },
+     { t:'Paspoorten en TDAC', d:'Paspoorten x4 + TDAC-bevestigingen (staan in de app onder de knop, ook offline) + een print in het tasje' },
      { t:'Grab app installeren', d:'Alvast installeren en account aanmaken voor taxi in Bangkok' },
      { t:'Slaapspullen', d:'Oordopjes, slaapmasker en een warm laagje voor in het vliegtuig' }
    ]},
  { iso:'2026-07-23', dl:'23 Juli', wd:'Donderdag', loc:'Bangkok', temp:'33', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'ascott',
    prog:[
-     { time:'09:30', title:'Landing' },
+     { time:'09:30', title:'Landing', sub:'Bij de immigratie: paspoorten + TDAC alle 4',
+       act:[ {label:'TDAC tonen (pdf)', href:'boekingen/tdac-alle-4.pdf'} ] },
      { time:'--:--', title:'Pinnen, SIM, DEET halen', sub:'Immigratie, THB pinnen (€200-300), simkaart, muggenspray' },
      { time:'--:--', title:'Grab taxi naar hotel', box:'Ascott Sathorn Bangkok\n7 S Sathorn Rd, Bangkok',
        act:[ {label:'Copy adres', copy:'Ascott Sathorn Bangkok, 7 S Sathorn Rd, Bangkok'}, {label:'Open grab app', href: GRAB} ] },
@@ -1159,6 +1161,7 @@ function openConverter(){
 
 /* ================= DETAIL PAGES ================= */
 var PDF = {
+  ascott: 'boekingen/hotel-ascott-en.pdf',
   dheva: 'boekingen/hotel-dheva-mantra.pdf',
   deva: 'boekingen/hotel-deva-beach.pdf',
   beach79: 'boekingen/hotel-79-beach-club.pdf',
@@ -1168,7 +1171,8 @@ var PDF = {
 };
 var HDET = {
   ascott: { email:'frontoffice.asb@the-ascott.com', booked:{label:'Geboekt via Trip.com', href:'https://www.trip.com'},
-    desc:'Appartement-hotel in de wijk Sathorn, Bangkok. Deluxe 2-slaapkamer appartement met ontbijt voor de eerste twee nachten met de meiden. Aankomst 11:30 is doorgegeven: early check-in bij beschikbaarheid, anders bagage-opslag en gebruik van de faciliteiten.' },
+    extraDocs:[ {label:'Incheckvoucher in het Thais (balie/taxi)', href:'boekingen/hotel-ascott-th.pdf'} ],
+    desc:'Appartement-hotel in de wijk Sathorn, Bangkok. Deluxe 2-slaapkamer appartement met ontbijt voor de eerste twee nachten met de meiden. Aankomst 11:30 is doorgegeven: early check-in bij beschikbaarheid, anders bagage-opslag en gebruik van de faciliteiten.\n\nIncheckvoucher: bevestiging 21644005 · pin 2305 · boeking 1482190417238129 (zie Documenten, ook in het Thais).' },
   dheva: { email:'info@dhevamantraresort.com', booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
     desc:'Resort aan de rivier Kwai bij Kanchanaburi. Deluxe familiekamer met extra bed (1.800 THB / €49 ter plaatse). Uitvalsbasis voor de Walking Street, Erawan en Elephants World. Taxi-van naar het vliegveld op 28 jul: 3.500 THB (€91), per mail bevestigd.' },
   deva: { booked:{label:'Geboekt via Booking.com', href:'https://www.booking.com'},
@@ -1232,7 +1236,7 @@ function dRow(ico, lbl, valHtml){
 
 function openDetail(type, key){
   var el = document.getElementById('detail');
-  var title, name, loc, emoji, bgc, addr, dateRows, contactRows = '', desc, pdf, pdfLabel, booked;
+  var title, name, loc, emoji, bgc, addr, dateRows, contactRows = '', desc, pdf, pdfLabel, booked, extraDocs = null;
   if (type === 'hotel') {
     var h = HOTELS[key]; if (!h) return;
     var x = HDET[key] || {};
@@ -1245,7 +1249,7 @@ function openDetail(type, key){
     if (x.email) contactRows += dRow(icoMail(), 'Email', '<a class="val" href="mailto:' + x.email + '">' + esc(x.email) + '</a>');
     desc = (x.desc || '') + (h.note ? '\n\n' + h.note : '');
     pdf = PDF[key]; pdfLabel = (key === 'board') ? 'Bekijk vluchttickets (pdf)' : 'Bekijk incheck document (pdf)';
-    booked = x.booked;
+    booked = x.booked; extraDocs = x.extraDocs || null;
   } else {
     var a = ACTS[key]; if (!a) return;
     title = 'Activiteit details';
@@ -1277,7 +1281,10 @@ function openDetail(type, key){
   html += '<a class="btn-blue" href="' + mapsUrl(addr) + '" target="_blank" rel="noopener">' + icoPin() + ' Get Direction</a></div>';
 
   if (desc) html += '<div class="d-card"><div class="d-sec-title">Omschrijving</div><div class="d-desc" style="white-space:pre-line">' + esc(desc) + '</div></div>';
-  if (pdf) html += '<div class="d-card"><div class="d-sec-title">Documenten</div><a class="btn wide" style="margin-top:0" href="' + pdf + '" target="_blank" rel="noopener">' + pdfLabel + ' <span class="chev">' + icoChev() + '</span></a></div>';
+  var docBtns = '';
+  if (pdf) docBtns += '<a class="btn wide" style="margin-top:0" href="' + pdf + '" target="_blank" rel="noopener">' + pdfLabel + ' <span class="chev">' + icoChev() + '</span></a>';
+  if (extraDocs) extraDocs.forEach(function(dd){ docBtns += '<a class="btn wide" style="margin-top:12px" href="' + dd.href + '" target="_blank" rel="noopener">' + esc(dd.label) + ' <span class="chev">' + icoChev() + '</span></a>'; });
+  if (docBtns) html += '<div class="d-card"><div class="d-sec-title">Documenten</div>' + docBtns + '</div>';
   if (booked) html += '<div class="d-card"><div class="d-sec-title">Geboekt via</div><a class="btn wide" style="margin-top:0" href="' + booked.href + '" target="_blank" rel="noopener">' + esc(booked.label) + ' <span class="chev">' + icoChev() + '</span></a></div>';
   html += '</div>';
 
