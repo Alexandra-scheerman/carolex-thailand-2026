@@ -88,6 +88,57 @@
     background: #fdece6; color: var(--accent-text);
   }
 
+  .tabs { display: flex; gap: 6px; padding: 0 14px 14px; }
+  .tab {
+    flex: 1 1 0; min-width: 0; background: rgba(255,255,255,.25); border: none; border-radius: 14px;
+    color: #fff; font-family: inherit; font-size: 11.5px; font-weight: 700; padding: 8px 1px 9px;
+    cursor: pointer; text-align: center; overflow: hidden;
+  }
+  .tab .em { display: block; font-size: 17px; margin-bottom: 2px; }
+  .tab small { display: block; font-size: 10px; font-weight: 600; opacity: .9; margin-top: 1px; }
+  .tab.active { background: var(--card); color: var(--nav-ink); box-shadow: 0 2px 10px rgba(0,0,0,0.10); }
+  .tab.active small { color: var(--muted); }
+  .tab.alg { display: flex; align-items: center; justify-content: center; font-size: 12.5px; }
+
+  .row {
+    display: flex; align-items: flex-start; gap: 10px; padding: 11px 6px;
+    border-bottom: 1px solid #f7f8f9; font-size: 15px; line-height: 1.35;
+  }
+  .row:last-child { border-bottom: none; }
+  .row input[type=checkbox] { width: 22px; height: 22px; flex-shrink: 0; accent-color: var(--dot); margin-top: 1px; }
+  .row .txt { flex: 1; min-width: 0; cursor: pointer; }
+  .row.checked .txt { text-decoration: line-through; color: #b9bdc7; }
+  .row .txt small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; font-weight: 400; }
+  .row.checked .txt small { color: #d3d6dd; }
+  .mini {
+    background: none; border: none; cursor: pointer; color: #c4c8d0; padding: 4px;
+    flex-shrink: 0; border-radius: 8px; display: inline-flex; margin-top: 1px;
+  }
+  .mini:active { background: #f3f4f6; color: var(--accent-text); }
+  .addrow { display: flex; gap: 8px; padding: 10px 8px 12px; border-top: 1px solid #f3f4f6; }
+  .addrow input {
+    flex: 1; min-width: 0; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 10px 12px;
+    font-family: inherit; font-size: 14px; outline: none; color: var(--ink);
+  }
+  .addrow input:focus { border-color: var(--accent); }
+  .addrow button {
+    background: var(--accent); border: none; border-radius: 10px; color: #fff; font-weight: 700;
+    font-family: inherit; font-size: 14px; padding: 0 16px; cursor: pointer; flex-shrink: 0;
+  }
+  .note {
+    margin: 0 16px 14px; background: rgba(255,255,255,.22); border-radius: 12px;
+    color: #fff; font-size: 13px; padding: 10px 14px; line-height: 1.4;
+  }
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--nav-ink); color: #fff; font-size: 14px; font-weight: 500;
+    padding: 10px 18px; border-radius: 20px; z-index: 600; transition: transform .25s, opacity .25s;
+    pointer-events: none; opacity: 0;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  #tab-pp { max-width: 430px; margin: 0 auto; }
+  @media (min-width: 700px) { .tabs { max-width: 560px; } }
+
   .reset-btn {
     display: block; margin: 4px auto 10px; background: rgba(255,255,255,.22); border: none;
     color: #fff; border-radius: 20px; padding: 9px 20px; font-size: 13px; font-weight: 600;
@@ -157,8 +208,11 @@
   <div class="hero">
     <h1>Kopen &amp; Pakken</h1>
     <p>Vertrek wo 22 juli · alleen handbagage (12 kg pp, 55×35×25)</p>
-    <p style="margin-top:8px"><a href="Per_Persoon.html" style="color:#fff;font-weight:700;">🎒 Naar de lijstjes per persoon &rsaquo;</a></p>
   </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div id="tab-alg">
 
   <div class="progress">
     <span id="progress-text">0 van 0 afgevinkt</span>
@@ -309,16 +363,42 @@
   </div><!-- /grid-2col -->
 
   <button class="reset-btn" onclick="if(confirm('Alles uitvinken?')){localStorage.removeItem('pak_checks');location.reload();}">↺ Alles uitvinken</button>
+
+  </div><!-- /tab-alg -->
+
+  <div id="tab-pp" style="display:none">
+
+    <div class="progress">
+      <span id="pp-progress-text"></span>
+      <div class="progress-bar"><div class="progress-fill" id="pp-progress-fill"></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span>🎒</span><h2>Inpakken</h2><span class="count" id="pp-count-pak"></span></div>
+      <div class="section-body" id="pp-list-pak"></div>
+      <div class="addrow"><input type="text" id="pp-add-pak" placeholder="Zelf iets toevoegen..." maxlength="120"><button data-add="pak">+</button></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span>✅</span><h2>Doen</h2><span class="count" id="pp-count-todo"></span></div>
+      <div class="section-body" id="pp-list-todo"></div>
+      <div class="addrow"><input type="text" id="pp-add-todo" placeholder="Zelf iets toevoegen..." maxlength="120"><button data-add="todo">+</button></div>
+    </div>
+
+    <div class="note">Tik op het potloodje om een regel aan te passen, op het kruisje om hem weg te halen. Vinkjes en eigen regels worden op deze telefoon onthouden.</div>
+
+  </div><!-- /tab-pp -->
 </div>
 
 <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+
+<div class="toast" id="pp-toast"></div>
 
 <div class="overlay" id="menu-overlay">
   <div class="panel">
     <h2>Menu <button class="close" id="menu-close">✕</button></h2>
     <ul class="menu-list">
       <li><a href="Vandaag.html"><span class="mi">📅</span>Vandaag (dagplanner)</a></li>
-      <li><a href="Per_Persoon.html"><span class="mi">🎒</span>Per persoon: pakken &amp; doen</a></li>
       <li><a href="index.html"><span class="mi">🌴</span>Startpagina</a></li>
       <li><a href="Thailand_Trip_Planner.html"><span class="mi">🗺️</span>Reisplanner (volledig overzicht)</a></li>
       <li><a href="Thailand_Boekingen_Bundel.pdf" target="_blank" rel="noopener"><span class="mi">📑</span>Boekingenbundel (PDF)</a></li>
@@ -364,6 +444,253 @@
     });
   }
   update();
+
+  /* ============ tabs + per-persoon ============ */
+  var PERSONEN = [
+    { key:'alex',  naam:'Alexandra', emoji:'🌸' },
+    { key:'caro',  naam:'Caroline',  emoji:'🌻' },
+    { key:'julia', naam:'Julia',     emoji:'🦄', sub:'10 jaar' },
+    { key:'lieve', naam:'Lieve',     emoji:'🐚', sub:'13 jaar' }
+  ];
+  var BASE = {
+    alex: {
+      pak: [
+        { id:'a1',  t:'Kleding voor ±5 dagen', s:'4 topjes, 2 korte broeken of rokjes, 1 jurkje · onderweg handwassen' },
+        { id:'a2',  t:'Ondergoed 5 sets + 3 paar sokken' },
+        { id:'a3',  t:'Zwemkleding ×2 + sarong', s:'Sarong ook voor de tempels' },
+        { id:'a4',  t:'Dun laagje met lange mouwen', s:'Voor het vliegtuig, muggen en tempels' },
+        { id:'a5',  t:'Slippers + stevige sportsandalen', s:'Sandalen voor de fietstour en zipline' },
+        { id:'a6',  t:'Waterschoenen', s:'Voor Erawan, de rotsen zijn glad' },
+        { id:'a7',  t:'Toilettas (klein)', s:'Zonnebrand reef-safe, deo, borstel, haarrekjes · tandpasta zit bij Caro' },
+        { id:'a8',  t:'Wasmiddel in klein reisflesje', s:'Voor handwas onderweg' },
+        { id:'a9',  t:'Klein parfumflesje', s:'Eerst nog kopen, zie Doen' },
+        { id:'a10', t:'Medicijntasje + EHBO-setje', s:'Samenstellen staat bij Doen' },
+        { id:'a11', t:'Telefoon + oplader + powerbank', s:'Powerbank altijd in de handbagage' },
+        { id:'a12', t:'Extra telefoon + oplader' },
+        { id:'a13', t:'Zonnebril + pet' },
+        { id:'a14', t:'Kleine drybag + 1L ziplock', s:'Drybag voor de boot, ziplock voor vloeistoffen bij security' },
+        { id:'a15', t:'Paspoort + prints', s:'TDAC-print en geprinte boekingenbundel in het tasje' },
+        { id:'a16', t:'Pinpas + creditcard' },
+        { id:'a17', t:'Dunne regenponcho' }
+      ],
+      todo: [
+        { id:'at1', t:'Klein parfumflesje kopen' },
+        { id:'at2', t:'Wasmiddel overgieten in een reisflesje' },
+        { id:'at3', t:'Medicatie verzamelen voor alle 4', s:'Paracetamol (+ kinder), Imodium, ORS, antihistamine, zeeziektabletten (nodig op 1, 6 en 11 aug), eigen medicatie' },
+        { id:'at4', t:'EHBO-setje samenstellen', s:'Pleisters, blarenpleisters, desinfectie, pincet/tekentang, aftersun' },
+        { id:'at5', t:'Zuivelvrije snacks voor Julia', s:'Voor de reisdagen en de boottocht' },
+        { id:'at6', t:'Alle vier de tassen wegen', s:'Max 12 kg per persoon' }
+      ]
+    },
+    caro: {
+      pak: [
+        { id:'c1',  t:'Kleding voor ±5 dagen', s:'4 topjes, 2 korte broeken of rokjes, 1 jurkje · onderweg handwassen' },
+        { id:'c2',  t:'Ondergoed 5 sets + 3 paar sokken' },
+        { id:'c3',  t:'Zwemkleding ×2 + sarong', s:'Sarong ook voor de tempels' },
+        { id:'c4',  t:'Dun laagje met lange mouwen', s:'Voor het vliegtuig, muggen en tempels' },
+        { id:'c5',  t:'Slippers + stevige sportsandalen', s:'Sandalen voor de fietstour en zipline' },
+        { id:'c6',  t:'Waterschoenen', s:'Voor Erawan' },
+        { id:'c7',  t:'Tandpasta: 1 tube voor het hele gezin', s:'De enige tube die meegaat, dus niet vergeten ;)' },
+        { id:'c8',  t:'Scheermes + mesjes', s:'Ook voor Alexandra' },
+        { id:'c9',  t:'Toilettas (klein)', s:'Zonnebrand, deo, eigen spulletjes' },
+        { id:'c10', t:'Telefoon + oplader + powerbank', s:'Powerbank altijd in de handbagage' },
+        { id:'c11', t:'Zonnebril + pet' },
+        { id:'c12', t:'E-reader' },
+        { id:'c13', t:'Paspoort' },
+        { id:'c14', t:'Pinpas + creditcard' },
+        { id:'c15', t:'Dunne regenponcho' }
+      ],
+      todo: [
+        { id:'ct1', t:'Handbagage wegen', s:'Max 12 kg, met de bagageweegschaal' },
+        { id:'ct2', t:'KLM-app installeren en inloggen', s:'Online check-in opent di 21 jul 17:15 (YSSAS6)' },
+        { id:'ct3', t:'Grab-app installeren en account aanmaken' },
+        { id:'ct4', t:'Printen: dagplanning + boekingenbundel', s:'Als dat nog niet gebeurd is · de map Print Car staat klaar' }
+      ]
+    },
+    julia: {
+      pak: [
+        { id:'j1',  t:'iPad + oplader', s:'Met films en series er al op!' },
+        { id:'j2',  t:'E-reader', s:'Vol met boeken' },
+        { id:'j3',  t:'Koptelefoon' },
+        { id:'j4',  t:'Knuffel', s:'Maximaal 1' },
+        { id:'j5',  t:'Kleding', s:'4 shirts, 2 korte broeken, 1 jurkje of leuke outfit' },
+        { id:'j6',  t:'Ondergoed 5 sets + sokken' },
+        { id:'j7',  t:'Zwemkleding ×2' },
+        { id:'j8',  t:'Slippers + sandalen' },
+        { id:'j9',  t:'Waterschoenen', s:'Voor de watervallen' },
+        { id:'j10', t:'Pet + zonnebril' },
+        { id:'j11', t:'Dunne regenponcho' },
+        { id:'j12', t:'Eigen tasje voor in het vliegtuig', s:'iPad, e-reader, koptelefoon en knuffel erin' }
+      ],
+      todo: [
+        { id:'jt1', t:'Films en series downloaden op de iPad', s:'Thuis doen, met wifi' },
+        { id:'jt2', t:'E-reader vol zetten met boeken' },
+        { id:'jt3', t:'Knuffel kiezen', s:'Er mag er maar 1 mee!' }
+      ]
+    },
+    lieve: {
+      pak: [
+        { id:'l1',  t:'Gehoorapparaat', s:'Plus oplader of reservebatterijen en het doosje!' },
+        { id:'l2',  t:'iPad + oplader', s:'Met films en series er al op!' },
+        { id:'l3',  t:'E-reader', s:'Vol met boeken' },
+        { id:'l4',  t:'Koptelefoon' },
+        { id:'l5',  t:'Kleding', s:'4 shirts, 2 korte broeken, 1 jurkje of leuke outfit' },
+        { id:'l6',  t:'Ondergoed 5 sets + sokken' },
+        { id:'l7',  t:'Zwemkleding ×2' },
+        { id:'l8',  t:'Slippers + sandalen' },
+        { id:'l9',  t:'Waterschoenen', s:'Voor de watervallen' },
+        { id:'l10', t:'Pet + zonnebril' },
+        { id:'l11', t:'Dunne regenponcho' },
+        { id:'l12', t:'Eigen tasje voor in het vliegtuig', s:'iPad, e-reader, koptelefoon erin' }
+      ],
+      todo: [
+        { id:'lt1', t:'Gehoorapparaat checken', s:'Oplader of genoeg batterijen mee, in het doosje' },
+        { id:'lt2', t:'Films en series downloaden op de iPad', s:'Thuis doen, met wifi' },
+        { id:'lt3', t:'E-reader vol zetten met boeken' }
+      ]
+    }
+  };
+
+  function ppLoad(p){
+    try { return JSON.parse(localStorage.getItem('pp1_' + p) || 'null') || { c:{}, rm:[], ed:{}, cust:[] }; }
+    catch(e){ return { c:{}, rm:[], ed:{}, cust:[] }; }
+  }
+  function ppSave(p, st){ try { localStorage.setItem('pp1_' + p, JSON.stringify(st)); } catch(e){} }
+  function ppEsc(x){ return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  var tab = localStorage.getItem('pak_tab') || 'alg';
+  if (tab !== 'alg' && !BASE[tab]) tab = 'alg';
+  var ppState = tab !== 'alg' ? ppLoad(tab) : null;
+
+  var ppToastTimer = null;
+  function ppToast(msg){
+    var t = document.getElementById('pp-toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(ppToastTimer);
+    ppToastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1600);
+  }
+
+  function ppItems(sec){
+    var uit = [];
+    BASE[tab][sec].forEach(function(it){
+      if (ppState.rm.indexOf(it.id) !== -1) return;
+      uit.push({ id: it.id, t: ppState.ed[it.id] || it.t, s: it.s });
+    });
+    ppState.cust.forEach(function(it){
+      if (it.sec === sec) uit.push({ id: it.id, t: it.t, s: null, custom: true });
+    });
+    return uit;
+  }
+  function icoEdit(){ return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>'; }
+  function icoDel(){ return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>'; }
+
+  function ppRenderSec(sec){
+    var host = document.getElementById('pp-list-' + sec);
+    var items = ppItems(sec);
+    var html = '';
+    items.forEach(function(it){
+      var done = !!ppState.c[it.id];
+      html += '<div class="row' + (done ? ' checked' : '') + '" data-id="' + it.id + '">';
+      html += '<input type="checkbox"' + (done ? ' checked' : '') + ' aria-label="Afvinken">';
+      html += '<span class="txt">' + ppEsc(it.t) + (it.s ? '<small>' + ppEsc(it.s) + '</small>' : '') + '</span>';
+      html += '<button class="mini" data-edit aria-label="Aanpassen">' + icoEdit() + '</button>';
+      html += '<button class="mini" data-del aria-label="Verwijderen">' + icoDel() + '</button>';
+      html += '</div>';
+    });
+    if (!items.length) html = '<div style="padding:14px 8px;color:var(--muted);font-size:14px;">Nog niets op dit lijstje.</div>';
+    host.innerHTML = html;
+
+    host.querySelectorAll('.row').forEach(function(row){
+      var id = row.getAttribute('data-id');
+      var box = row.querySelector('input');
+      function flip(){
+        ppState.c[id] = box.checked;
+        row.classList.toggle('checked', box.checked);
+        ppSave(tab, ppState);
+        ppTellers();
+      }
+      box.addEventListener('change', flip);
+      row.querySelector('.txt').addEventListener('click', function(){ box.checked = !box.checked; flip(); });
+      row.querySelector('[data-edit]').addEventListener('click', function(){
+        var huidige = row.querySelector('.txt').childNodes[0].textContent;
+        var nieuw = prompt('Aanpassen:', huidige);
+        if (nieuw === null) return;
+        nieuw = nieuw.trim();
+        if (!nieuw) return;
+        var cust = null;
+        ppState.cust.forEach(function(cc){ if (cc.id === id) cust = cc; });
+        if (cust) cust.t = nieuw; else ppState.ed[id] = nieuw;
+        ppSave(tab, ppState);
+        ppRenderSec(sec); ppTellers();
+      });
+      row.querySelector('[data-del]').addEventListener('click', function(){
+        var isCust = false;
+        ppState.cust = ppState.cust.filter(function(cc){ if (cc.id === id) { isCust = true; return false; } return true; });
+        if (!isCust && ppState.rm.indexOf(id) === -1) ppState.rm.push(id);
+        delete ppState.c[id];
+        ppSave(tab, ppState);
+        ppRenderSec(sec); ppTellers();
+        ppToast('Weggehaald');
+      });
+    });
+  }
+
+  function ppTellers(){
+    var totaal = 0, klaar = 0;
+    ['pak','todo'].forEach(function(sec){
+      var items = ppItems(sec), d = 0;
+      items.forEach(function(it){ if (ppState.c[it.id]) d++; });
+      document.getElementById('pp-count-' + sec).textContent = d + '/' + items.length;
+      totaal += items.length; klaar += d;
+    });
+    var p = PERSONEN.filter(function(x){ return x.key === tab; })[0];
+    document.getElementById('pp-progress-text').textContent = p.naam + ': ' + klaar + ' van ' + totaal + ' afgevinkt';
+    document.getElementById('pp-progress-fill').style.width = (totaal ? (klaar / totaal * 100) : 0) + '%';
+  }
+
+  function renderTabs(){
+    var html = '<button class="tab alg' + (tab === 'alg' ? ' active' : '') + '" data-t="alg">Algemeen</button>';
+    PERSONEN.forEach(function(p){
+      html += '<button class="tab' + (tab === p.key ? ' active' : '') + '" data-t="' + p.key + '"><span class="em">' + p.emoji + '</span>' + p.naam + (p.sub ? '<small>' + p.sub + '</small>' : '') + '</button>';
+    });
+    var el = document.getElementById('tabs');
+    el.innerHTML = html;
+    el.querySelectorAll('.tab').forEach(function(b){
+      b.addEventListener('click', function(){
+        tab = b.getAttribute('data-t');
+        localStorage.setItem('pak_tab', tab);
+        showTab(); renderTabs();
+      });
+    });
+  }
+
+  function showTab(){
+    var alg = tab === 'alg';
+    document.getElementById('tab-alg').style.display = alg ? '' : 'none';
+    document.getElementById('tab-pp').style.display = alg ? 'none' : '';
+    if (!alg) {
+      ppState = ppLoad(tab);
+      ppRenderSec('pak'); ppRenderSec('todo'); ppTellers();
+    }
+  }
+
+  document.querySelectorAll('[data-add]').forEach(function(btn){
+    var sec = btn.getAttribute('data-add');
+    var input = document.getElementById('pp-add-' + sec);
+    function voegToe(){
+      var t = input.value.trim();
+      if (!t || tab === 'alg') return;
+      ppState.cust.push({ id: 'x' + Date.now() + Math.floor(Math.random() * 1000), sec: sec, t: t });
+      input.value = '';
+      ppSave(tab, ppState);
+      ppRenderSec(sec); ppTellers();
+    }
+    btn.addEventListener('click', voegToe);
+    input.addEventListener('keydown', function(e){ if (e.key === 'Enter') voegToe(); });
+  });
+
+  renderTabs();
+  showTab();
 
   var ov = document.getElementById('menu-overlay');
   document.getElementById('btn-menu').addEventListener('click', function(){ ov.classList.add('open'); });
