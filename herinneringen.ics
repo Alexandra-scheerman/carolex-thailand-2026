@@ -24,9 +24,8 @@ DTSTAMP:20260720T120000Z
 DTSTART:20260724T170000
 DURATION:PT15M
 SUMMARY:Pinnen: cash voor Kanchanaburi
-DESCRIPTION:Morgen taxi naar Kanchanaburi: 3.500 THB cash. Ook alvast 
- 2.100 THB voor het Erawan-vervoer. Vandaag ook de taxi bevestigen bij
-  de Ascott-concierge.
+DESCRIPTION:Morgen 08:30 taxi naar Kanchanaburi (bevestigd door de con
+ cierge): 3.500 THB cash. Ook alvast 2.100 THB voor het Erawan-vervoer.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Pinnen: cash voor Kanchanaburi
