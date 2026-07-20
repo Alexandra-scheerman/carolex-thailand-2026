@@ -524,16 +524,17 @@ var DAYS = [
    ]},
  { iso:'2026-07-24', dl:'24 Juli', wd:'Vrijdag', loc:'Bangkok', temp:'33', ico:'sun', phase:'kids', tag:'Met de kids', hotel:'ascott',
    prog:[
-     { time:'12:15', title:'Grab naar River City', box:'River City Bangkok\n23 Charoen Krung 24, Bangkok',
-       act:[ {label:'Copy adres', copy:'River City Bangkok, 23 Charoen Krung 24, Bangkok'}, {label:'Open grab app', href: GRAB} ] },
+     { time:'12:15', title:'Grab naar River City', box:'River City Bangkok\n23 Charoen Krung 24, Bangkok\n\nVoor de chauffeur, in het Thais:\nกรุณาส่งลูกค้าที่ ศูนย์การค้า ริเวอร์ซิตี้ ท่าน้ำสี่พระยา (เข้าซอยเจริญกรุง 24) ตรอกโรงน้ำแข็ง แขวงตลาดน้อย',
+       act:[ {label:'Copy Thais adres', copy:'กรุณาส่งลูกค้าที่ ศูนย์การค้า ริเวอร์ซิตี้ ท่าน้ำสี่พระยา (เข้าซอยเจริญกรุง 24) ตรอกโรงน้ำแข็ง แขวงตลาดน้อย'}, {label:'Open kaart', href:'https://maps.app.goo.gl/cRmvUZT4gxVQZ3yp6'}, {label:'Open grab app', href: GRAB} ] },
      { time:'12:45', title:'Aanwezig bij Co van Kessel', sub:'Verzamelpunt River City Bangkok', det:'cvk' },
      { time:'13:00', title:'CO Combo: fietsen + longtail boot', sub:'Tot 18:00 · Chinatown, kanalen, maaltijd inbegrepen\nBoeking #6a241d5343f2d · 9.375 THB (€253) betaald', det:'cvk' },
      { time:'--:--', title:'Avond: koffers pakken', sub:'Morgen vroeg weg naar Kanchanaburi' }
    ],
    rem:[
-     { t:'Kleding fietstour', d:'Gesloten schoenen, schouders bedekt (tempels), zonnebrand en pet' },
-     { t:'Eten', d:'Maaltijd zit bij de tour inbegrepen' },
-     { t:'Vervoer morgen', d:'Minivan of privetaxi naar Kanchanaburi, vandaag via de receptie regelen' }
+     { t:'Get ready: kleding', d:'Bedekte schouders en een sarong voor de tempels, gesloten schoenen of stevige sportsandalen' },
+     { t:'Get ready: meenemen', d:'Zonnebril, pet, zonnebrand · camera of telefoon · origineel paspoort (voor noodgevallen en verzekering) · regenjas hoeft niet, die hebben ze bij regen aan boord' },
+     { t:'Eten en drinken', d:'Alles inbegrepen (all-in), niets meenemen nodig' },
+     { t:'Vervoer morgen', d:'Taxi naar Kanchanaburi loopt via de Ascott-concierge (3.500 THB / €91 cash), vandaag even bevestigen' }
    ]},
  { iso:'2026-07-25', dl:'25 Juli', wd:'Zaterdag', loc:'Kanchanaburi', temp:'33', ico:'sun', phase:'kids', tag:'Reisdag · met de kids', hotel:'dheva',
    prog:[
@@ -1191,8 +1192,9 @@ var HDET = {
 var ACTS = {
   cvk: { name:'Co van Kessel fietstour', loc:'Bangkok', emoji:'🚲', bgc:'#fdf3d8',
     addr:'River City Bangkok, 23 Charoen Krung 24, Bangkok', date:'Vrijdag 24 juli', time:'13:00 - 18:00 · uiterlijk 12:45 aanwezig',
-    email:'info@covankessel.com',
-    desc:'CO Combo van 5 uur: fietsen door Chinatown en de smalle steegjes, longtailboot over de kanalen van Thonburi, maaltijd inbegrepen. 3 volwassenen + 1 kind, 9.375 THB (€253), betaald. Boeking #6a241d5343f2d. Gesloten schoenen, schouders bedekt voor de tempels.',
+    email:'info@covankessel.com', mapExact:'https://maps.app.goo.gl/cRmvUZT4gxVQZ3yp6',
+    thai:'กรุณาส่งลูกค้าที่ ศูนย์การค้า ริเวอร์ซิตี้ ท่าน้ำสี่พระยา (เข้าซอยเจริญกรุง 24) ตรอกโรงน้ำแข็ง แขวงตลาดน้อย',
+    desc:'CO Combo van 5 uur: fietsen door Chinatown en de smalle steegjes, longtailboot over de kanalen van Thonburi, maaltijd inbegrepen. 3 volwassenen + 1 kind, 9.375 THB (€253), betaald. Boeking #6a241d5343f2d.\n\nGet ready: bedekte schouders en sarong voor de tempels, gesloten schoenen of sportsandalen. Meenemen: zonnebril, pet, zonnebrand, camera en het originele paspoort. Eten en drinken zijn inbegrepen; regenjassen hebben ze zelf aan boord.',
     pdf:'boekingen/activiteit-co-van-kessel.pdf', pdfLabel:'Bekijk booking (pdf)',
     booked:{label:'covankessel.com', href:'https://www.covankessel.com'} },
   erawan: { name:'Erawan watervallen', loc:'Kanchanaburi', emoji:'🌊', bgc:'#e0f0f2',
@@ -1260,6 +1262,7 @@ function openDetail(type, key){
     if (a.wa) contactRows += dRow(icoPhoneA(), 'WhatsApp', '<a class="val" href="https://wa.me/' + a.wa.replace(/[^0-9]/g,'') + '" target="_blank" rel="noopener">' + esc(a.wa) + '</a>');
     if (a.email) contactRows += dRow(icoMail(), 'Email', '<a class="val" href="mailto:' + a.email + '">' + esc(a.email) + '</a>');
     desc = a.desc; pdf = a.pdf; pdfLabel = a.pdfLabel || 'Bekijk booking (pdf)'; booked = a.booked;
+    var mapHref = a.mapExact || null; var thaiAddr = a.thai || null;
   }
 
   var html = '<div class="d-top"><button class="d-back" id="d-back" aria-label="Terug">' +
@@ -1278,7 +1281,11 @@ function openDetail(type, key){
 
   html += '<div class="d-card"><div class="d-sec-title">Getting there</div>';
   html += '<div class="d-map"><span class="pin">📍</span>' + esc(addr) + '</div>';
-  html += '<a class="btn-blue" href="' + mapsUrl(addr) + '" target="_blank" rel="noopener">' + icoPin() + ' Get Direction</a></div>';
+  if (typeof thaiAddr !== 'undefined' && thaiAddr) {
+    html += '<div style="font-size:13px;color:#4b5563;line-height:1.6;margin-bottom:12px;"><strong>Voor de taxichauffeur, in het Thais:</strong><br>' + esc(thaiAddr) + '</div>';
+    html += '<button class="btn wide" style="margin:0 0 12px" data-copy="' + esc(thaiAddr) + '">Copy Thais adres</button>';
+  }
+  html += '<a class="btn-blue" href="' + ((typeof mapHref !== 'undefined' && mapHref) ? mapHref : mapsUrl(addr)) + '" target="_blank" rel="noopener">' + icoPin() + ' Get Direction</a></div>';
 
   if (desc) html += '<div class="d-card"><div class="d-sec-title">Omschrijving</div><div class="d-desc" style="white-space:pre-line">' + esc(desc) + '</div></div>';
   var docBtns = '';
