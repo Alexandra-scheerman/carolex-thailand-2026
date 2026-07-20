@@ -24,6 +24,7 @@ var ASSETS = [
   'boekingen/hotel-sora.pdf',
   'boekingen/vluchten-klm.pdf',
   'boekingen/vlucht-pg145.pdf',
+  'boekingen/vlucht-pg168.pdf',
   'boekingen/activiteit-co-van-kessel.pdf',
   'boekingen/activiteit-elephants-world.pdf',
   'boekingen/ferry-6-aug.pdf',
