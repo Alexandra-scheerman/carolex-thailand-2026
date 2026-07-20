@@ -20,6 +20,7 @@ var ASSETS = [
   'boekingen/hotel-deva-beach.pdf',
   'boekingen/hotel-79-beach-club.pdf',
   'boekingen/hotel-long-bay.pdf',
+  'boekingen/hotel-so-kohkoon.pdf',
   'boekingen/hotel-sora.pdf',
   'boekingen/vluchten-klm.pdf',
   'boekingen/vlucht-pg145.pdf',
